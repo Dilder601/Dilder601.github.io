@@ -15,7 +15,7 @@ export default function DocExport() {
             const imgData = canvas.toDataURL('image/png');
             const pdf = new jsPDF();
             pdf.addImage(imgData, 'PNG', 0, 0);
-            pdf.save('KAMRUZZAMAN.pdf');
+            pdf.save('DILDER HOSSAIN.pdf');
 
             printBtn.classList.remove('hidden');
         });

@@ -9,29 +9,19 @@ export default function Resume() {
             <div className='resume-box'>
                 <div className='left-box'>
                     <Image
-                        src='/images/profile.jpg'
+                        src='/images/profile.png'
                         className='mx-auto rounded-full bg-primary-400 object-cover'
                         width={150}
                         height={150}
                         alt='profile'
                     />
-                    <h1 className='mt-4 text-center text-xl font-bold uppercase'>DILDER HOssain</h1>
+                    <h1 className='mt-4 text-center text-xl font-bold uppercase'>DILDER HOSSAIN</h1>
                     <p className='subtitle mb-6 text-center capitalize'>Software Engineer</p>
                     {/* contact info */}
                     <div className='subtitle left'>
                         <p className='subtitle-border'>Personal Details</p>
                     </div>
                     <ul className='mb-3 space-y-2'>
-                        {/* <li className='flex items-center'>
-                            <Image
-                                className='contact-icon'
-                                src='/images/user.png'
-                                width={20}
-                                height={20}
-                                alt='KAMRUZZAMAN'
-                            />
-                            <p className='text-sm'>KAMRUZZAMAN</p>
-                        </li> */}
                         <li className='flex items-center'>
                             <Image
                                 className='contact-icon'
@@ -40,7 +30,7 @@ export default function Resume() {
                                 height={20}
                                 alt='phone'
                             />
-                            <p className='text-sm'>+880 1716 724 245</p>
+                            <p className='text-sm'>+880 1635 000 601</p>
                         </li>
 
                         <li className='flex items-center'>
@@ -56,7 +46,7 @@ export default function Resume() {
                                 target='_blank'
                                 className='resume-link'
                                 rel='noreferrer'>
-                                kzamanbn@gmail.com
+                                dilder.hossain.feni@gmail.com
                             </a>
                         </li>
 
@@ -83,11 +73,11 @@ export default function Resume() {
                                 alt='github'
                             />
                             <a
-                                href='https://github.com/kzamaan'
+                                href='https://github.com/Dilder601'
                                 target='_blank'
                                 className='resume-link'
                                 rel='noreferrer'>
-                                github.com/kzamaan
+                                github.com/Dilder601
                             </a>
                         </li>
                         <li className='flex items-center'>
@@ -99,11 +89,11 @@ export default function Resume() {
                                 alt='github'
                             />
                             <a
-                                href='https://linkedin.com/in/kzamanbd'
+                                href='https://www.linkedin.com/in/dilder-orclapex/'
                                 target='_blank'
                                 className='resume-link'
                                 rel='noreferrer'>
-                                linkedin.com/in/kzamanbd
+                                linkedin.com/in/dilder-orclapex
                             </a>
                         </li>
                     </ul>
@@ -113,40 +103,45 @@ export default function Resume() {
                         <p className='subtitle-border'>Education</p>
                     </div>
                     <div className='mb-3 text-sm'>
-                        <div className='mb-2'>
-                            <p>
-                                <span className='font-bold'>B.SC. In CSE </span>
-                                <span>(Continuing)</span>
-                            </p>
-                            <p className='italic'>Southeast University.</p>
-                            <p> – 251/A Tejgaon I/A, Dhaka</p>
-                        </div>
-
                         <div>
                             <p>
-                                <span className='font-bold'>Diploma In CSE </span>
-                                <span>(3.31) - 2019</span>
+                                <span className='font-bold'>Diploma In DDD</span>
+                                <span className='font-bold'>(Database Design and Development) - 2020</span> <br />
+                                <span className='italic'>IsDB BISEW</span>
+                                <span> –  IDB Bhaban (4th Floor) E/8-A, Rokeya Sharani, Dhaka 1207</span>
                             </p>
-                            <p className='italic'>Rumdo Institute of Modern Technology.</p>
-                            <p> – Mymensingh City.</p>
                         </div>
                     </div>
+
+
+                    <div className='mb-3 text-sm'>
+                        <div>
+                            <p>
+                                <span>Bachelor of Business Administration</span><br />
+                                <span className='font-bold'>BBA</span> 
+                                <span className='font-bold'>(3.17) - 2017</span>
+                                <br />
+                                <span className='italic'>Feni Govt. College.</span>
+                            </p>
+                        </div>
+                    </div>
+
                     {/* Key Skills */}
                     <div className='subtitle left'>
                         <p className='subtitle-border'>Key Skills</p>
                     </div>
                     <div className='mb-3 space-y-4'>
                         <button className='gradient-btn group from-purple-500 to-pink-500 group-hover:from-purple-500 group-hover:to-pink-500'>
-                            <span className='gradient-content'>PHP/Laravel</span>
+                            <span className='gradient-content'>Oracle SQL / PLSQL</span>
                         </button>
                         <button className='gradient-btn group from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500'>
-                            <span className='gradient-content'>Node.js/Express</span>
+                            <span className='gradient-content'>Oracle APEX</span>
                         </button>
                         <button className='gradient-btn group from-green-400 to-blue-600 group-hover:from-green-400 group-hover:to-blue-600'>
-                            <span className='gradient-content'>VueJS/Vuex</span>
+                            <span className='gradient-content'>PL SQL Dynamic Content</span>
                         </button>
                         <button className='gradient-btn group from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500'>
-                            <span className='gradient-content'>React/Redux</span>
+                            <span className='gradient-content'>BI Publisher Report</span>
                         </button>
                     </div>
                     {/* Training */}
@@ -155,24 +150,19 @@ export default function Resume() {
                     </div>
                     <div className='space-y-2 text-sm'>
                         <div>
-                            <p className='font-bold'>PHP/Laravel (2019)</p>
-                            <p className='italic'>Creative It Institute, Dhaka.</p>
+                            <p className='font-bold'>Computer Fundamental</p>
+                            <p className='italic'>New Horizons, Dhaka.</p>
                         </div>
-                        <div>
-                            <p className='font-bold'>Redux (2023)</p>
-                            <p className='italic'>Learn with Sumit.</p>
-                        </div>
+                        
                     </div>
                 </div>
                 <div className='right-box'>
                     <p className='subtitle'>Summary</p>
 
                     <p className='mb-6 text-sm'>
-                        Over three years of experience building web applications, updating existing web applications,
-                        and fixing bugs. I like to learn and use new technology in web development. I have worked
-                        extensively on various stages of application development by creating & implementing application
-                        architecture, which includes various stages in development, code signing, and releasing to
-                        Market and collaborative environments for the web platform.
+                        I am writing to express my strong interest in the Oracle Apex and PL/SQL Developer. As a skilled and experienced professional with a passion for creating efficient and robust applications, I believe my technical expertise and dedication to delivering high-quality solutions align perfectly with the requirements of the role.
+
+                        Over the course of my career, I have acquired a deep understanding of Oracle Application Express (Apex) and PL/SQL development, along with a strong foundation in database design and management. I have successfully developed and implemented a wide range of applications, including data-driven web applications, reports, and interactive dashboards. 
                     </p>
 
                     {/* Experience section */}
@@ -181,7 +171,7 @@ export default function Resume() {
                         {/* last job Experience */}
                         <div className='grid grid-cols-5 gap-16'>
                             <div className='section-box col-span-2'>
-                                <p className='text-sm font-bold'>Jun 2021 - Present</p>
+                                <p className='text-sm font-bold'>Feb 2021 - Present</p>
                             </div>
                             <div className='col-span-3 flex flex-col justify-center text-xs'>
                                 <a
@@ -203,7 +193,7 @@ export default function Resume() {
                                 <div className='mr-4'>
                                     <div className='bullet'></div>
                                 </div>
-                                <p>Developing an ERP system based on Laravel, Vue.js and React.js.</p>
+                                <p>Developing an ERP system based on Oracle Database and Oracle Apex. </p>
                             </li>
                             <li className='flex items-center'>
                                 <div className='mr-4'>
@@ -215,13 +205,13 @@ export default function Resume() {
                                 <div className='mr-4'>
                                     <div className='bullet'></div>
                                 </div>
-                                <p>Creating and implementing the source code of new applications.</p>
+                                <p>Complex business logic, Packages, stored procedures, triggers, and functions.</p>
                             </li>
                             <li className='flex items-center'>
                                 <div className='mr-4'>
                                     <div className='bullet'></div>
                                 </div>
-                                <p>Testing source code and debugging code.</p>
+                                <p>Creating function for different purposes like returning JSON for report queries.</p>
                             </li>
                             <li className='flex items-center'>
                                 <div className='mr-4'>
@@ -234,55 +224,70 @@ export default function Resume() {
                                     <div className='bullet'></div>
                                 </div>
                                 <p>
-                                    Developing technical handbooks to represent the design and code of new applications.
+                                I am committed to staying updated with the latest  technologies.
                                 </p>
                             </li>
                         </ul>
                     </div>
+
+                    <p className='subtitle'>Professional Experience</p>
                     <div className='mb-6'>
                         {/* last job Experience */}
-                        <div className='grid grid-cols-5 gap-16'>
-                            <div className='section-box col-span-2'>
-                                <p className='text-sm font-bold'>May 2020 – Jun 2021</p>
-                            </div>
-                            <div className='col-span-3 flex flex-col justify-center text-xs'>
-                                <a href='https://maxsop.com' target='_blank' className='resume-link' rel='noreferrer'>
-                                    https://maxsop.com
-                                </a>
-                                <p>27/2 Ram Babu Road, Mymensingh – 2200</p>
-                            </div>
-                        </div>
+                        
                         <p className='mt-4'>
-                            <span className='font-bold'>Junior Software Engineer </span>
-                            <span className='ml-2 text-sm'>at MaxSOP </span>
+                            <span className='font-bold'>Project of APEX:</span>
                         </p>
                         <ul className='bullet-list'>
                             <li className='flex items-center'>
                                 <div className='mr-4'>
                                     <div className='bullet'></div>
                                 </div>
-                                <p>Developing web applications based on PHP frameworks - Laravel, Vue JS.</p>
+                                <p>I have completed few projects like Cash & Carry Mobile Shop ,  Pharmacy Management System ,  QC Alter System , Blood Circulation System etc. </p>
                             </li>
                             <li className='flex items-center'>
                                 <div className='mr-4'>
                                     <div className='bullet'></div>
                                 </div>
-                                <p>Build efficient, testable & reusable codes. Modify existing code as needed.</p>
+                                <a href="https://apex.oracle.com/pls/apex/f?p=57988" className='resume-link' target='_blank'>URL1: https://apex.oracle.com/pls/apex/f?p=57988</a>
                             </li>
+
                             <li className='flex items-center'>
                                 <div className='mr-4'>
                                     <div className='bullet'></div>
                                 </div>
-                                <p>Executed and monitored standards for user interfaces page design and development.</p>
+                                <p>USER: Mithu Password:123</p>
                             </li>
+
                             <li className='flex items-center'>
                                 <div className='mr-4'>
                                     <div className='bullet'></div>
                                 </div>
-                                <p>Perform other operational tasks based on {`"as and when required"`}.</p>
+                                <a href="https://apex.oracle.com/pls/apex/f?p=157297" className='resume-link' target='_blank'>URL2: https://apex.oracle.com/pls/apex/f?p=157297</a>
+                            </li>
+
+                            <li className='flex items-center'>
+                                <div className='mr-4'>
+                                    <div className='bullet'></div>
+                                </div>
+                                <p>USER: 1001 Password: 1001</p>
+                            </li>
+
+                            <li className='flex items-center'>
+                                <div className='mr-4'>
+                                    <div className='bullet'></div>
+                                </div>
+                                <a href="https://apex.oracle.com/pls/apex/f?p=224500" className='resume-link' target='_blank'>URL2: https://apex.oracle.com/pls/apex/f?p=224500</a>
+                            </li>
+
+                            <li className='flex items-center'>
+                                <div className='mr-4'>
+                                    <div className='bullet'></div>
+                                </div>
+                                <p>USER: Mithu Password: Mithu#123</p>
                             </li>
                         </ul>
                     </div>
+                    
 
                     {/* Additional Skills */}
                     <p className='subtitle'>Additional Skills</p>
@@ -292,31 +297,26 @@ export default function Resume() {
                             <div className='mr-4'>
                                 <div className='bullet'></div>
                             </div>
-                            <p>Good Knowledge on Web Services likes REST/JSON/XML APIs.</p>
+                            <p>Good Knowledge on Web Services likes REST API/JSON.</p>
                         </li>
                         <li className='flex items-center'>
                             <div className='mr-4'>
                                 <div className='bullet'></div>
                             </div>
-                            <p>HTML, CSS, Bootstrap, Tailwind CSS, Livewire, Alpine.js and MySQL</p>
+                            <p>HTML, CSS, Bootstrap, Javascript and MySQL</p>
                         </li>
                         <li className='flex items-center'>
                             <div className='mr-4'>
                                 <div className='bullet'></div>
                             </div>
-                            <p>Proficient Understanding of Code Versioning Tools (Git) CI/CD and Github Action.</p>
+                            <p>Proficient Understanding of Code Versioning Tools Github Action and SVN.</p>
                         </li>
+                        
                         <li className='flex items-center'>
                             <div className='mr-4'>
                                 <div className='bullet'></div>
                             </div>
-                            <p>Familiarity with DevOps processes and tools (Docker).</p>
-                        </li>
-                        <li className='flex items-center'>
-                            <div className='mr-4'>
-                                <div className='bullet'></div>
-                            </div>
-                            <p>Knowledge of JIRA, Elasticsearch, Linux or Other Unix-based systems.</p>
+                            <p>Knowledge of JIRA, Click Up.</p>
                         </li>
                         <li className='flex items-center'>
                             <div className='mr-4'>

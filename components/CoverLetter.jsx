@@ -22,8 +22,7 @@ export default function CoverLetter() {
                     </p>
                     <p>
                         I’ve more than two years of experience and profound knowledge of web development. I am
-                        proficient in PHP, Laravel, JavaScript, Vue and React. My main responsibilities are building web
-                        applications, updating, maintaining, testing, and debugging applications.
+                        proficient developing Apex applications from scratch, utilizing its declarative features as well as customizing the application behavior through PL/SQL.
                     </p>
                     <p>
                         My skills and experience in designing and developing applications will be of great benefit to
@@ -33,7 +32,7 @@ export default function CoverLetter() {
                 </div>
 
                 <p className='mt-8'>Thanks & Regards</p>
-                <p>Md. Kamruzzaman</p>
+                <p>Dilder Hossain</p>
                 <p>Software Engineer</p>
                 <p className='italic'>Dhaka, Bangladesh</p>
             </div>
