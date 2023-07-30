@@ -9,13 +9,13 @@ export default function Resume() {
             <div className='resume-box'>
                 <div className='left-box'>
                     <Image
-                        src='/images/profile.png'
+                        src='/images/profile.jpg'
                         className='mx-auto rounded-full bg-primary-400 object-cover'
                         width={150}
                         height={150}
                         alt='profile'
                     />
-                    <h1 className='mt-4 text-center text-xl font-bold'>KAMRUZZAMAN</h1>
+                    <h1 className='mt-4 text-center text-xl font-bold uppercase'>DILDER HOssain</h1>
                     <p className='subtitle mb-6 text-center capitalize'>Software Engineer</p>
                     {/* contact info */}
                     <div className='subtitle left'>
