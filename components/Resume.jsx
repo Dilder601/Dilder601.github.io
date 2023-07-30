@@ -10,7 +10,7 @@ export default function Resume() {
                 <div className='left-box'>
                     <Image
                         src='/images/profile.png'
-                        className='mx-auto rounded-full bg-primary-400 object-cover'
+                        className='mx-auto rounded-full bg-white object-cover border border-primary-500'
                         width={150}
                         height={150}
                         alt='profile'
