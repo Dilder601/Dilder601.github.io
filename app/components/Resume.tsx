@@ -262,7 +262,7 @@ export default function Resume() {
                             <h3 className="mb-1 md:flex print:flex items-center font-bold text-gray-900">
                                 <div>PROFESSIONAL EXPERIENCE</div>
                                 <a
-                                    href="https://maxsop.com/"
+                                    href="#"
                                     className="ml-2 text-sm font-medium text-primary-800"
                                     target="_blank">
                                     at <span className="underline">Project of APEX:</span>
