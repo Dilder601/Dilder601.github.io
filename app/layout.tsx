@@ -34,16 +34,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <meta name="theme-color" content="#009EF7" />
 
                 <meta name="twitter:card" content="summary" />
-                <meta name="twitter:url" content="https://kzaman.vercel.app" />
+                <meta name="twitter:url" content="https://dilder.vercel.app" />
                 <meta name="twitter:title" content={authorName} />
                 <meta name="twitter:description" content={description} />
                 <meta name="twitter:image" content="/images/icons/android-chrome-192x192.png" />
-                <meta name="twitter:creator" content="@kzaman" />
+                <meta name="twitter:creator" content="@DilderHossain8" />
                 <meta name="title" property="og:title" content={authorName} key="title" />
                 <meta name="description" property="og:description" content={description} key="desc" />
                 <meta property="og:type" content="website" />
                 <meta property="og:site_name" content={authorName} />
-                <meta property="og:url" content="https://kzaman.vercel.app" />
+                <meta property="og:url" content="https://dilder.vercel.app" />
                 <meta property="og:image" content="/images/icons/android-chrome-192x192.png" />
             </head>
             <body suppressHydrationWarning={true}>
