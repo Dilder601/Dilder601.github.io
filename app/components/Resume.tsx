@@ -150,7 +150,7 @@ export default function Resume() {
                             <span className="key-skill bg-yellow-50 text-yellow-500 hover:text-white">Oracle Apex</span>
                         </button>
                         <button className="key-button group from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 focus:ring-lime-200">
-                            <span className="key-skill bg-teal-50 text-teal-500 hover:text-black">BI/Dynamic Content Report</span>
+                            <span className="key-skill bg-teal-50 text-teal-500 hover:text-black">BI / Dynamic Content Report</span>
                         </button>
                         <button className="key-button group from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white focus:ring-cyan-200">
                             <span className="key-skill bg-cyan-50 text-cyan-500 hover:text-white">SQL Performace Tuning</span>
