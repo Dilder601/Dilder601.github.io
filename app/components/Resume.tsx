@@ -124,7 +124,6 @@ export default function Resume() {
                         <div className="mb-2">
                             <p>
                                 <span className="font-bold">Diploma In DDD(Database Design and Development) - 2020 </span>
-                                <span>(Continuing)</span>
                             </p>
                             <p className="italic">IsDB BISEW.</p>
                             <p> –  IDB Bhaban (4th Floor) E/8-A, Rokeya Sharani, Dhaka 1207</p>
@@ -286,6 +285,12 @@ export default function Resume() {
                                     <div className="mr-4">
                                         <div className="bullet"></div>
                                     </div> 
+                                    <p>URL2: <a className="text-blue-600"  href={'https://apex.oracle.com/pls/apex/f?p=207615'}  target='_blank' >https://apex.oracle.com/pls/apex/f?p=207615 </a> </p> 
+                                </li>
+                                <li className="flex items-center">
+                                    <div className="mr-4">
+                                        <div className="bullet"></div>
+                                    </div> 
                                     <p>Crediantial: <span className="text-blue-600">02030 / 123456  </span></p> 
                                     
                                 </li>
@@ -294,7 +299,7 @@ export default function Resume() {
                                         <div className="bullet"></div>
                                     </div>
                                     <div>
-                                        <p>URL2: <a className="text-blue-600"  href={'https://apex.oracle.com/pls/apex/f?p=57988'} target='_blank'  >https://apex.oracle.com/pls/apex/f?p=57988 </a> </p> 
+                                        <p>URL3: <a className="text-blue-600"  href={'https://apex.oracle.com/pls/apex/f?p=57988'} target='_blank'  >https://apex.oracle.com/pls/apex/f?p=57988 </a> </p> 
                                     </div>
                                 </li>
                                 <li className="flex items-center">
@@ -307,7 +312,7 @@ export default function Resume() {
                                     <div className="mr-4">
                                         <div className="bullet"></div>
                                     </div>
-                                    <p>URL3: <a className="text-blue-600"  href={'https://apex.oracle.com/pls/apex/f?p=157297'}  target='_blank' >https://apex.oracle.com/pls/apex/f?p=157297 </a> </p> 
+                                    <p>URL4: <a className="text-blue-600"  href={'https://apex.oracle.com/pls/apex/f?p=157297'}  target='_blank' >https://apex.oracle.com/pls/apex/f?p=157297 </a> </p> 
                                 </li>
 
                                 <li className="flex items-center">
@@ -322,7 +327,7 @@ export default function Resume() {
                                     <div className="mr-4">
                                         <div className="bullet"></div>
                                     </div>
-                                    <p>URL4: <a className="text-blue-600"  href={'https://apex.oracle.com/pls/apex/f?p=224500'} target='_blank' >https://apex.oracle.com/pls/apex/f?p=224500 </a> </p> 
+                                    <p>URL5: <a className="text-blue-600"  href={'https://apex.oracle.com/pls/apex/f?p=224500'} target='_blank' >https://apex.oracle.com/pls/apex/f?p=224500 </a> </p> 
                                 </li>
                                 <li className="flex items-center">
                                     <div className="mr-4">
