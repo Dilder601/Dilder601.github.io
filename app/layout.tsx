@@ -26,10 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <meta name="apple-mobile-web-app-title" content={authorName} />
                 <meta name="application-name" content={authorName} />
                 <meta name="description" content={description} />
-                <meta
-                    name="keywords"
-                    content="kzamanbd, kzaman, kamruzzaman, software engineer, problem solving, kzamanbn, "
-                />
+                <meta name="keywords" content="software engineer, problem solving" />
                 <meta name="author" content={authorName} />
                 <meta name="theme-color" content="#009EF7" />
 
