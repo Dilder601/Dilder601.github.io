@@ -4,8 +4,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 export default function Resume() {
-    const textColor:any = {
-        color: 'blue'}
+    const textColor: any = {
+        color: 'blue'
+    };
     return (
         <div className="page gradient resume">
             <ActionButton />
@@ -123,10 +124,12 @@ export default function Resume() {
                     <section className="mb-3 text-sm">
                         <div className="mb-2">
                             <p>
-                                <span className="font-bold">Diploma In DDD(Database Design and Development) - 2020 </span>
+                                <span className="font-bold">
+                                    Diploma In DDD(Database Design and Development) - 2020{' '}
+                                </span>
                             </p>
                             <p className="italic">IsDB BISEW.</p>
-                            <p> –  IDB Bhaban (4th Floor) E/8-A, Rokeya Sharani, Dhaka 1207</p>
+                            <p> – IDB Bhaban (4th Floor) E/8-A, Rokeya Sharani, Dhaka 1207</p>
                         </div>
 
                         <div>
@@ -143,16 +146,22 @@ export default function Resume() {
                     </div>
                     <section className="space-y-2">
                         <button className="key-button group from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 focus:ring-pink-200">
-                            <span className="key-skill bg-pink-50 text-pink-500 hover:text-white">Oracle SQL/ PLSQL</span>
+                            <span className="key-skill bg-pink-50 text-pink-500 hover:text-white">
+                                Oracle SQL/ PLSQL
+                            </span>
                         </button>
                         <button className="key-button group from-yellow-500 to-orange-400 group-hover:from-yellow-500 group-hover:to-orange-400 focus:ring-yellow-200">
                             <span className="key-skill bg-yellow-50 text-yellow-500 hover:text-white">Oracle Apex</span>
                         </button>
                         <button className="key-button group from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 focus:ring-lime-200">
-                            <span className="key-skill bg-teal-50 text-teal-500 hover:text-black">BI / Dynamic Content Report</span>
+                            <span className="key-skill bg-teal-50 text-teal-500 hover:text-black">
+                                BI / Dynamic Content Report
+                            </span>
                         </button>
                         <button className="key-button group from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white focus:ring-cyan-200">
-                            <span className="key-skill bg-cyan-50 text-cyan-500 hover:text-white">SQL Performace Tuning</span>
+                            <span className="key-skill bg-cyan-50 text-cyan-500 hover:text-white">
+                                SQL Performace Tuning
+                            </span>
                         </button>
                     </section>
                     {/* Training */}
@@ -179,14 +188,18 @@ export default function Resume() {
                     <h5 className="subtitle">Summary</h5>
 
                     <p className="mb-5 text-sm">
-                        I am writing to express my strong interest in the Oracle Apex and PL/SQL Developer. 
-                        As a skilled and experienced professional with a passion for creating efficient and
-                        robust applications, I believe my technical expertise and dedication to delivering 
-                        high-quality solutions align perfectly with the requirements of the role. Over the 
-                        course of my career, I have acquired a deep understanding of Oracle Application Express (Apex) 
-                        and PL/SQL development, along with a strong foundation in database design and management. 
-                        I have successfully developed and implemented a wide range of applications, including 
-                        data-driven web applications, reports, and interactive dashboards.
+                        I am writing to express my strong interest in the Oracle Apex and PL/SQL Developer. As a skilled
+                        and experienced professional with a passion for creating efficient and robust applications, I
+                        believe my technical expertise and dedication to delivering high-quality solutions align
+                        perfectly with the requirements of the role. Over the course of my career, I have acquired a
+                        deep understanding of Oracle Application Express (Apex) and PL/SQL development, along with a
+                        strong foundation in database design and management. In my current role as a Software Engineer
+                        at MononSoft Ltd. (a sister concern of JMI Group), I have been responsible for developing and
+                        maintaining an ERP system built on Oracle PL/SQL. I have worked extensively on the PP
+                        (Production Planning), MM (Materials Management), and SD (Sales & Distribution) modules for ERP
+                        implementations at Nipro JMI Pharma, Unido Pharma and other concern of JMI Group. My role
+                        involved designing robust PL/SQL-based solutions, optimizing database performance, and ensuring
+                        seamless integration across different business functions.
                     </p>
 
                     {/* Experience section */}
@@ -238,7 +251,9 @@ export default function Resume() {
                                     <div className="mr-4">
                                         <div className="bullet"></div>
                                     </div>
-                                    <p>Creating function for different purposes like returning JSON for report queries.</p>
+                                    <p>
+                                        Creating function for different purposes like returning JSON for report queries.
+                                    </p>
                                 </li>
                                 <li className="flex items-center">
                                     <div className="mr-4">
@@ -250,9 +265,7 @@ export default function Resume() {
                                     <div className="mr-4">
                                         <div className="bullet"></div>
                                     </div>
-                                    <p>
-                                    I am committed to staying updated with the latest technologies.
-                                    </p>
+                                    <p>I am committed to staying updated with the latest technologies.</p>
                                 </li>
                             </ul>
                         </li>
@@ -260,80 +273,127 @@ export default function Resume() {
                             <TimelineIcon />
                             <h3 className="mb-1 md:flex print:flex items-center font-bold text-gray-900">
                                 <div>PROFESSIONAL EXPERIENCE</div>
-                                <a
-                                    href="#"
-                                    className="ml-2 text-sm font-medium text-primary-800"
-                                    target="_blank">
+                                <a href="#" className="ml-2 text-sm font-medium text-primary-800" target="_blank">
                                     at <span className="underline">Project of APEX:</span>
                                 </a>
                             </h3>
 
-                            <ul className="bullet-list"> 
+                            <ul className="bullet-list">
                                 <li className="flex items-center">
                                     <div className="mr-4">
                                         <div className=""></div>
                                     </div>
-                                    <p>I have completed few projects like Micro Credit Management System, Cash & Carry Mobile Shop(POS) , Pharmacy Management System(POS) , QC Alter System , Blood Circulation System etc.</p>
+                                    <p>
+                                        I have completed few projects like Micro Credit Management System, Cash & Carry
+                                        Mobile Shop(POS) , Pharmacy Management System(POS) , QC Alter System , Blood
+                                        Circulation System etc.
+                                    </p>
                                 </li>
                                 <li className="flex items-center">
                                     <div className="mr-4">
                                         <div className="bullet"></div>
-                                    </div> 
-                                    <p>URL1: <a className="text-blue-600"  href={'https://apex.oracle.com/pls/apex/f?p=113484'}  target='_blank' >https://apex.oracle.com/pls/apex/f?p=113484 </a> </p> 
+                                    </div>
+                                    <p>
+                                        URL1:{' '}
+                                        <a
+                                            className="text-blue-600"
+                                            href={'https://apex.oracle.com/pls/apex/f?p=113484'}
+                                            target="_blank">
+                                            https://apex.oracle.com/pls/apex/f?p=113484{' '}
+                                        </a>{' '}
+                                    </p>
                                 </li>
                                 <li className="flex items-center">
                                     <div className="mr-4">
                                         <div className="bullet"></div>
-                                    </div> 
-                                    <p>URL2: <a className="text-blue-600"  href={'https://apex.oracle.com/pls/apex/f?p=207615'}  target='_blank' >https://apex.oracle.com/pls/apex/f?p=207615 </a> </p> 
+                                    </div>
+                                    <p>
+                                        URL2:{' '}
+                                        <a
+                                            className="text-blue-600"
+                                            href={'https://apex.oracle.com/pls/apex/f?p=207615'}
+                                            target="_blank">
+                                            https://apex.oracle.com/pls/apex/f?p=207615{' '}
+                                        </a>{' '}
+                                    </p>
                                 </li>
                                 <li className="flex items-center">
                                     <div className="mr-4">
                                         <div className="bullet"></div>
-                                    </div> 
-                                    <p>Crediantial: <span className="text-blue-600">02030 / 123456  </span></p> 
-                                    
+                                    </div>
+                                    <p>
+                                        Crediantial: <span className="text-blue-600">02030 / 123456 </span>
+                                    </p>
                                 </li>
                                 <li className="flex items-center">
                                     <div className="mr-4">
                                         <div className="bullet"></div>
                                     </div>
                                     <div>
-                                        <p>URL3: <a className="text-blue-600"  href={'https://apex.oracle.com/pls/apex/f?p=57988'} target='_blank'  >https://apex.oracle.com/pls/apex/f?p=57988 </a> </p> 
+                                        <p>
+                                            URL3:{' '}
+                                            <a
+                                                className="text-blue-600"
+                                                href={'https://apex.oracle.com/pls/apex/f?p=57988'}
+                                                target="_blank">
+                                                https://apex.oracle.com/pls/apex/f?p=57988{' '}
+                                            </a>{' '}
+                                        </p>
                                     </div>
                                 </li>
                                 <li className="flex items-center">
                                     <div className="mr-4">
                                         <div className="bullet"></div>
-                                    </div> 
-                                    <p>Crediantial: <span className="text-blue-600">Mithu / 123  </span></p>  
+                                    </div>
+                                    <p>
+                                        Crediantial: <span className="text-blue-600">Mithu / 123 </span>
+                                    </p>
                                 </li>
                                 <li className="flex items-center">
                                     <div className="mr-4">
                                         <div className="bullet"></div>
                                     </div>
-                                    <p>URL4: <a className="text-blue-600"  href={'https://apex.oracle.com/pls/apex/f?p=157297'}  target='_blank' >https://apex.oracle.com/pls/apex/f?p=157297 </a> </p> 
+                                    <p>
+                                        URL4:{' '}
+                                        <a
+                                            className="text-blue-600"
+                                            href={'https://apex.oracle.com/pls/apex/f?p=157297'}
+                                            target="_blank">
+                                            https://apex.oracle.com/pls/apex/f?p=157297{' '}
+                                        </a>{' '}
+                                    </p>
                                 </li>
 
                                 <li className="flex items-center">
                                     <div className="mr-4">
                                         <div className="bullet"></div>
-                                    </div> 
-                                    <p>Crediantial: <span className="text-blue-600">1001 / 1001  </span></p> 
-                                    
+                                    </div>
+                                    <p>
+                                        Crediantial: <span className="text-blue-600">1001 / 1001 </span>
+                                    </p>
                                 </li>
 
                                 <li className="flex items-center">
                                     <div className="mr-4">
                                         <div className="bullet"></div>
                                     </div>
-                                    <p>URL5: <a className="text-blue-600"  href={'https://apex.oracle.com/pls/apex/f?p=224500'} target='_blank' >https://apex.oracle.com/pls/apex/f?p=224500 </a> </p> 
+                                    <p>
+                                        URL5:{' '}
+                                        <a
+                                            className="text-blue-600"
+                                            href={'https://apex.oracle.com/pls/apex/f?p=224500'}
+                                            target="_blank">
+                                            https://apex.oracle.com/pls/apex/f?p=224500{' '}
+                                        </a>{' '}
+                                    </p>
                                 </li>
                                 <li className="flex items-center">
                                     <div className="mr-4">
                                         <div className="bullet"></div>
-                                    </div> 
-                                    <p>Crediantial: <span className="text-blue-600">Mithu / 123  </span></p>  
+                                    </div>
+                                    <p>
+                                        Crediantial: <span className="text-blue-600">Mithu / 123 </span>
+                                    </p>
                                 </li>
                             </ul>
                         </li>
@@ -353,7 +413,7 @@ export default function Resume() {
                             <div className="mr-4">
                                 <div className="bullet"></div>
                             </div>
-                            <p>HTML, CSS, Bootstrap, Javascript, PHP and MySQL.</p>
+                            <p>HTML, CSS, Bootstrap, C, C++, and MySQL.</p>
                         </li>
                         <li className="flex items-center">
                             <div className="mr-4">
@@ -371,9 +431,7 @@ export default function Resume() {
                             <div className="mr-4">
                                 <div className="bullet"></div>
                             </div>
-                            <p>
-                            Ability to work individually and independently with minimal supervision.
-                            </p>
+                            <p>Ability to work individually and independently with minimal supervision.</p>
                         </li>
                         <li className="flex items-center">
                             <div className="mr-4">
