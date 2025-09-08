@@ -1,26 +1,36 @@
 import ActionButton from '@/app/components/ActionButton';
 import TimelineIcon from '@/app/components/TimelineIcon';
 import Image from 'next/image';
-import Link from 'next/link';
+// import Link from 'next/link';
 
 export default function Resume() {
-    const textColor: any = {
-        color: 'blue'
-    };
     return (
         <div className="page gradient resume">
             <ActionButton />
 
-            <div className="resume-box with-photo">
+            <div className="resume-box with-photo rounded-2xl border border-slate-200/60 dark:border-slate-700/50 shadow-xl bg-white dark:bg-slate-900/70">
                 <div className="left-box">
-                    <Image src="/images/profile.png" className="profile-photo" width={150} height={150} alt="profile" />
+                    <Image
+                        src="/images/profile.png"
+                        className="profile-photo rounded-full ring-4 ring-primary-500/20"
+                        width={150}
+                        height={150}
+                        alt="Profile photo"
+                    />
                     <div className="name--title">
-                        <h1 className="text-xl font-bold">DILDER HOSSAIN</h1>
-                        <h5 className="subtitle capitalize">Software Engineer</h5>
+                        <h1 className="text-2xl font-extrabold tracking-tight bg-gradient-to-r from-primary-600 to-indigo-600 bg-clip-text text-transparent">
+                            DILDER HOSSAIN
+                        </h1>
+                        <h5 className="subtitle capitalize inline-flex items-center px-3 py-1 mt-1 rounded-full text-xs font-semibold bg-primary-50 text-primary-700 border border-primary-200">
+                            Software Engineer
+                        </h5>
                     </div>
                     {/* contact info */}
-                    <div className="subtitle">
-                        <h5 className="subtitle-text">Personal Details</h5>
+                    <div className="subtitle mt-4">
+                        <h5 className="subtitle-text text-slate-600 dark:text-slate-300 tracking-wider uppercase text-sm">
+                            Personal Details
+                        </h5>
+                        <div className="h-0.5 w-10 bg-primary-500/70 rounded mt-2"></div>
                     </div>
                     <ul className="mb-3 space-y-2">
                         <li className="flex items-center">
@@ -45,8 +55,8 @@ export default function Resume() {
                             <a
                                 href="mailto:dilder.hossain.feni@gmail.com"
                                 target="_blank"
-                                className="resume-link"
-                                rel="noreferrer">
+                                className="resume-link hover:underline underline-offset-4 hover:text-primary-600 transition-colors"
+                                rel="noreferrer noopener">
                                 dilder.hossain.feni@gmail.com
                             </a>
                         </li>
@@ -55,15 +65,15 @@ export default function Resume() {
                             <Image
                                 className="contact-icon"
                                 src="/images/leetcode.svg"
-                                width="0"
-                                height="0"
-                                alt="leetcode kzamanbd"
+                                width={20}
+                                height={20}
+                                alt="LeetCode profile"
                             />
                             <a
                                 href="https://leetcode.com/DilderHossain/"
                                 target="_blank"
-                                className="resume-link"
-                                rel="noreferrer">
+                                className="resume-link hover:underline underline-offset-4 hover:text-primary-600 transition-colors"
+                                rel="noreferrer noopener">
                                 leetcode.com/DilderHossain/
                             </a>
                         </li>
@@ -79,8 +89,8 @@ export default function Resume() {
                             <a
                                 href="https://github.com/Dilder601"
                                 target="_blank"
-                                className="resume-link"
-                                rel="noreferrer">
+                                className="resume-link hover:underline underline-offset-4 hover:text-primary-600 transition-colors"
+                                rel="noreferrer noopener">
                                 github.com/Dilder601
                             </a>
                         </li>
@@ -96,8 +106,8 @@ export default function Resume() {
                             <a
                                 href="https://www.linkedin.com/in/dilder-orclapex/"
                                 target="_blank"
-                                className="resume-link"
-                                rel="noreferrer">
+                                className="resume-link hover:underline underline-offset-4 hover:text-primary-600 transition-colors"
+                                rel="noreferrer noopener">
                                 linkedin.com/in/dilder-orclapex
                             </a>
                         </li>
@@ -111,8 +121,8 @@ export default function Resume() {
                                 alt="location"
                             />
                             <p className="text-sm">
-                                Tejgaon Industrial Area,
-                                <br /> 29/C & 29/D, Dhaka
+                                Pathan Villa, House No: 331/A
+                                <br /> East Nakhal Para , Tejgaon- Dhaka-1215
                             </p>
                         </li>
                     </ul>
@@ -160,7 +170,7 @@ export default function Resume() {
                         </button>
                         <button className="key-button group from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white focus:ring-cyan-200">
                             <span className="key-skill bg-cyan-50 text-cyan-500 hover:text-white">
-                                SQL Performace Tuning
+                                SQL Performance Tuning
                             </span>
                         </button>
                     </section>
@@ -177,15 +187,19 @@ export default function Resume() {
                             <a
                                 href="https://learnwithsumit.com/certificates/verify/LWSCTXN-F584A5R7"
                                 target="_blank"
+                                rel="noreferrer noopener"
                                 className="resume-link font-bold">
-                                SQL Performace Tuning
+                                SQL Performance Tuning
                             </a>
                             <p className="italic">Udemy</p>
                         </div>
                     </section>
                 </div>
                 <div className="right-box">
-                    <h5 className="subtitle">Summary</h5>
+                    <h5 className="subtitle text-slate-700 dark:text-slate-200 tracking-wider uppercase text-sm">
+                        Summary
+                    </h5>
+                    <div className="h-0.5 w-10 bg-primary-500/70 rounded mb-4"></div>
 
                     <p className="mb-5 text-sm">
                         I am writing to express my strong interest in the Oracle Apex and PL/SQL Developer. As a skilled
@@ -203,7 +217,10 @@ export default function Resume() {
                     </p>
 
                     {/* Experience section */}
-                    <h5 className="subtitle mb-5">Professional Experience</h5>
+                    <h5 className="subtitle mb-2 text-slate-700 dark:text-slate-200 tracking-wider uppercase text-sm">
+                        Professional Experience
+                    </h5>
+                    <div className="h-0.5 w-10 bg-primary-500/70 rounded mb-4"></div>
 
                     <ol className="relative border-l border-primary-500">
                         <li className="mb-6 ml-6">
@@ -213,10 +230,18 @@ export default function Resume() {
                                 <div className="text-sm font-medium text-primary-800 flex space-x-1">
                                     <span>at</span>
                                     <div className="md:flex print:flex items-center space-x-1">
-                                        <a href="https://mononsoft.org" target="_blank" className="underline">
+                                        <a
+                                            href="https://mononsoft.org"
+                                            target="_blank"
+                                            rel="noreferrer noopener"
+                                            className="underline hover:text-primary-600">
                                             MononSoft Ltd.
                                         </a>
-                                        <a href="https://jmigroup-bd.com" target="_blank" className="underline">
+                                        <a
+                                            href="https://jmigroup-bd.com"
+                                            target="_blank"
+                                            rel="noreferrer noopener"
+                                            className="underline hover:text-primary-600">
                                             (A Sister Concern of JMI Group)
                                         </a>
                                     </div>
@@ -272,10 +297,8 @@ export default function Resume() {
                         <li className="mb-6 ml-6">
                             <TimelineIcon />
                             <h3 className="mb-1 md:flex print:flex items-center font-bold text-gray-900">
-                                <div>PROFESSIONAL EXPERIENCE</div>
-                                <a href="#" className="ml-2 text-sm font-medium text-primary-800" target="_blank">
-                                    at <span className="underline">Project of APEX:</span>
-                                </a>
+                                <div>Projects</div>
+                                <span className="ml-2 text-sm font-medium text-primary-800">Oracle APEX</span>
                             </h3>
 
                             <ul className="bullet-list">
@@ -296,9 +319,10 @@ export default function Resume() {
                                     <p>
                                         URL1:{' '}
                                         <a
-                                            className="text-blue-600"
+                                            className="text-blue-600 hover:underline underline-offset-4"
                                             href={'https://apex.oracle.com/pls/apex/f?p=113484'}
-                                            target="_blank">
+                                            target="_blank"
+                                            rel="noreferrer noopener">
                                             https://apex.oracle.com/pls/apex/f?p=113484{' '}
                                         </a>{' '}
                                     </p>
@@ -310,9 +334,10 @@ export default function Resume() {
                                     <p>
                                         URL2:{' '}
                                         <a
-                                            className="text-blue-600"
+                                            className="text-blue-600 hover:underline underline-offset-4"
                                             href={'https://apex.oracle.com/pls/apex/f?p=207615'}
-                                            target="_blank">
+                                            target="_blank"
+                                            rel="noreferrer noopener">
                                             https://apex.oracle.com/pls/apex/f?p=207615{' '}
                                         </a>{' '}
                                     </p>
@@ -333,9 +358,10 @@ export default function Resume() {
                                         <p>
                                             URL3:{' '}
                                             <a
-                                                className="text-blue-600"
+                                                className="text-blue-600 hover:underline underline-offset-4"
                                                 href={'https://apex.oracle.com/pls/apex/f?p=57988'}
-                                                target="_blank">
+                                                target="_blank"
+                                                rel="noreferrer noopener">
                                                 https://apex.oracle.com/pls/apex/f?p=57988{' '}
                                             </a>{' '}
                                         </p>
@@ -356,9 +382,10 @@ export default function Resume() {
                                     <p>
                                         URL4:{' '}
                                         <a
-                                            className="text-blue-600"
+                                            className="text-blue-600 hover:underline underline-offset-4"
                                             href={'https://apex.oracle.com/pls/apex/f?p=157297'}
-                                            target="_blank">
+                                            target="_blank"
+                                            rel="noreferrer noopener">
                                             https://apex.oracle.com/pls/apex/f?p=157297{' '}
                                         </a>{' '}
                                     </p>
@@ -380,9 +407,10 @@ export default function Resume() {
                                     <p>
                                         URL5:{' '}
                                         <a
-                                            className="text-blue-600"
+                                            className="text-blue-600 hover:underline underline-offset-4"
                                             href={'https://apex.oracle.com/pls/apex/f?p=224500'}
-                                            target="_blank">
+                                            target="_blank"
+                                            rel="noreferrer noopener">
                                             https://apex.oracle.com/pls/apex/f?p=224500{' '}
                                         </a>{' '}
                                     </p>
@@ -400,7 +428,10 @@ export default function Resume() {
                     </ol>
 
                     {/* Additional Skills */}
-                    <h5 className="subtitle">Additional Skills</h5>
+                    <h5 className="subtitle text-slate-700 dark:text-slate-200 tracking-wider uppercase text-sm">
+                        Additional Skills
+                    </h5>
+                    <div className="h-0.5 w-10 bg-primary-500/70 rounded mb-2"></div>
 
                     <ul className="bullet-list ml-4">
                         <li className="flex items-center">

@@ -2,7 +2,8 @@
 @tailwind components;
 @layer components {
     .page {
-        @apply z-[1] mx-auto w-full bg-white px-8 pb-10 pt-12 h-auto md:my-6 md:h-[297mm] md:w-[210mm] md:rounded md:border;
+        /* Allow flexible height on screen; keep A4 size for print */
+        @apply z-[1] mx-auto w-full bg-white px-8 pb-10 pt-12 h-auto md:my-6 md:min-h-[297mm] md:h-auto md:w-[210mm] md:rounded md:border;
         @apply relative break-before-auto print:mx-0 print:my-0 print:rounded-none print:shadow-none print:h-[297mm] print:w-[210mm];
     }
     .gradient {
@@ -18,13 +19,25 @@
         @apply bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent;
     }
     .resume-box {
-        @apply grid h-full grid-cols-10 gap-4;
+        /* Let it grow with content to avoid bottom overflow */
+        @apply grid grid-cols-10 gap-4 p-4 md:p-6;
     }
+    /* Professional resume cards and titles */
+    .section-card {
+        @apply rounded-xl border border-slate-200/70 dark:border-slate-700/60 bg-white/80 dark:bg-slate-900/60 shadow-sm p-4 md:p-5;
+    }
+    .section-title {
+        @apply text-xs tracking-wider font-semibold uppercase text-slate-600 mb-2;
+    }
+    .chips { @apply flex flex-wrap gap-2; }
+    .chip { @apply inline-flex items-center rounded-full border border-slate-200 bg-white/70 px-3 py-1 text-xs text-slate-700; }
+    .chip-primary { @apply border-primary-200 text-primary-700 bg-primary-50; }
     .left-box {
         @apply col-span-full md:col-span-3 print:col-span-3;
     }
     .right-box {
-        @apply text-justify col-span-full md:col-span-7 print:col-span-7;
+        /* Re-enable justified text with a bit of right padding to avoid clipping */
+        @apply col-span-full md:col-span-7 print:col-span-7 text-justify pr-1 md:pr-2;
     }
     .subtitle {
         @apply blue-gradient relative mb-2 font-bold uppercase print:text-gray-700;
@@ -80,6 +93,60 @@
     }
 }
 @tailwind utilities;
+
+/* Home hero small animation helpers */
+@keyframes blob {
+  0% { transform: translate(0px, 0px) scale(1); }
+  33% { transform: translate(12px, -20px) scale(1.05); }
+  66% { transform: translate(-10px, 8px) scale(0.98); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+.animate-blob { animation: blob 12s infinite; }
+.animation-delay-2000 { animation-delay: 2s; }
+
+/* Aurora-style moving blurs */
+@keyframes aurora-move {
+  0%   { transform: translate3d(-10%, -10%, 0) rotate(0deg) scale(1); }
+  50%  { transform: translate3d(5%, 10%, 0) rotate(10deg) scale(1.05); }
+  100% { transform: translate3d(10%, -5%, 0) rotate(-6deg) scale(0.98); }
+}
+.aurora { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.aurora .beam { position: absolute; width: 42vw; height: 42vw; border-radius: 9999px; filter: blur(70px); opacity: .35; mix-blend-mode: screen; animation: aurora-move 18s ease-in-out infinite alternate; }
+
+/* Subtle moving dots grid */
+@keyframes pan {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 200% 0%; }
+}
+.bg-dots { background-image: radial-gradient(rgba(2,132,199,0.22) 1px, transparent 1px); background-size: 22px 22px; }
+.pan-slow { animation: pan 60s linear infinite; }
+
+/* CTA button animations */
+@keyframes breath {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+}
+.animate-breath { animation: breath 6s ease-in-out infinite; }
+.btn-animated { position: relative; overflow: hidden; isolation: isolate; }
+.btn-animated::after {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 -150%;
+  width: 50%;
+  background: linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.45) 50%, rgba(255,255,255,0) 100%);
+  transform: skewX(-20deg);
+  animation: shine 2.8s linear infinite;
+  z-index: -1;
+}
+@keyframes shine { to { transform: translateX(300%) skewX(-20deg); } }
+
+/* Animated waves at bottom */
+@keyframes wave-slide {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.animate-wave-slow { animation: wave-slide 30s linear infinite; }
+.animate-wave-fast { animation: wave-slide 16s linear infinite; }
 
 body {
     @apply bg-[url('/images/mask.svg')] [mask-image:linear-gradient(0deg,#fff,rgba(255,255,255,1))] print:bg-white;

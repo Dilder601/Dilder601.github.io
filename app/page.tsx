@@ -1,12 +1,7 @@
-import ContextMenu from './components/ContextMenu';
-import CoverLetter from './components/CoverLetter';
-import Resume from './components/Resume';
+import HomeHero from './components/HomeHero';
 
 export default function Home() {
     return (
-        <ContextMenu>
-            <Resume />
-            <CoverLetter />
-        </ContextMenu>
+        <HomeHero />
     );
 }
