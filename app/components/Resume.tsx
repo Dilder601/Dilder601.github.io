@@ -34,24 +34,12 @@ export default function Resume() {
                     </div>
                     <ul className="mb-3 space-y-2">
                         <li className="flex items-center">
-                            <Image
-                                className="contact-icon"
-                                src="/images/phone.png"
-                                width={20}
-                                height={20}
-                                alt="phone"
-                            />
+                            <Image className="contact-icon" src="/images/phone.png" width={20} height={20} alt="phone" />
                             <p className="text-sm">+880 1635 000 601</p>
                         </li>
 
                         <li className="flex items-center">
-                            <Image
-                                className="contact-icon"
-                                src="/images/email.png"
-                                width={20}
-                                height={20}
-                                alt="email"
-                            />
+                            <Image className="contact-icon" src="/images/email.png" width={20} height={20} alt="email" />
                             <a
                                 href="mailto:dilder.hossain.feni@gmail.com"
                                 target="_blank"
@@ -62,13 +50,7 @@ export default function Resume() {
                         </li>
 
                         <li className="flex items-center">
-                            <Image
-                                className="contact-icon"
-                                src="/images/leetcode.svg"
-                                width={20}
-                                height={20}
-                                alt="LeetCode profile"
-                            />
+                            <Image className="contact-icon" src="/images/leetcode.svg" width={20} height={20} alt="LeetCode profile" />
                             <a
                                 href="https://leetcode.com/DilderHossain/"
                                 target="_blank"
@@ -79,13 +61,7 @@ export default function Resume() {
                         </li>
 
                         <li className="flex items-center">
-                            <Image
-                                className="contact-icon"
-                                src="/images/github.png"
-                                width={20}
-                                height={20}
-                                alt="github"
-                            />
+                            <Image className="contact-icon" src="/images/github.png" width={20} height={20} alt="github" />
                             <a
                                 href="https://github.com/Dilder601"
                                 target="_blank"
@@ -96,13 +72,7 @@ export default function Resume() {
                         </li>
 
                         <li className="flex items-center">
-                            <Image
-                                className="contact-icon"
-                                src="/images/linkedin.png"
-                                width={20}
-                                height={20}
-                                alt="github"
-                            />
+                            <Image className="contact-icon" src="/images/linkedin.png" width={20} height={20} alt="github" />
                             <a
                                 href="https://www.linkedin.com/in/dilder-orclapex/"
                                 target="_blank"
@@ -113,13 +83,7 @@ export default function Resume() {
                         </li>
 
                         <li className="flex items-center">
-                            <Image
-                                className="contact-icon"
-                                src="/images/location.png"
-                                width={20}
-                                height={20}
-                                alt="location"
-                            />
+                            <Image className="contact-icon" src="/images/location.png" width={20} height={20} alt="location" />
                             <p className="text-sm">
                                 Pathan Villa, House No: 331/A
                                 <br /> East Nakhal Para , Tejgaon- Dhaka-1215
@@ -174,6 +138,7 @@ export default function Resume() {
                             </span>
                         </button>
                     </section>
+
                     {/* Training */}
                     <div className="subtitle left mt-3">
                         <h5 className="subtitle-text">Training</h5>
@@ -202,49 +167,55 @@ export default function Resume() {
                     <div className="h-0.5 w-10 bg-primary-500/70 rounded mb-4"></div>
 
                     <p className="mb-5 text-sm">
-                        I am writing to express my strong interest in the Oracle Apex and PL/SQL Developer. As a skilled
-                        and experienced professional with a passion for creating efficient and robust applications, I
-                        believe my technical expertise and dedication to delivering high-quality solutions align
-                        perfectly with the requirements of the role. Over the course of my career, I have acquired a
-                        deep understanding of Oracle Application Express (Apex) and PL/SQL development, along with a
-                        strong foundation in database design and management. In my current role as a Software Engineer
-                        at MononSoft Ltd. (a sister concern of JMI Group), I have been responsible for developing and
-                        maintaining an ERP system built on Oracle PL/SQL. I have worked extensively on the PP
-                        (Production Planning), MM (Materials Management), and SD (Sales & Distribution) modules for ERP
-                        implementations at Nipro JMI Pharma, Unido Pharma and other concern of JMI Group. My role
-                        involved designing robust PL/SQL-based solutions, optimizing database performance, and ensuring
-                        seamless integration across different business functions.
+                        I am writing to express my strong interest in the Oracle Apex and PL/SQL Developer. As a
+                        skilled and experienced professional with a passion for creating efficient and robust
+                        applications, I believe my technical expertise and dedication to delivering high-quality
+                        solutions align perfectly with the requirements of the role. Over the course of my career,
+                        I have acquired a deep understanding of Oracle Application Express (Apex) and PL/SQL
+                        development, along with a strong foundation in database design and management. In my
+                        current role as a Software Engineer at MononSoft Ltd. (a sister concern of JMI Group), I
+                        have been responsible for developing and maintaining an ERP system built on Oracle PL/SQL.
+                        I have worked extensively on the PP (Production Planning), MM (Materials Management), and
+                        SD (Sales & Distribution) modules for ERP implementations at Nipro JMI Pharma, Unido
+                        Pharma and other concern of JMI Group. My role involved designing robust PL/SQL-based
+                        solutions, optimizing database performance, and ensuring seamless integration across
+                        different business functions.
                     </p>
 
                     {/* Experience section */}
-                    <h5 className="subtitle mb-2 text-slate-700 dark:text-slate-200 tracking-wider uppercase text-sm">
+                    <h5 className="subtitle mb-2 text-slate-700 dark:text-slate-200 tracking-wider uppercase text-sm inline-flex items-center gap-2">
+                        <span className="inline-flex h-5 w-5 items-center justify-center rounded-md bg-primary-50 text-primary-600 ring-1 ring-primary-200 print:ring-0" aria-hidden>
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <rect x="3" y="7" width="18" height="13" rx="2" ry="2"></rect>
+                                <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"></path>
+                            </svg>
+                        </span>
                         Professional Experience
                     </h5>
                     <div className="h-0.5 w-10 bg-primary-500/70 rounded mb-4"></div>
 
-                    <ol className="relative border-l border-primary-500">
-                        <li className="mb-6 ml-6">
-                            <TimelineIcon className="-top-1" />
+                    <ol className="relative border-l border-primary-500 pl-3">
+                        <li className="relative mb-6 ml-3">
                             <h3 className="mb-1 md:flex print:flex items-center font-bold text-gray-900">
                                 <div className="mr-2">Software Engineer</div>
-                                <div className="text-sm font-medium text-primary-800 flex space-x-1">
+                                <div className="text-sm font-medium text-primary-800 inline-flex items-center gap-1 whitespace-nowrap">
                                     <span>at</span>
-                                    <div className="md:flex print:flex items-center space-x-1">
-                                        <a
-                                            href="https://mononsoft.org"
-                                            target="_blank"
-                                            rel="noreferrer noopener"
-                                            className="underline hover:text-primary-600">
-                                            MononSoft Ltd.
-                                        </a>
-                                        <a
-                                            href="https://jmigroup-bd.com"
-                                            target="_blank"
-                                            rel="noreferrer noopener"
-                                            className="underline hover:text-primary-600">
-                                            (A Sister Concern of JMI Group)
-                                        </a>
-                                    </div>
+                                    <a
+                                        href="https://mononsoft.org"
+                                        target="_blank"
+                                        rel="noreferrer noopener"
+                                        className="text-primary-700 hover:underline underline-offset-4">
+                                        MononSoft Ltd.
+                                    </a>
+                                    <span>(A Sister Concern of</span>
+                                    <a
+                                        href="https://jmigroup-bd.com"
+                                        target="_blank"
+                                        rel="noreferrer noopener"
+                                        className="text-primary-700 hover:underline underline-offset-4">
+                                        JMI Group
+                                    </a>
+                                    <span>)</span>
                                 </div>
                             </h3>
                             <div className="mb-3 space-y-1 md:space-y-0 print:space-y-0 md:flex print:flex items-center justify-between">
@@ -294,141 +265,15 @@ export default function Resume() {
                                 </li>
                             </ul>
                         </li>
-                        <li className="mb-6 ml-6">
-                            <TimelineIcon />
-                            <h3 className="mb-1 md:flex print:flex items-center font-bold text-gray-900">
-                                <div>Projects</div>
-                                <span className="ml-2 text-sm font-medium text-primary-800">Oracle APEX</span>
-                            </h3>
-
-                            <ul className="bullet-list">
-                                <li className="flex items-center">
-                                    <div className="mr-4">
-                                        <div className=""></div>
-                                    </div>
-                                    <p>
-                                        I have completed few projects like Micro Credit Management System, Cash & Carry
-                                        Mobile Shop(POS) , Pharmacy Management System(POS) , QC Alter System , Blood
-                                        Circulation System etc.
-                                    </p>
-                                </li>
-                                <li className="flex items-center">
-                                    <div className="mr-4">
-                                        <div className="bullet"></div>
-                                    </div>
-                                    <p>
-                                        URL1:{' '}
-                                        <a
-                                            className="text-blue-600 hover:underline underline-offset-4"
-                                            href={'https://apex.oracle.com/pls/apex/f?p=113484'}
-                                            target="_blank"
-                                            rel="noreferrer noopener">
-                                            https://apex.oracle.com/pls/apex/f?p=113484{' '}
-                                        </a>{' '}
-                                    </p>
-                                </li>
-                                <li className="flex items-center">
-                                    <div className="mr-4">
-                                        <div className="bullet"></div>
-                                    </div>
-                                    <p>
-                                        URL2:{' '}
-                                        <a
-                                            className="text-blue-600 hover:underline underline-offset-4"
-                                            href={'https://apex.oracle.com/pls/apex/f?p=207615'}
-                                            target="_blank"
-                                            rel="noreferrer noopener">
-                                            https://apex.oracle.com/pls/apex/f?p=207615{' '}
-                                        </a>{' '}
-                                    </p>
-                                </li>
-                                <li className="flex items-center">
-                                    <div className="mr-4">
-                                        <div className="bullet"></div>
-                                    </div>
-                                    <p>
-                                        Crediantial: <span className="text-blue-600">02030 / 123456 </span>
-                                    </p>
-                                </li>
-                                <li className="flex items-center">
-                                    <div className="mr-4">
-                                        <div className="bullet"></div>
-                                    </div>
-                                    <div>
-                                        <p>
-                                            URL3:{' '}
-                                            <a
-                                                className="text-blue-600 hover:underline underline-offset-4"
-                                                href={'https://apex.oracle.com/pls/apex/f?p=57988'}
-                                                target="_blank"
-                                                rel="noreferrer noopener">
-                                                https://apex.oracle.com/pls/apex/f?p=57988{' '}
-                                            </a>{' '}
-                                        </p>
-                                    </div>
-                                </li>
-                                <li className="flex items-center">
-                                    <div className="mr-4">
-                                        <div className="bullet"></div>
-                                    </div>
-                                    <p>
-                                        Crediantial: <span className="text-blue-600">Mithu / 123 </span>
-                                    </p>
-                                </li>
-                                <li className="flex items-center">
-                                    <div className="mr-4">
-                                        <div className="bullet"></div>
-                                    </div>
-                                    <p>
-                                        URL4:{' '}
-                                        <a
-                                            className="text-blue-600 hover:underline underline-offset-4"
-                                            href={'https://apex.oracle.com/pls/apex/f?p=157297'}
-                                            target="_blank"
-                                            rel="noreferrer noopener">
-                                            https://apex.oracle.com/pls/apex/f?p=157297{' '}
-                                        </a>{' '}
-                                    </p>
-                                </li>
-
-                                <li className="flex items-center">
-                                    <div className="mr-4">
-                                        <div className="bullet"></div>
-                                    </div>
-                                    <p>
-                                        Crediantial: <span className="text-blue-600">1001 / 1001 </span>
-                                    </p>
-                                </li>
-
-                                <li className="flex items-center">
-                                    <div className="mr-4">
-                                        <div className="bullet"></div>
-                                    </div>
-                                    <p>
-                                        URL5:{' '}
-                                        <a
-                                            className="text-blue-600 hover:underline underline-offset-4"
-                                            href={'https://apex.oracle.com/pls/apex/f?p=224500'}
-                                            target="_blank"
-                                            rel="noreferrer noopener">
-                                            https://apex.oracle.com/pls/apex/f?p=224500{' '}
-                                        </a>{' '}
-                                    </p>
-                                </li>
-                                <li className="flex items-center">
-                                    <div className="mr-4">
-                                        <div className="bullet"></div>
-                                    </div>
-                                    <p>
-                                        Crediantial: <span className="text-blue-600">Mithu / 123 </span>
-                                    </p>
-                                </li>
-                            </ul>
-                        </li>
                     </ol>
 
                     {/* Additional Skills */}
-                    <h5 className="subtitle text-slate-700 dark:text-slate-200 tracking-wider uppercase text-sm">
+                    <h5 className="subtitle text-slate-700 dark:text-slate-200 tracking-wider uppercase text-sm inline-flex items-center gap-2">
+                        <span className="inline-flex h-5 w-5 items-center justify-center rounded-md bg-primary-50 text-primary-600 ring-1 ring-primary-200 print:ring-0" aria-hidden>
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+                            </svg>
+                        </span>
                         Additional Skills
                     </h5>
                     <div className="h-0.5 w-10 bg-primary-500/70 rounded mb-2"></div>
@@ -471,6 +316,60 @@ export default function Resume() {
                             <p>Problem-solving skills, Self-managed, independent, initiative and proactive.</p>
                         </li>
                     </ul>
+
+                    {/* Projects (under Additional Skills) */}
+                    <h5 className="subtitle text-slate-700 dark:text-slate-200 tracking-wider uppercase text-sm mt-4 inline-flex items-center gap-2">
+                        <span className="inline-flex h-5 w-5 items-center justify-center rounded-md bg-primary-50 text-primary-600 ring-1 ring-primary-200 print:ring-0" aria-hidden>
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M3 7a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"></path>
+                            </svg>
+                        </span>
+                        Projects
+                    </h5>
+                    <div className="h-0.5 w-10 bg-primary-500/70 rounded mb-3"></div>
+                    <ul className="bullet-list">
+                        <li className="flex items-start">
+                            <div className="mr-4"><div className="bullet"></div></div>
+                            <div>
+                                <p className="font-semibold text-slate-800">Micro Credit Management System</p>
+                                <p className="text-xs text-slate-600">Oracle APEX modules for onboarding, loans, collections and reporting.</p>
+                                <p className="mt-1 text-xs">Demo: <a className="text-blue-600 hover:underline underline-offset-4" href={'https://apex.oracle.com/pls/apex/f?p=113484'} target="_blank" rel="noreferrer noopener">apex.oracle.com/pls/apex/f?p=113484</a></p>
+                            </div>
+                        </li>
+                        <li className="flex items-start">
+                            <div className="mr-4"><div className="bullet"></div></div>
+                            <div>
+                                <p className="font-semibold text-slate-800">Cash & Carry POS</p>
+                                <p className="text-xs text-slate-600">Retail POS with invoicing, stock and daily sales summary.</p>
+                                <p className="mt-1 text-xs">Demo: <a className="text-blue-600 hover:underline underline-offset-4" href={'https://apex.oracle.com/pls/apex/f?p=207615'} target="_blank" rel="noreferrer noopener">apex.oracle.com/pls/apex/f?p=207615</a> <span className="ml-2 text-slate-500">Credentials: 02030 / 123456</span></p>
+                            </div>
+                        </li>
+                        <li className="flex items-start">
+                            <div className="mr-4"><div className="bullet"></div></div>
+                            <div>
+                                <p className="font-semibold text-slate-800">QC Alert System</p>
+                                <p className="text-xs text-slate-600">QC alerts and approvals with audit logs and dashboards.</p>
+                                <p className="mt-1 text-xs">Demo: <a className="text-blue-600 hover:underline underline-offset-4" href={'https://apex.oracle.com/pls/apex/f?p=57988'} target="_blank" rel="noreferrer noopener">apex.oracle.com/pls/apex/f?p=57988</a> <span className="ml-2 text-slate-500">Credentials: Mithu / 123</span></p>
+                            </div>
+                        </li>
+                        <li className="flex items-start">
+                            <div className="mr-4"><div className="bullet"></div></div>
+                            <div>
+                                <p className="font-semibold text-slate-800">Pharmacy Management System (POS)</p>
+                                <p className="text-xs text-slate-600">Billing, inventory, expiry tracking, and purchase management.</p>
+                                <p className="mt-1 text-xs">Demo: <a className="text-blue-600 hover:underline underline-offset-4" href={'https://apex.oracle.com/pls/apex/f?p=157297'} target="_blank" rel="noreferrer noopener">apex.oracle.com/pls/apex/f?p=157297</a> <span className="ml-2 text-slate-500">Credentials: 1001 / 1001</span></p>
+                            </div>
+                        </li>
+                        <li className="flex items-start">
+                            <div className="mr-4"><div className="bullet"></div></div>
+                            <div>
+                                <p className="font-semibold text-slate-800">Blood Circulation System</p>
+                                <p className="text-xs text-slate-600">Donation, routing and inventory tracking with notifications.</p>
+                                <p className="mt-1 text-xs">Demo: <a className="text-blue-600 hover:underline underline-offset-4" href={'https://apex.oracle.com/pls/apex/f?p=224500'} target="_blank" rel="noreferrer noopener">apex.oracle.com/pls/apex/f?p=224500</a> <span className="ml-2 text-slate-500">Credentials: Mithu / 123</span></p>
+                            </div>
+                        </li>
+                    </ul>
+
                 </div>
             </div>
         </div>

@@ -43,7 +43,7 @@
         @apply blue-gradient relative mb-2 font-bold uppercase print:text-gray-700;
     }
     .timeline-icon {
-        @apply absolute -left-5 flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-r from-emerald-300 to-primary-300;
+        @apply absolute -left-4 md:-left-5 flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-r from-emerald-300 to-primary-300;
     }
     .section-box {
         @apply flex h-10 items-center justify-center rounded-lg bg-primary-100;
