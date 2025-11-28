@@ -10,6 +10,10 @@ const config: Config = {
     ],
     theme: {
         extend: {
+            fontFamily: {
+                sans: ['var(--font-inter)'],
+                heading: ['var(--font-outfit)'],
+            },
             colors: {
                 light: {
                     gray: '#F5F8FA'

@@ -26,6 +26,12 @@
     .section-card {
         @apply rounded-xl border border-slate-200/70 dark:border-slate-700/60 bg-white/80 dark:bg-slate-900/60 shadow-sm p-4 md:p-5;
     }
+    .glass-card {
+        @apply backdrop-blur-xl bg-white/60 border border-white/20 shadow-lg ring-1 ring-black/5;
+    }
+    .text-gradient {
+        @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-indigo-600;
+    }
     .section-title {
         @apply text-xs tracking-wider font-semibold uppercase text-slate-600 mb-2;
     }
@@ -147,6 +153,16 @@
 }
 .animate-wave-slow { animation: wave-slide 30s linear infinite; }
 .animate-wave-fast { animation: wave-slide 16s linear infinite; }
+
+/* Entrance animations */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in-up { animation: fadeInUp 0.8s ease-out forwards; opacity: 0; }
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
 
 body {
     @apply bg-[url('/images/mask.svg')] [mask-image:linear-gradient(0deg,#fff,rgba(255,255,255,1))] print:bg-white;

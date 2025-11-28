@@ -1,7 +1,8 @@
 import './globals.css';
-import { Inter } from 'next/font/google';
+import { Inter, Outfit } from 'next/font/google';
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+const outfit = Outfit({ subsets: ['latin'], variable: '--font-outfit' });
 
 const description = `I am writing to express my strong interest in the Oracle Apex and PL/SQL Developer. As a skilled and experienced professional with a passion for creating efficient and robust applications, I believe my technical expertise and dedication to delivering high-quality solutions align perfectly with the requirements of the role. Over the course of my career, I have acquired a deep understanding of Oracle Application Express (Apex) and PL/SQL development, along with a strong foundation in database design and management. I have successfully developed and implemented a wide range of applications, including data-driven web applications, reports, and interactive dashboards.`;
 
@@ -44,7 +45,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <meta property="og:image" content="/images/icons/android-chrome-192x192.png" />
             </head>
             <body suppressHydrationWarning={true}>
-                <div className={inter.className}>{children}</div>
+                <div className={`${inter.variable} ${outfit.variable} font-sans`}>{children}</div>
             </body>
         </html>
     );
