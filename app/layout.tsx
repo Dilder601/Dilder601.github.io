@@ -1,8 +1,4 @@
 import './globals.css';
-import { Inter, Outfit } from 'next/font/google';
-
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
-const outfit = Outfit({ subsets: ['latin'], variable: '--font-outfit' });
 
 const description = `I am writing to express my strong interest in the Oracle Apex and PL/SQL Developer. As a skilled and experienced professional with a passion for creating efficient and robust applications, I believe my technical expertise and dedication to delivering high-quality solutions align perfectly with the requirements of the role. Over the course of my career, I have acquired a deep understanding of Oracle Application Express (Apex) and PL/SQL development, along with a strong foundation in database design and management. I have successfully developed and implemented a wide range of applications, including data-driven web applications, reports, and interactive dashboards.`;
 
@@ -10,8 +6,25 @@ const authorName = 'DILDER HOSSAIN';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
-        <html lang="en">
+        <html lang="en" suppressHydrationWarning={true}>
             <head>
+                <script
+                    dangerouslySetInnerHTML={{
+                        __html: `
+                            (function() {
+                                try {
+                                    var mode = localStorage.getItem('theme');
+                                    var supportDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                                    if (mode === 'dark' || (!mode && supportDark)) {
+                                        document.documentElement.classList.add('dark');
+                                    } else {
+                                        document.documentElement.classList.remove('dark');
+                                    }
+                                } catch (e) {}
+                            })();
+                        `
+                    }}
+                />
                 <title>{authorName}</title>
                 <meta
                     name="viewport"
@@ -44,8 +57,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <meta property="og:url" content="https://dilder.vercel.app" />
                 <meta property="og:image" content="/images/icons/android-chrome-192x192.png" />
             </head>
-            <body suppressHydrationWarning={true}>
-                <div className={`${inter.variable} ${outfit.variable} font-sans`}>{children}</div>
+            <body
+                suppressHydrationWarning={true}
+                style={
+                    {
+                        '--font-inter': '"Segoe UI", "Helvetica Neue", Arial, sans-serif',
+                        '--font-outfit': '"Trebuchet MS", "Arial Narrow", Arial, sans-serif',
+                    } as React.CSSProperties
+                }
+            >
+                <div className="font-sans">{children}</div>
             </body>
         </html>
     );

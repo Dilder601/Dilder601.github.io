@@ -1,343 +1,591 @@
-"use client";
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
+
+const navItems = [
+    { href: '/resume', label: 'Resume' },
+    { href: 'https://github.com/Dilder601', label: 'GitHub', ext: true },
+    { href: 'https://www.linkedin.com/in/dilder-orclapex/', label: 'LinkedIn', ext: true }
+];
+
+const expertise = ['Oracle APEX', 'PL/SQL', 'ERP Architecture', 'REST API', 'Performance Tuning'];
+
+const trustPoints = [
+    'Oracle APEX Cloud Developer Certified',
+    '5+ years in ERP delivery',
+    'Built solutions for pharma and healthcare operations'
+];
+
+const highlights = [
+    {
+        value: '5+',
+        label: 'Years building Oracle ERP workflows'
+    },
+    {
+        value: '4000+',
+        label: 'Concurrent users supported in enterprise applications'
+    },
+    {
+        value: 'JMI',
+        label: 'Hands-on delivery across multiple JMI Group concerns'
+    }
+];
+
+const focusCards = [
+    {
+        title: 'Enterprise Systems',
+        text: 'Production-ready APEX applications designed around real operational workflows.'
+    },
+    {
+        title: 'Database Performance',
+        text: 'PL/SQL, SQL tuning, report optimization, and reliable backend architecture.'
+    },
+    {
+        title: 'Domain Delivery',
+        text: 'Strong delivery experience in pharmaceutical, manufacturing, and healthcare environments.'
+    }
+];
+
+const socials = [
+    { href: 'https://github.com/Dilder601', icon: '/images/github.png', label: 'GitHub' },
+    { href: 'https://www.linkedin.com/in/dilder-orclapex/', icon: '/images/linkedin.png', label: 'LinkedIn' },
+    { href: 'https://leetcode.com/DilderHossain/', icon: '/images/leetcode.svg', label: 'LeetCode' }
+];
+
+// Mock database commands and outputs
+const terminalCommands = [
+    {
+        cmd: 'SELECT * FROM skills;',
+        output: [
+            'SKILL_NAME                | LEVEL       | CERTIFIED',
+            '--------------------------|-------------|----------',
+            'Oracle APEX Development   | Expert      | YES      ',
+            'Oracle SQL & PL/SQL       | Expert      | YES      ',
+            'ERP Architecture Design   | Senior      | YES      ',
+            'Performance Tuning        | Specialist  | YES      ',
+            'REST API & Web Services   | Advanced    | YES      ',
+            '',
+            '5 rows selected (0.02 seconds).'
+        ]
+    },
+    {
+        cmd: 'EXECUTE db_tuner.optimize_query(\'JMI_SALES_REPORT\');',
+        output: [
+            '*** Oracle Tuning Task Initialized ***',
+            '[INFO] Analyzing SQL execution plan...',
+            '[WARN] Detected FULL TABLE SCAN on large partition JMI_SALES_DATA (14.8 seconds).',
+            '[ACTION] Restructuring nested subqueries to inline WITH clause...',
+            '[ACTION] Applying Local Partitioned Index on INVOICE_DATE...',
+            '[SUCCESS] SQL Profile generated successfully.',
+            '[SUCCESS] Query execution time reduced: 14.8s -> 0.11s!',
+            '[STATUS] 99.2% increase in query efficiency.',
+            '',
+            'PL/SQL procedure successfully completed (0.15 seconds).'
+        ]
+    },
+    {
+        cmd: 'SELECT * FROM experience WHERE company = \'MononSoft\';',
+        output: [
+            'COMPANY    | ROLE              | TENURE            | LOCATION',
+            '-----------|-------------------|-------------------|------------------',
+            'MononSoft  | Software Engineer | Feb 2021 - Pres.  | Dhaka, BD        ',
+            '',
+            'Description:',
+            'Developing enterprise ERP ecosystems on Oracle Database & APEX.',
+            'Maintaining systems supporting 4000+ concurrent pharmaceutical users.',
+            '',
+            '1 row selected (0.01 seconds).'
+        ]
+    }
+];
 
 export default function HomeHero() {
     const [mobileOpen, setMobileOpen] = useState(false);
-    return (
-        <main className="relative min-h-screen overflow-hidden font-sans selection:bg-primary-100 selection:text-primary-900">
-            {/* background */}
-            <div className="absolute inset-0 -z-20">
-                <Image src="/mesh-2.png" alt="background" fill className="object-cover opacity-30" priority />
-            </div>
-            {/* animated dots layer */}
-            <div className="absolute inset-0 -z-10 opacity-[.15] bg-dots pan-slow" />
-            
-            {/* animated blobs - enhanced colors */}
-            <div className="pointer-events-none absolute -left-24 top-24 -z-10 h-72 w-72 rounded-full bg-primary-400/40 blur-[100px] lg:-left-12 lg:h-96 lg:w-96 animate-blob" />
-            <div className="pointer-events-none absolute -right-24 top-48 -z-10 h-72 w-72 rounded-full bg-indigo-400/40 blur-[100px] lg:-right-12 lg:h-96 lg:w-96 animate-blob animation-delay-2000" />
-            
-            {/* aurora beams */}
-            <div className="aurora -z-10 opacity-50">
-                <div className="beam" style={{ left: '-10%', top: '10%', background: 'radial-gradient(closest-side, rgba(59,130,246,0.6), transparent 60%)' }} />
-                <div className="beam" style={{ right: '-5%', top: '30%', background: 'radial-gradient(closest-side, rgba(99,102,241,0.6), transparent 60%)', animationDelay: '4s' }} />
-                <div className="beam" style={{ left: '20%', bottom: '-10%', background: 'radial-gradient(closest-side, rgba(16,185,129,0.5), transparent 60%)', animationDelay: '8s' }} />
-            </div>
+    const [theme, setTheme] = useState<'light' | 'dark'>('light');
+    const [rightPanel, setRightPanel] = useState<'profile' | 'terminal'>('profile');
+    
+    // Terminal state
+    const [terminalLogs, setTerminalLogs] = useState<string[]>([
+        'Oracle Database 19c Enterprise Edition Release 19.0.0.0.0',
+        'Connected to instance: DILDER_CORE_PROD',
+        'Type a command or click one of the quick queries below...',
+        ''
+    ]);
+    const [isTyping, setIsTyping] = useState(false);
+    const terminalEndRef = useRef<HTMLDivElement>(null);
 
-            {/* navbar */}
-            <header className="sticky top-6 z-50 transition-all duration-300">
-                <div className="mx-auto max-w-6xl px-6 md:px-10">
-                    <div className="glass-card flex items-center justify-between rounded-full px-6 py-3 transition-all hover:shadow-xl hover:bg-white/70">
-                        {/* brand */}
-                        <Link href="/" className="flex items-center gap-3 group">
-                            <span className="relative inline-flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-primary-500 to-indigo-500 text-white font-bold shadow-md group-hover:scale-110 transition-transform duration-300">
-                                D
-                                <span className="absolute inset-0 rounded-full bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity" />
+    // Sync theme with document class list
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            const isDark = document.documentElement.classList.contains('dark');
+            setTheme(isDark ? 'dark' : 'light');
+        }
+    }, []);
+
+    const toggleTheme = () => {
+        if (theme === 'light') {
+            document.documentElement.classList.add('dark');
+            localStorage.setItem('theme', 'dark');
+            setTheme('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+            localStorage.setItem('theme', 'light');
+            setTheme('light');
+        }
+    };
+
+    // Auto scroll terminal to bottom
+    useEffect(() => {
+        if (terminalEndRef.current) {
+            terminalEndRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+    }, [terminalLogs]);
+
+    const runTerminalCommand = (cmdText: string) => {
+        if (isTyping) return;
+        setIsTyping(true);
+        
+        // Add typed command
+        setTerminalLogs(prev => [...prev, `SQL> ${cmdText}`]);
+        
+        // Find matching output
+        const cmdObj = terminalCommands.find(c => c.cmd === cmdText);
+        const outputLines = cmdObj ? cmdObj.output : ['[ERROR] ORA-00900: invalid SQL statement.'];
+        
+        // Simulate typing delay
+        setTimeout(() => {
+            setTerminalLogs(prev => [...prev, ...outputLines, '']);
+            setIsTyping(false);
+        }, 800);
+    };
+
+    const clearTerminal = () => {
+        setTerminalLogs([
+            'Oracle Database 19c Enterprise Edition Release 19.0.0.0.0',
+            'Connected to instance: DILDER_CORE_PROD',
+            ''
+        ]);
+    };
+
+    return (
+        <main className="relative min-h-screen overflow-hidden bg-[linear-gradient(180deg,#f8fbff_0%,#edf4fb_56%,#ffffff_100%)] dark:bg-[linear-gradient(180deg,#030712_0%,#090d16_56%,#020617_100%)] font-sans text-slate-900 dark:text-slate-100 selection:bg-sky-100 dark:selection:bg-sky-950/60 selection:text-sky-900 transition-colors duration-300">
+            {/* Ambient Background Graphics */}
+            <div className="absolute inset-0 -z-30">
+                <Image src="/mesh-2.png" alt="background texture" fill className="object-cover opacity-25 dark:opacity-10" priority />
+            </div>
+            <div className="absolute inset-0 -z-20 bg-[radial-gradient(circle_at_top_left,rgba(14,165,233,0.15),transparent_28%),radial-gradient(circle_at_80%_20%,rgba(30,64,175,0.14),transparent_26%),radial-gradient(circle_at_bottom,rgba(251,191,36,0.1),transparent_24%)] dark:bg-[radial-gradient(circle_at_top_left,rgba(56,189,248,0.08),transparent_35%),radial-gradient(circle_at_80%_20%,rgba(37,99,235,0.08),transparent_30%)]" />
+            <div className="absolute inset-0 -z-10 opacity-[0.12] dark:opacity-[0.07] bg-dots pan-slow" />
+            
+            {/* Blurs */}
+            <div className="pointer-events-none absolute -left-28 top-16 -z-10 h-80 w-80 rounded-full bg-cyan-300/30 dark:bg-cyan-500/10 blur-[110px] animate-blob md:h-[28rem] md:w-[28rem]" />
+            <div className="pointer-events-none absolute right-[-5rem] top-32 -z-10 h-72 w-72 rounded-full bg-blue-500/20 dark:bg-blue-600/10 blur-[120px] animate-blob animation-delay-2000 md:h-[30rem] md:w-[30rem]" />
+            <div className="pointer-events-none absolute bottom-[-7rem] left-1/3 -z-10 h-72 w-72 rounded-full bg-amber-300/15 dark:bg-emerald-500/5 blur-[120px] animate-blob" />
+
+            <header className="relative z-30 px-5 pt-6 md:px-10">
+                <div className="mx-auto max-w-7xl">
+                    <div className="flex items-center justify-between rounded-full border border-white/50 dark:border-slate-800/40 bg-white/70 dark:bg-slate-900/60 px-4 py-3 shadow-[0_18px_55px_rgba(15,23,42,0.06)] dark:shadow-[0_18px_55px_rgba(0,0,0,0.3)] backdrop-blur-xl md:px-6 transition-all duration-300">
+                        <Link href="/" className="group flex items-center gap-3">
+                            <span className="relative inline-flex h-11 w-11 items-center justify-center rounded-full bg-[linear-gradient(135deg,#0f172a_0%,#1d4ed8_100%)] dark:bg-[linear-gradient(135deg,#1e293b_0%,#0284c7_100%)] text-sm font-bold tracking-[0.22em] text-white shadow-lg">
+                                DH
+                                <span className="absolute inset-0 rounded-full ring-1 ring-white/30" />
                             </span>
-                            <span className="font-heading font-bold tracking-tight text-xl">
-                                <span className="text-gradient">Dilder</span>
-                            </span>
+                            <div>
+                                <p className="font-heading text-lg font-bold tracking-tight text-slate-955 dark:text-white">Dilder Hossain</p>
+                                <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-slate-500 dark:text-slate-400">
+                                    Oracle APEX Developer
+                                </p>
+                            </div>
                         </Link>
 
-                        {/* desktop nav */}
-                        <nav className="hidden md:flex items-center gap-2 text-sm font-medium text-slate-600">
-                            {[
-                                { href: '/resume', label: 'Resume' },
-                                { href: 'https://github.com/Dilder601', label: 'GitHub', ext: true },
-                                { href: 'https://www.linkedin.com/in/dilder-orclapex/', label: 'LinkedIn', ext: true },
-                            ].map((item) => (
+                        <nav className="hidden items-center gap-1 md:flex">
+                            {navItems.map((item) =>
                                 item.ext ? (
                                     <a
                                         key={item.label}
                                         href={item.href}
                                         target="_blank"
                                         rel="noreferrer noopener"
-                                        className="group relative px-4 py-2 hover:text-primary-600 transition-colors">
+                                        className="rounded-full px-4 py-2 text-sm font-semibold text-slate-600 dark:text-slate-300 transition-all hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-950 dark:hover:text-white">
                                         {item.label}
-                                        <span className="absolute inset-x-4 -bottom-0.5 h-0.5 scale-x-0 bg-gradient-to-r from-primary-600 to-indigo-600 transition-transform duration-300 group-hover:scale-x-100" />
                                     </a>
                                 ) : (
                                     <Link
                                         key={item.label}
                                         href={item.href}
-                                        className="group relative px-4 py-2 hover:text-primary-600 transition-colors">
+                                        className="rounded-full px-4 py-2 text-sm font-semibold text-slate-600 dark:text-slate-300 transition-all hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-955 dark:hover:text-white">
                                         {item.label}
-                                        <span className="absolute inset-x-4 -bottom-0.5 h-0.5 scale-x-0 bg-gradient-to-r from-primary-600 to-indigo-600 transition-transform duration-300 group-hover:scale-x-100" />
                                     </Link>
                                 )
-                            ))}
-                            <Link
-                                href="/resume"
-                                aria-label="Download Resume"
-                                className="ml-4 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-primary-600 to-indigo-600 px-6 py-2.5 text-white font-medium shadow-lg shadow-primary-500/25 hover:shadow-xl hover:shadow-primary-500/40 hover:-translate-y-0.5 transition-all duration-300">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
-                                Download
-                            </Link>
+                            )}
+                            
+                            {/* Theme Toggle Button */}
+                            <button
+                                onClick={toggleTheme}
+                                className="mx-2 theme-toggle-btn"
+                                aria-label="Toggle theme">
+                                {theme === 'light' ? (
+                                    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                                    </svg>
+                                ) : (
+                                    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 9H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.062.062a5.002 5.002 0 01-7.01 0l-.002-.002z" />
+                                    </svg>
+                                )}
+                            </button>
+
+                            <a
+                                href="mailto:dilder.hossain.feni@gmail.com"
+                                className="ml-2 inline-flex items-center gap-2 rounded-full bg-slate-950 dark:bg-sky-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-slate-900/10 dark:shadow-sky-950/20 transition-all hover:-translate-y-0.5 hover:bg-slate-800 dark:hover:bg-sky-500">
+                                Let&apos;s Talk
+                            </a>
                         </nav>
 
-                        {/* mobile toggle */}
-                        <button
-                            aria-label="Toggle menu"
-                            className="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white/50 backdrop-blur text-slate-700 hover:bg-white transition-colors"
-                            onClick={() => setMobileOpen((v) => !v)}>
-                            <svg
-                                className={`transition-transform duration-300 ${mobileOpen ? 'rotate-90' : ''}`}
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                {mobileOpen ? (
-                                    <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                        <div className="flex items-center gap-3 md:hidden">
+                            <button
+                                onClick={toggleTheme}
+                                className="theme-toggle-btn h-9 w-9"
+                                aria-label="Toggle theme">
+                                {theme === 'light' ? (
+                                    <svg className="h-4.5 w-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                                    </svg>
                                 ) : (
-                                    <path d="M4 8h16M4 16h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                                    <svg className="h-4.5 w-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 9H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.062.062a5.002 5.002 0 01-7.01 0l-.002-.002z" />
+                                    </svg>
                                 )}
-                            </svg>
-                        </button>
+                            </button>
+                            
+                            <button
+                                aria-label="Toggle menu"
+                                className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300"
+                                onClick={() => setMobileOpen((v) => !v)}>
+                                <svg
+                                    className={`transition-transform duration-300 ${mobileOpen ? 'rotate-90' : ''}`}
+                                    width="20"
+                                    height="20"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    {mobileOpen ? (
+                                        <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                                    ) : (
+                                        <path d="M4 8h16M4 16h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                                    )}
+                                </svg>
+                            </button>
+                        </div>
                     </div>
 
-                    {/* mobile panel */}
                     <div
-                        className={`md:hidden mt-4 overflow-hidden rounded-3xl glass-card transition-[max-height,opacity,transform] duration-500 ease-in-out ${mobileOpen ? 'max-h-96 opacity-100 translate-y-0' : 'max-h-0 opacity-0 -translate-y-4'}`}>
-                        <div className="flex flex-col p-2">
-                            {[
-                                { href: '/resume', label: 'Resume' },
-                                { href: 'https://github.com/Dilder601', label: 'GitHub', ext: true },
-                                { href: 'https://www.linkedin.com/in/dilder-orclapex/', label: 'LinkedIn', ext: true },
-                            ].map((item) => (
-                                item.ext ? (
-                                    <a
-                                        key={item.label}
-                                        href={item.href}
-                                        target="_blank"
-                                        rel="noreferrer noopener"
-                                        className="px-6 py-4 text-slate-700 hover:bg-white/50 rounded-2xl transition-colors font-medium"
-                                        onClick={() => setMobileOpen(false)}>
-                                        {item.label}
-                                    </a>
-                                ) : (
-                                    <Link
-                                        key={item.label}
-                                        href={item.href}
-                                        className="px-6 py-4 text-slate-700 hover:bg-white/50 rounded-2xl transition-colors font-medium"
-                                        onClick={() => setMobileOpen(false)}>
-                                        {item.label}
-                                    </Link>
-                                )
-                            ))}
-                            <div className="p-2">
-                                <Link
-                                    href="/resume"
-                                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-primary-600 to-indigo-600 px-6 py-4 text-white font-bold shadow-lg"
-                                    onClick={() => setMobileOpen(false)}>
-                                    Download Resume
-                                </Link>
+                        className={`overflow-hidden transition-all duration-500 md:hidden ${mobileOpen ? 'max-h-96 pt-4 opacity-100' : 'max-h-0 opacity-0'}`}>
+                        <div className="rounded-[28px] border border-white/60 dark:border-slate-800/40 bg-white/75 dark:bg-slate-900/80 p-3 shadow-xl backdrop-blur-xl">
+                            <div className="flex flex-col gap-1">
+                                {navItems.map((item) =>
+                                    item.ext ? (
+                                        <a
+                                            key={item.label}
+                                            href={item.href}
+                                            target="_blank"
+                                            rel="noreferrer noopener"
+                                            className="rounded-2xl px-4 py-3 text-sm font-semibold text-slate-700 dark:text-slate-300 transition-colors hover:bg-slate-50 dark:hover:bg-slate-800/60">
+                                            {item.label}
+                                        </a>
+                                    ) : (
+                                        <Link
+                                            key={item.label}
+                                            href={item.href}
+                                            className="rounded-2xl px-4 py-3 text-sm font-semibold text-slate-700 dark:text-slate-300 transition-colors hover:bg-slate-50 dark:hover:bg-slate-800/60">
+                                            {item.label}
+                                        </Link>
+                                    )
+                                )}
+                                <a
+                                    href="mailto:dilder.hossain.feni@gmail.com"
+                                    className="mt-2 inline-flex items-center justify-center rounded-2xl bg-slate-950 dark:bg-sky-600 px-5 py-3 text-sm font-bold text-white">
+                                    Let&apos;s Talk
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
             </header>
 
-            <section className="mx-auto max-w-6xl px-6 md:px-10 py-12 md:py-24 grid gap-12 md:grid-cols-2 items-center relative z-10">
-                {/* Left: Heading + CTA */}
-                <div className="space-y-8">
-                    <div className="inline-flex items-center gap-2 rounded-full border border-primary-200 bg-primary-50/50 px-4 py-1.5 backdrop-blur-sm animate-fade-in-up">
-                        <span className="relative flex h-2 w-2">
-                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-400 opacity-75"></span>
-                          <span className="relative inline-flex rounded-full h-2 w-2 bg-primary-500"></span>
+            <section className="relative z-20 mx-auto grid max-w-7xl gap-12 px-5 pb-14 pt-12 md:px-10 md:pb-20 md:pt-16 xl:grid-cols-[minmax(0,1.05fr)_31rem] xl:items-center">
+                <div className="min-w-0 max-w-3xl">
+                    <div className="inline-flex items-center gap-3 rounded-full border border-sky-200/70 dark:border-sky-800/40 bg-white/80 dark:bg-slate-900/60 px-4.5 py-2 shadow-sm backdrop-blur animate-fade-in-up">
+                        <span className="flex h-2.5 w-2.5 rounded-full bg-emerald-500 shadow-[0_0_0_6px_rgba(16,185,129,0.16)] dark:shadow-[0_0_0_6px_rgba(16,185,129,0.22)]" />
+                        <span className="text-[10px] font-bold uppercase tracking-[0.28em] text-sky-800 dark:text-sky-300">
+                            Oracle APEX Cloud Developer Certified
                         </span>
-                        <span className="text-xs font-bold tracking-wide text-primary-700 uppercase">Available for hire</span>
                     </div>
-                    
-                    <div className="space-y-4">
-                        <h1 className="font-heading text-5xl md:text-7xl font-bold leading-[1.1] tracking-tight text-slate-900 animate-fade-in-up delay-100">
-                            Building <br/>
-                            <span className="text-gradient">Scalable</span> Solutions
+
+                    <div className="mt-7 space-y-6">
+                        <p className="text-[11px] font-bold uppercase tracking-[0.34em] text-slate-400 dark:text-slate-450 animate-fade-in-up delay-100">
+                            Enterprise Applications. Database Logic. ERP Delivery.
+                        </p>
+                        <h1 className="font-heading text-[2.75rem] md:text-7xl font-bold leading-[1.02] tracking-[-0.04em] text-slate-950 dark:text-white animate-fade-in-up delay-100">
+                            Gorgeous software is nice.
+                            <span className="mt-3 block bg-gradient-to-r from-sky-600 via-blue-700 to-indigo-950 dark:from-sky-400 dark:via-blue-400 dark:to-indigo-300 bg-clip-text text-transparent">
+                                Reliable enterprise systems are better.
+                            </span>
                         </h1>
-                        <p className="text-lg md:text-xl text-slate-600 max-w-xl leading-relaxed animate-fade-in-up delay-200">
-                            Oracle APEX and PL/SQL developer specializing in high-performance ERP modules, data-driven applications, and database optimization.
+                        <p className="max-w-2xl text-[13px] md:text-sm leading-7 md:leading-8 text-slate-600 dark:text-slate-300 animate-fade-in-up delay-200">
+                            I design and ship Oracle APEX and PL/SQL solutions that help real operations move faster,
+                            from ERP workflows and reporting systems to performance-critical database applications in
+                            pharma and healthcare environments.
                         </p>
                     </div>
 
-                    <div className="flex flex-wrap items-center gap-4 animate-fade-in-up delay-300">
+                    <div className="mt-8 flex flex-wrap items-center gap-4 animate-fade-in-up delay-300">
                         <Link
                             href="/resume"
-                            className="btn-animated animate-breath group relative inline-flex items-center gap-3 rounded-full bg-slate-900 px-8 py-4 text-white shadow-xl shadow-slate-900/20 transition-all hover:-translate-y-1 hover:shadow-2xl hover:bg-slate-800">
-                            <span className="font-semibold">View Resume</span>
-                            <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                            className="inline-flex items-center gap-3 rounded-full bg-slate-950 dark:bg-sky-600 px-7 py-4 text-sm font-semibold text-white shadow-[0_18px_40px_rgba(15,23,42,0.12)] dark:shadow-[0_18px_40px_rgba(3,105,161,0.25)] transition-all hover:-translate-y-1 hover:bg-slate-800 dark:hover:bg-sky-500">
+                            View Resume
+                            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                             </svg>
                         </Link>
                         <a
                             href="mailto:dilder.hossain.feni@gmail.com"
-                            className="group inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/50 px-8 py-4 text-slate-700 backdrop-blur-sm transition-all hover:bg-white hover:shadow-lg hover:-translate-y-1">
-                            <span className="font-semibold">Contact Me</span>
+                            className="inline-flex items-center gap-3 rounded-full border border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/60 px-7 py-4 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm backdrop-blur transition-all hover:-translate-y-1 hover:bg-white dark:hover:bg-slate-800 hover:text-slate-950 dark:hover:text-white">
+                            Contact Me
                         </a>
                     </div>
 
-                    {/* Socials & Skills */}
-                    <div className="pt-8 border-t border-slate-200/60 flex flex-col md:flex-row gap-6 md:items-center">
-                        <div className="flex items-center gap-4">
-                            {[
-                                { href: 'https://github.com/Dilder601', icon: '/images/github.png', label: 'GitHub' },
-                                { href: 'https://www.linkedin.com/in/dilder-orclapex/', icon: '/images/linkedin.png', label: 'LinkedIn' },
-                                { href: 'https://leetcode.com/DilderHossain/', icon: '/images/leetcode.svg', label: 'LeetCode' },
-                            ].map((social) => (
+                    <div className="mt-9 flex flex-wrap gap-2 animate-fade-in-up delay-300">
+                        {expertise.map((item) => (
+                            <span
+                                key={item}
+                                className="rounded-full border border-slate-200/80 dark:border-slate-800/80 bg-white/70 dark:bg-slate-900/50 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.16em] text-slate-700 dark:text-slate-300 backdrop-blur">
+                                {item}
+                            </span>
+                        ))}
+                    </div>
+
+                    <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+                        {highlights.map((item) => (
+                            <div
+                                key={item.label}
+                                className="rounded-[28px] border border-white/60 dark:border-slate-800/60 bg-white/75 dark:bg-slate-900/40 p-5 shadow-[0_18px_45px_rgba(15,23,42,0.04)] dark:shadow-[0_18px_45px_rgba(0,0,0,0.15)] backdrop-blur transition-all duration-300 hover:-translate-y-0.5">
+                                <p className="font-heading text-3xl font-bold tracking-tight text-slate-950 dark:text-white">{item.value}</p>
+                                <p className="mt-2 text-xs leading-6 text-slate-600 dark:text-slate-400">{item.label}</p>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className="mt-10 flex flex-col gap-6 border-t border-slate-200/70 dark:border-slate-800/70 pt-8 lg:flex-row lg:items-center lg:justify-between">
+                        <div className="flex items-center gap-3">
+                            {socials.map((social) => (
                                 <a
                                     key={social.label}
                                     href={social.href}
                                     target="_blank"
                                     rel="noreferrer noopener"
-                                    className="group relative flex h-12 w-12 items-center justify-center rounded-full bg-white border border-slate-200 shadow-sm transition-all hover:scale-110 hover:shadow-md hover:border-primary-200"
+                                    className="group flex h-12 w-12 items-center justify-center rounded-full border border-slate-200 dark:border-slate-800 bg-white/85 dark:bg-slate-900/60 shadow-sm transition-all hover:-translate-y-1 hover:border-sky-200 dark:hover:border-sky-900 hover:shadow-md"
                                     title={social.label}>
-                                    <Image src={social.icon} alt={social.label} width={24} height={24} className="opacity-75 group-hover:opacity-100 transition-opacity" />
+                                    <Image
+                                        src={social.icon}
+                                        alt={social.label}
+                                        width={20}
+                                        height={20}
+                                        className="opacity-70 dark:opacity-60 transition-opacity group-hover:opacity-100 group-hover:invert-0 dark:invert-[0.85] dark:group-hover:invert-0"
+                                    />
                                 </a>
                             ))}
                         </div>
-                        <div className="h-8 w-px bg-slate-200 hidden md:block" />
-                        <div className="flex flex-wrap gap-2">
-                            {['Oracle APEX', 'PL/SQL', 'ERP', 'REST API'].map((t) => (
-                                <span key={t} className="rounded-full border border-slate-200 bg-white/40 px-3 py-1 text-xs font-medium text-slate-600 backdrop-blur-sm">
-                                    {t}
-                                </span>
+
+                        <div className="grid gap-2">
+                            {trustPoints.map((item) => (
+                                <div key={item} className="flex items-start gap-3 text-xs text-slate-600 dark:text-slate-400">
+                                    <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-sky-500 dark:bg-sky-400" />
+                                    <span>{item}</span>
+                                </div>
                             ))}
                         </div>
                     </div>
                 </div>
 
-                {/* Right: Avatar */}
-                <div className="relative mx-auto w-full max-w-md aspect-square md:aspect-auto md:h-[32rem] flex items-center justify-center">
-                    <div className="absolute inset-0 bg-gradient-to-tr from-primary-200/40 to-indigo-200/40 rounded-full blur-3xl animate-pulse" />
-                    <div className="relative h-[280px] w-[280px] md:h-[400px] md:w-[400px]">
-                        <div className="absolute inset-0 rounded-full border-2 border-white/50 animate-[spin_10s_linear_infinite]" />
-                        <div className="absolute inset-4 rounded-full border border-white/30 animate-[spin_15s_linear_infinite_reverse]" />
-                        <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary-100 to-indigo-100 p-2 shadow-2xl ring-1 ring-white/50">
-                            <div className="relative h-full w-full overflow-hidden rounded-full bg-white">
-                                <Image
-                                    src="/images/profile.png"
-                                    alt="Profile"
-                                    fill
-                                    className="object-cover scale-110 hover:scale-100 transition-transform duration-700"
-                                    sizes="(max-width: 768px) 100vw, 50vw"
-                                    priority
-                                />
-                            </div>
-                        </div>
-                        
-                        {/* Floating badges */}
-                        <div className="absolute -left-4 top-1/4 animate-bounce duration-[3000ms]">
-                            <div className="glass-card flex items-center gap-2 rounded-2xl px-4 py-2">
-                                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-orange-100 text-orange-600">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-                                </span>
-                                <div className="text-xs font-bold text-slate-700">
-                                    Full Stack<br/>Developer
+                {/* Right Side Panel - Features Toggle tab between Photo Profile and Live PL/SQL Terminal */}
+                <div className="relative mx-auto w-full max-w-[31rem] min-w-0 xl:mx-0">
+                    <div className="absolute inset-x-8 top-8 h-40 rounded-full bg-cyan-300/20 dark:bg-cyan-500/5 blur-[90px]" />
+                    <div className="absolute inset-x-14 bottom-8 h-36 rounded-full bg-blue-600/15 dark:bg-sky-600/5 blur-[90px]" />
+
+                    {/* Toggle Headers */}
+                    <div className="flex justify-center gap-2 mb-4">
+                        <button 
+                            onClick={() => setRightPanel('profile')}
+                            className={`px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-full transition-all duration-300 ${rightPanel === 'profile' ? 'bg-slate-950 text-white dark:bg-sky-600' : 'bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-slate-900 dark:text-slate-400 dark:hover:bg-slate-800'}`}>
+                            Profile Profile
+                        </button>
+                        <button 
+                            onClick={() => setRightPanel('terminal')}
+                            className={`px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-full transition-all duration-300 ${rightPanel === 'terminal' ? 'bg-slate-950 text-white dark:bg-sky-600' : 'bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-slate-900 dark:text-slate-400 dark:hover:bg-slate-800'}`}>
+                            Live PL/SQL Terminal
+                        </button>
+                    </div>
+
+                    {/* Panel Container */}
+                    <div className="relative rounded-[36px] border border-white/70 dark:border-slate-800 bg-[linear-gradient(160deg,rgba(255,255,255,0.92),rgba(232,242,252,0.82))] dark:bg-[linear-gradient(160deg,rgba(15,23,42,0.95),rgba(9,15,28,0.9))] p-4 shadow-[0_30px_80px_rgba(15,23,42,0.12)] dark:shadow-[0_30px_80px_rgba(0,0,0,0.5)] backdrop-blur-xl min-h-[500px] flex flex-col justify-between">
+                        {rightPanel === 'profile' ? (
+                            <div className="rounded-[30px] bg-[linear-gradient(180deg,#0f2749_0%,#173d6b_52%,#205b8f_100%)] dark:bg-[linear-gradient(180deg,#090d16_0%,#111827_52%,#1e293b_100%)] p-5 text-white flex flex-col h-full justify-between">
+                                <div>
+                                    <div className="flex items-start justify-between gap-4">
+                                        <div>
+                                            <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-sky-200/90">
+                                                Featured Profile
+                                            </p>
+                                            <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight">Dilder Hossain</h2>
+                                            <p className="mt-2.5 max-w-xs text-xs leading-6 text-sky-100/85">
+                                                Oracle APEX, PL/SQL, ERP modules, reporting systems, and business process automation.
+                                            </p>
+                                        </div>
+                                        <div className="rounded-full border border-white/15 bg-white/10 px-3.5 py-1 text-[9px] font-bold uppercase tracking-[0.18em] text-sky-100">
+                                            Dhaka
+                                        </div>
+                                    </div>
+
+                                    <div className="relative mt-6 overflow-hidden rounded-[28px] border border-white/10 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.12),transparent_48%),linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] p-4">
+                                        <div className="absolute left-1/2 top-4 h-56 w-56 -translate-x-1/2 rounded-full border border-white/10" />
+                                        <div className="absolute left-1/2 top-8 h-48 w-48 -translate-x-1/2 rounded-full border border-white/5" />
+                                        <div className="relative mx-auto aspect-[4/5] max-w-[17rem] overflow-hidden rounded-[28px] bg-[linear-gradient(180deg,#e0f2fe_0%,#f8fbff_100%)] shadow-[0_24px_50px_rgba(2,6,23,0.3)]">
+                                            <Image
+                                                src="/images/resume-profile.jpg"
+                                                alt="Dilder Hossain portrait"
+                                                fill
+                                                className="object-cover object-top transition-transform duration-500 hover:scale-105"
+                                                sizes="(max-width: 1024px) 90vw, 30rem"
+                                                priority
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="mt-5 grid gap-3">
+                                    {focusCards.map((item) => (
+                                        <div
+                                            key={item.title}
+                                            className="rounded-[22px] border border-white/10 bg-white/10 p-4 backdrop-blur transition-all duration-300 hover:bg-white/15">
+                                            <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-sky-200">{item.title}</p>
+                                            <p className="mt-1.5 text-xs leading-5 text-sky-50/90">{item.text}</p>
+                                        </div>
+                                    ))}
                                 </div>
                             </div>
-                        </div>
-                        
-                        <div className="absolute -right-8 bottom-1/3 animate-bounce duration-[4000ms]">
-                            <div className="glass-card flex items-center gap-2 rounded-2xl px-4 py-2">
-                                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-                                </span>
-                                <div className="text-xs font-bold text-slate-700">
-                                    Verified<br/>Expert
+                        ) : (
+                            /* Live PL/SQL Terminal Simulator */
+                            <div className="terminal-mock flex flex-col h-full bg-slate-950 text-emerald-450 p-4 min-h-[480px]">
+                                <div className="terminal-header border-b border-slate-900 pb-3 mb-3 flex items-center justify-between">
+                                    <div className="terminal-dots flex gap-1.5">
+                                        <span className="terminal-dot bg-red-500 h-2.5 w-2.5 rounded-full" />
+                                        <span className="terminal-dot bg-yellow-500 h-2.5 w-2.5 rounded-full" />
+                                        <span className="terminal-dot bg-green-500 h-2.5 w-2.5 rounded-full" />
+                                    </div>
+                                    <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500">
+                                        SQLPlus Console
+                                    </span>
+                                    <button 
+                                        onClick={clearTerminal} 
+                                        className="text-[10px] hover:text-white text-slate-500 uppercase tracking-widest border border-slate-800 rounded px-2 py-0.5 transition-colors">
+                                        Clear
+                                    </button>
+                                </div>
+
+                                {/* Outputs */}
+                                <div className="flex-1 overflow-y-auto max-h-[300px] text-[11px] leading-5 pr-2 font-mono scrollbar-thin scrollbar-thumb-slate-800">
+                                    {terminalLogs.map((log, index) => (
+                                        <div key={index} className={log.startsWith('SQL>') ? 'text-white' : log.startsWith('[SUCCESS]') ? 'text-sky-400' : log.startsWith('[ERROR]') ? 'text-rose-500' : log.startsWith('[WARN]') ? 'text-amber-500' : 'text-emerald-400'}>
+                                            {log}
+                                        </div>
+                                    ))}
+                                    {isTyping && (
+                                        <div className="flex items-center gap-1 text-white">
+                                            <span>{'SQL> Running query...'}</span>
+                                            <span className="h-3 w-1.5 bg-white animate-blink" />
+                                        </div>
+                                    )}
+                                    <div ref={terminalEndRef} />
+                                </div>
+
+                                {/* Clickable inputs */}
+                                <div className="mt-4 border-t border-slate-900 pt-3">
+                                    <p className="text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-2">
+                                        Execute Query Shortcut:
+                                    </p>
+                                    <div className="flex flex-col gap-1.5">
+                                        <button 
+                                            disabled={isTyping}
+                                            onClick={() => runTerminalCommand('SELECT * FROM skills;')}
+                                            className="text-left text-[11px] font-mono hover:bg-slate-900 disabled:opacity-50 text-sky-400 hover:text-white px-2 py-1.5 border border-slate-800 rounded transition-all">
+                                            &gt; SELECT * FROM skills;
+                                        </button>
+                                        <button 
+                                            disabled={isTyping}
+                                            onClick={() => runTerminalCommand('EXECUTE db_tuner.optimize_query(\'JMI_SALES_REPORT\');')}
+                                            className="text-left text-[11px] font-mono hover:bg-slate-900 disabled:opacity-50 text-sky-400 hover:text-white px-2 py-1.5 border border-slate-800 rounded transition-all">
+                                            {"> EXECUTE db_tuner.optimize_query('JMI_SALES_REPORT');"}
+                                        </button>
+                                        <button 
+                                            disabled={isTyping}
+                                            onClick={() => runTerminalCommand('SELECT * FROM experience WHERE company = \'MononSoft\';')}
+                                            className="text-left text-[11px] font-mono hover:bg-slate-900 disabled:opacity-50 text-sky-400 hover:text-white px-2 py-1.5 border border-slate-800 rounded transition-all">
+                                            &gt; SELECT * FROM experience...
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
+                        )}
+
+                        {/* Side tags visible in desktop 2xl only */}
+                        <div className="absolute -left-6 top-16 hidden w-40 rounded-[22px] border border-white/60 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 p-4 shadow-xl backdrop-blur 2xl:block transition-all duration-300">
+                            <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Core Focus</p>
+                            <p className="mt-1.5 text-sm font-bold text-slate-900 dark:text-white">ERP + Database + Delivery</p>
+                            <p className="mt-1 text-xs leading-5 text-slate-600 dark:text-slate-400">
+                                Clean architecture for practical business systems.
+                            </p>
+                        </div>
+
+                        <div className="absolute -right-5 bottom-20 hidden w-44 rounded-[22px] border border-sky-200/80 dark:border-sky-900/60 bg-sky-50/95 dark:bg-slate-900/95 p-4 shadow-xl 2xl:block transition-all duration-300">
+                            <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-sky-700 dark:text-sky-400">Impact</p>
+                            <p className="mt-1.5 text-3xl font-bold tracking-tight text-sky-950 dark:text-white">4000+</p>
+                            <p className="mt-1 text-xs leading-5 text-slate-600 dark:text-slate-455">Concurrent users supported through enterprise ERP delivery.</p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* stats/footer strip */}
-            <section className="mx-auto max-w-6xl px-6 md:px-10 pb-12 relative z-10">
-                <div className="glass-card rounded-3xl p-1 bg-gradient-to-r from-white/40 to-white/10">
-                    <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-slate-200/50 bg-white/40 rounded-[22px]">
-                        {/* Item 1 */}
-                        <div className="group flex items-center gap-4 px-8 py-6 hover:bg-white/40 transition rounded-t-[22px] md:rounded-l-[22px] md:rounded-tr-none">
-                            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary-50 text-primary-600 group-hover:scale-110 transition-transform">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-                                    <path d="M10 4H6a2 2 0 00-2 2v12h2v-6h4v6h2V6a2 2 0 00-2-2zm8 4h-4a2 2 0 00-2 2v8h2v-4h4v4h2v-8a2 2 0 00-2-2zm-6 4v-2a2 2 0 012-2h4"/>
-                                </svg>
-                            </div>
-                            <div>
-                                <h3 className="font-bold text-slate-800">4+ Years Exp.</h3>
-                                <p className="text-sm text-slate-600">APEX, PL/SQL & ERP</p>
-                            </div>
+            <section className="relative z-20 mx-auto max-w-7xl px-5 pb-16 md:px-10 md:pb-24">
+                <div className="rounded-[34px] border border-white/60 dark:border-slate-800 bg-white/72 dark:bg-slate-900/50 p-3 shadow-[0_22px_60px_rgba(15,23,42,0.04)] dark:shadow-[0_22px_60px_rgba(0,0,0,0.2)] backdrop-blur-xl">
+                    <div className="grid gap-4 rounded-[28px] bg-[linear-gradient(135deg,rgba(255,255,255,0.9),rgba(236,246,255,0.92))] dark:bg-[linear-gradient(135deg,rgba(15,23,42,0.85),rgba(17,24,39,0.92))] p-3 lg:grid-cols-3">
+                        <div className="rounded-[24px] bg-slate-950 dark:bg-slate-900 px-6 py-6 text-white border border-slate-900 dark:border-slate-800 shadow">
+                            <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-sky-400">What I Build</p>
+                            <h3 className="mt-3 font-heading text-2xl font-bold">Oracle-backed business platforms</h3>
+                            <p className="mt-3 text-xs leading-6 text-slate-300 dark:text-slate-400">
+                                ERP modules, dashboards, reports, automation pipelines, APIs, and stable database-heavy systems.
+                            </p>
                         </div>
-                        {/* Item 2 */}
-                        <div className="group flex items-center gap-4 px-8 py-6 hover:bg-white/40 transition">
-                            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-indigo-50 text-indigo-600 group-hover:scale-110 transition-transform">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                                    <path d="M22 12a10 10 0 1 1-10-10"/>
-                                    <path d="M22 12A10 10 0 0 0 12 2v10z" fill="currentColor"/>
-                                </svg>
-                            </div>
-                            <div>
-                                <h3 className="font-bold text-slate-800">Performance</h3>
-                                <p className="text-sm text-slate-600">Database Tuning & Reports</p>
-                            </div>
+
+                        <div className="rounded-[24px] bg-white dark:bg-slate-950/60 px-6 py-6 border border-slate-100 dark:border-slate-800 shadow-sm">
+                            <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Industries</p>
+                            <h3 className="mt-3 font-heading text-2xl font-bold text-slate-900 dark:text-white">Pharma, healthcare, operations</h3>
+                            <p className="mt-3 text-xs leading-6 text-slate-600 dark:text-slate-400">
+                                Delivery experience for organizations including Nipro JMI Pharma, Unido Pharma, Bangladesh Eye Hospital, and related concerns.
+                            </p>
                         </div>
-                        {/* Item 3 */}
-                        <div className="group flex items-center gap-4 px-8 py-6 hover:bg-white/40 transition rounded-b-[22px] md:rounded-r-[22px] md:rounded-bl-none">
-                            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-600 group-hover:scale-110 transition-transform">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                                    <path d="M20 6L9 17l-5-5"/>
-                                </svg>
-                            </div>
-                            <div>
-                                <h3 className="font-bold text-slate-800">Available</h3>
-                                <p className="text-sm text-slate-600">For Full-time Roles</p>
-                            </div>
+
+                        <div className="rounded-[24px] bg-[linear-gradient(135deg,#e0f2fe_0%,#eff6ff_100%)] dark:bg-[linear-gradient(135deg,rgba(15,23,42,0.45)_0%,rgba(3,105,161,0.2)_100%)] px-6 py-6 border border-sky-100/50 dark:border-sky-900/20 shadow-sm">
+                            <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-sky-700 dark:text-sky-350">Approach</p>
+                            <h3 className="mt-3 font-heading text-2xl font-bold text-slate-950 dark:text-white">Business-first engineering</h3>
+                            <p className="mt-3 text-xs leading-6 text-slate-700 dark:text-slate-300">
+                                I translate complex operational requirements into maintainable applications that teams can trust every day.
+                             </p>
                         </div>
                     </div>
                 </div>
             </section>
-
-            {/* animated waves */}
-            <div className="pointer-events-none absolute inset-x-0 bottom-0 -z-10">
-                <div className="relative h-40 md:h-64 overflow-hidden">
-                    {/* back wave */}
-                    <svg
-                        className="absolute bottom-0 left-0 h-full w-[200%] animate-wave-slow will-change-transform opacity-50"
-                        viewBox="0 0 1800 240"
-                        fill="none"
-                        preserveAspectRatio="none">
-                        <defs>
-                            <linearGradient id="waveGradBack" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="0%" stopColor="#60a5fa" stopOpacity="0.2" />
-                                <stop offset="100%" stopColor="#60a5fa" stopOpacity="0" />
-                            </linearGradient>
-                        </defs>
-                        <path
-                            d="M0 120 C 150 200 350 40 500 120 S 850 200 1000 120 S 1150 40 1300 120 S 1650 200 1800 120 V 240 H 0 Z"
-                            fill="url(#waveGradBack)"
-                        />
-                    </svg>
-                    {/* front wave */}
-                    <svg
-                        className="absolute bottom-0 left-0 h-full w-[200%] animate-wave-fast will-change-transform"
-                        viewBox="0 0 1800 240"
-                        fill="none"
-                        preserveAspectRatio="none"
-                        style={{ animationDirection: 'reverse' }}>
-                        <defs>
-                            <linearGradient id="waveGradFront" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="0%" stopColor="#6366f1" stopOpacity="0.3" />
-                                <stop offset="100%" stopColor="#6366f1" stopOpacity="0" />
-                            </linearGradient>
-                        </defs>
-                        <path
-                            d="M0 140 C 140 220 360 60 520 140 S 860 220 1020 140 S 1180 60 1340 140 S 1660 220 1800 140 V 240 H 0 Z"
-                            fill="url(#waveGradFront)"
-                        />
-                    </svg>
-                </div>
-            </div>
         </main>
     );
 }

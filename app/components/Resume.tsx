@@ -1,508 +1,417 @@
 import ActionButton from '@/app/components/ActionButton';
-import TimelineIcon from '@/app/components/TimelineIcon';
 import Image from 'next/image';
-// import Link from 'next/link';
+
+const contacts = [
+    {
+        label: 'Phone',
+        value: '+880 1635 000 601',
+        href: 'tel:+8801635000601'
+    },
+    {
+        label: 'Email',
+        value: 'dilder.hossain.feni@gmail.com',
+        href: 'mailto:dilder.hossain.feni@gmail.com'
+    },
+    {
+        label: 'LinkedIn',
+        value: 'linkedin.com/in/dilder-orclapex',
+        href: 'https://www.linkedin.com/in/dilder-orclapex/'
+    },
+    {
+        label: 'GitHub',
+        value: 'github.com/Dilder601',
+        href: 'https://github.com/Dilder601'
+    },
+    {
+        label: 'LeetCode',
+        value: 'leetcode.com/DilderHossain',
+        href: 'https://leetcode.com/DilderHossain/'
+    },
+    {
+        label: 'Address',
+        value: 'Tejgaon, Dhaka-1215, Bangladesh'
+    }
+];
+
+const expertise = [
+    'Oracle APEX application development',
+    'Oracle SQL and PL/SQL architecture',
+    'ERP process design and module support',
+    'REST API, JSON and web service integration',
+    'Performance tuning and query optimization',
+    'Dynamic reports, dashboards and BI outputs'
+];
+
+const tools = [
+    'Oracle Database',
+    'Oracle APEX',
+    'PL/SQL',
+    'REST API',
+    'JSON',
+    'HTML',
+    'CSS',
+    'Bootstrap',
+    'GitHub',
+    'SVN',
+    'JIRA',
+    'ClickUp'
+];
+
+const domainAreas = ['PP', 'MM', 'SD', 'HRM', 'POS', 'QC', 'Inventory', 'Reporting'];
+
+const highlights = ['5+ years ERP delivery', 'Oracle APEX and PL/SQL specialist', 'Production support and optimization'];
+
+const education = [
+    {
+        degree: 'Diploma in DDD (Database Design & Development)',
+        institute: 'IsDB-BISEW',
+        meta: '2020'
+    },
+    {
+        degree: 'Bachelor of Business Administration',
+        institute: 'Feni Govt. College',
+        meta: '2017 | CGPA 3.17'
+    }
+];
+
+const training = [
+    {
+        title: 'Computer Fundamental',
+        provider: 'New Horizons, Dhaka'
+    },
+    {
+        title: 'SQL Performance Tuning',
+        provider: 'Udemy',
+        href: 'https://learnwithsumit.com/certificates/verify/LWSCTXN-F584A5R7'
+    }
+];
+
+const experienceBullets = [
+    'Develop and maintain enterprise ERP solutions on Oracle Database and Oracle APEX.',
+    'Build packages, procedures, triggers and functions for complex business workflows.',
+    'Design report queries, JSON-producing functions and reusable database components.',
+    'Improve existing applications through optimization, feature enhancement and issue resolution.',
+    'Support manufacturing, supply chain, sales and HR teams with stable production-ready modules.'
+];
+
+const projectHighlights = [
+    {
+        name: 'Micro Credit Management System',
+        summary: 'End-to-end Oracle APEX solution for onboarding, loan operations, collections and reporting.',
+        href: 'https://apex.oracle.com/pls/apex/f?p=113484'
+    },
+    {
+        name: 'Cash and Carry POS',
+        summary: 'Retail POS with invoicing, stock monitoring and daily sales insights for business users.',
+        href: 'https://apex.oracle.com/pls/apex/f?p=207615',
+        credentials: 'Demo: 02030 / 123456'
+    },
+    {
+        name: 'Pharmacy Management System',
+        summary: 'POS and inventory workflow covering billing, purchases, expiry tracking and stock control.',
+        href: 'https://apex.oracle.com/pls/apex/f?p=157297',
+        credentials: 'Demo: 1001 / 1001'
+    },
+    {
+        name: 'QC Alert System',
+        summary: 'Quality control alerts, approvals, dashboards and audit history for operational teams.',
+        href: 'https://apex.oracle.com/pls/apex/f?p=57988',
+        credentials: 'Demo: Mithu / 123'
+    }
+];
+
+const getContactIcon = (label: string) => {
+    switch (label.toLowerCase()) {
+        case 'phone':
+            return (
+                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                </svg>
+            );
+        case 'email':
+            return (
+                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+            );
+        case 'linkedin':
+            return (
+                <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.779-1.75-1.75s.784-1.75 1.75-1.75 1.75.779 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                </svg>
+            );
+        case 'github':
+            return (
+                <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+            );
+        case 'leetcode':
+            return (
+                <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                    <path d="M16.102 17.93l-2.69 2.6c-.77.68-1.76 1.005-2.9 1.005-.88 0-1.62-.25-2.22-.8l-4.9-4.73c-.37-.37-.6-.82-.6-1.37 0-.41.12-.77.37-1.07l2.69-2.6 1.34 1.28-2.69 2.6c-.05.05-.08.13-.08.23 0 .15.1.25.25.25.07 0 .13-.02.18-.08l4.9-4.73c.2-.22.47-.35.85-.35.35 0 .62.13.82.35l3.4 3.48c.37.35.6.8.6 1.37 0 .43-.12.8-.37 1.07zm-2.07-5.83l-3.4-3.48c-.2-.22-.47-.35-.85-.35-.35 0-.62.13-.82.35l-4.9 4.73c-.05.05-.08.12-.08.23 0 .15.1.25.25.25.07 0 .13-.02.18-.08l2.69-2.6 1.34 1.28-2.69 2.6c-.37.37-.6.82-.6 1.37 0 .41.12.77.37 1.07l2.69-2.6 1.34 1.28-2.69 2.6c-.05.05-.08.13-.08.23 0 .15.1.25.25.25.07 0 .13-.02.18-.08l4.9-4.73c.2-.22.47-.35.85-.35.35 0 .62.13.82.35l3.4 3.48c.37.35.6.8.6 1.37 0 .43-.12.8-.37 1.07z"/>
+                </svg>
+            );
+        case 'address':
+            return (
+                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+            );
+        default:
+            return null;
+    }
+};
 
 export default function Resume() {
     return (
-        <div className="page gradient resume">
+        <div className="page resume-page">
             <ActionButton />
 
-            <div className="resume-box with-photo rounded-2xl border border-slate-200/60 dark:border-slate-700/50 shadow-xl bg-white dark:bg-slate-900/70">
-                <div className="left-box">
-                    <Image
-                        src="/images/profile.png"
-                        className="profile-photo rounded-full ring-4 ring-primary-500/20"
-                        width={150}
-                        height={150}
-                        alt="Profile photo"
-                    />
-                    <div className="name--title">
-                        <h1 className="text-2xl font-extrabold tracking-tight bg-gradient-to-r from-primary-600 to-indigo-600 bg-clip-text text-transparent">
-                            DILDER HOSSAIN
-                        </h1>
-                        <h5 className="subtitle capitalize inline-flex items-center px-3 py-1 mt-1 rounded-full text-xs font-semibold bg-primary-50 text-primary-700 border border-primary-200">
-                            Software Engineer
-                        </h5>
-                    </div>
-                    {/* contact info */}
-                    <div className="subtitle mt-4">
-                        <h5 className="subtitle-text text-slate-600 dark:text-slate-300 tracking-wider uppercase text-sm">
-                            Personal Details
-                        </h5>
-                        <div className="h-0.5 w-10 bg-primary-500/70 rounded mt-2"></div>
-                    </div>
-                    <ul className="mb-3 space-y-2">
-                        <li className="flex items-center">
+            <div className="resume-shell">
+                {/* Left Sidebar */}
+                <aside className="resume-sidebar">
+                    <div className="resume-sidebar-top">
+                        <div className="resume-photo-wrap resume-photo-panel">
                             <Image
-                                className="contact-icon"
-                                src="/images/phone.png"
-                                width={20}
-                                height={20}
-                                alt="phone"
+                                src="/images/resume-profile.jpg"
+                                className="resume-photo"
+                                width={220}
+                                height={286}
+                                alt="Dilder Hossain portrait"
+                                priority
                             />
-                            <p className="text-sm">+880 1635 000 601</p>
-                        </li>
-
-                        <li className="flex items-center">
-                            <Image
-                                className="contact-icon"
-                                src="/images/email.png"
-                                width={20}
-                                height={20}
-                                alt="email"
-                            />
-                            <a
-                                href="mailto:dilder.hossain.feni@gmail.com"
-                                target="_blank"
-                                className="resume-link hover:underline underline-offset-4 hover:text-primary-600 transition-colors"
-                                rel="noreferrer noopener">
-                                dilder.hossain.feni@gmail.com
-                            </a>
-                        </li>
-
-                        <li className="flex items-center">
-                            <Image
-                                className="contact-icon"
-                                src="/images/leetcode.svg"
-                                width={20}
-                                height={20}
-                                alt="LeetCode profile"
-                            />
-                            <a
-                                href="https://leetcode.com/DilderHossain/"
-                                target="_blank"
-                                className="resume-link hover:underline underline-offset-4 hover:text-primary-600 transition-colors"
-                                rel="noreferrer noopener">
-                                leetcode.com/DilderHossain/
-                            </a>
-                        </li>
-
-                        <li className="flex items-center">
-                            <Image
-                                className="contact-icon"
-                                src="/images/github.png"
-                                width={20}
-                                height={20}
-                                alt="github"
-                            />
-                            <a
-                                href="https://github.com/Dilder601"
-                                target="_blank"
-                                className="resume-link hover:underline underline-offset-4 hover:text-primary-600 transition-colors"
-                                rel="noreferrer noopener">
-                                github.com/Dilder601
-                            </a>
-                        </li>
-
-                        <li className="flex items-center">
-                            <Image
-                                className="contact-icon"
-                                src="/images/linkedin.png"
-                                width={20}
-                                height={20}
-                                alt="github"
-                            />
-                            <a
-                                href="https://www.linkedin.com/in/dilder-orclapex/"
-                                target="_blank"
-                                className="resume-link hover:underline underline-offset-4 hover:text-primary-600 transition-colors"
-                                rel="noreferrer noopener">
-                                linkedin.com/in/dilder-orclapex
-                            </a>
-                        </li>
-
-                        <li className="flex items-center">
-                            <Image
-                                className="contact-icon"
-                                src="/images/location.png"
-                                width={20}
-                                height={20}
-                                alt="location"
-                            />
-                            <p className="text-sm">
-                                Pathan Villa, House No: 331/A
-                                <br /> East Nakhal Para , Tejgaon- Dhaka-1215
-                            </p>
-                        </li>
-                    </ul>
-
-                    {/* Education */}
-                    <div className="subtitle">
-                        <h5 className="subtitle-text">Education</h5>
-                    </div>
-                    <section className="mb-3 text-sm">
-                        <div className="mb-2">
-                            <p>
-                                <span className="font-bold">
-                                    Diploma In DDD(Database Design and Development) - 2020{' '}
-                                </span>
-                            </p>
-                            <p className="italic">IsDB BISEW.</p>
-                            <p> – IDB Bhaban (4th Floor) E/8-A, Rokeya Sharani, Dhaka 1207</p>
                         </div>
 
                         <div>
-                            <p>
-                                <span className="font-bold">Bachelor of Business Administration </span>
-                                <span>BBA(3.17) - 2017</span>
-                            </p>
-                            <p className="italic">Feni Govt. College.</p>
-                        </div>
-                    </section>
-                    {/* Key Skills */}
-                    <div className="subtitle">
-                        <h5 className="subtitle-text">Key Skills</h5>
-                    </div>
-                    <section className="space-y-2">
-                        <button className="key-button group from-pink-500 to-orange-400 group-hover:from-pink-500 group-hover:to-orange-400 focus:ring-pink-200">
-                            <span className="key-skill bg-pink-50 text-pink-500 hover:text-white">
-                                Oracle SQL/ PLSQL
-                            </span>
-                        </button>
-                        <button className="key-button group from-yellow-500 to-orange-400 group-hover:from-yellow-500 group-hover:to-orange-400 focus:ring-yellow-200">
-                            <span className="key-skill bg-yellow-50 text-yellow-500 hover:text-white">Oracle Apex</span>
-                        </button>
-                        <button className="key-button group from-teal-300 to-lime-300 group-hover:from-teal-300 group-hover:to-lime-300 focus:ring-lime-200">
-                            <span className="key-skill bg-teal-50 text-teal-500 hover:text-black">
-                                BI / Dynamic Content Report
-                            </span>
-                        </button>
-                        <button className="key-button group from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white focus:ring-cyan-200">
-                            <span className="key-skill bg-cyan-50 text-cyan-500 hover:text-white">
-                                SQL Performance Tuning
-                            </span>
-                        </button>
-                    </section>
-
-                    {/* Training */}
-                    <div className="subtitle left mt-3">
-                        <h5 className="subtitle-text">Training</h5>
-                    </div>
-                    <section className="space-y-2 text-sm">
-                        <div>
-                            <p className="resume-link font-bold">Computer Fundamental</p>
-                            <p className="italic">New Horizons, Dhaka.</p>
-                        </div>
-                        <div>
-                            <a
-                                href="https://learnwithsumit.com/certificates/verify/LWSCTXN-F584A5R7"
-                                target="_blank"
-                                rel="noreferrer noopener"
-                                className="resume-link font-bold">
-                                SQL Performance Tuning
-                            </a>
-                            <p className="italic">Udemy</p>
-                        </div>
-                    </section>
-                </div>
-                <div className="right-box">
-                    <h5 className="subtitle text-slate-700 dark:text-slate-200 tracking-wider uppercase text-sm">
-                        Summary
-                    </h5>
-                    <div className="h-0.5 w-10 bg-primary-500/70 rounded mb-4"></div>
-
-                    <p className="mb-5 text-sm">
-                        I am writing to express my strong interest in the PL/SQL Developer and Oracle APEX position.
-                        With solid experience in building efficient and scalable Oracle-based applications, I am
-                        confident that my technical expertise and problem-solving abilities align well with the
-                        requirements of this role. Throughout my career, I have gained in-depth knowledge of Oracle
-                        Application Express (APEX), PL/SQL development, and comprehensive database design and
-                        optimization.
-                        <br />
-                        <br />
-                        In my current role as a Software Engineer at MononSoft Ltd. (a sister concern of JMI Group), I
-                        am responsible for developing and maintaining the JERP system built entirely on Oracle PL/SQL. I
-                        have worked extensively across key ERP modules, including PP (Production Planning), MM
-                        (Materials Management), SD (Sales & Distribution), and HRM (Human Resource Management).
-                        <br />
-                        <br />
-                        Throughout implementations at Nipro JMI Pharma, JMI Syringes & Medical Devices Ltd., Unido
-                        Pharma, and other concerns of JMI Group, my role has focused on designing robust PL/SQL-based
-                        solutions, improving database performance, and ensuring seamless integration between complex
-                        business processes. I consistently aim to deliver reliable, high-quality solutions that support
-                        organizational efficiency and long-term system performance.
-                    </p>
-
-                    {/* Experience section */}
-                    <h5 className="subtitle mb-2 text-slate-700 dark:text-slate-200 tracking-wider uppercase text-sm inline-flex items-center gap-2">
-                        <span
-                            className="inline-flex h-5 w-5 items-center justify-center rounded-md bg-primary-50 text-primary-600 ring-1 ring-primary-200 print:ring-0"
-                            aria-hidden>
-                            <svg
-                                width="12"
-                                height="12"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round">
-                                <rect x="3" y="7" width="18" height="13" rx="2" ry="2"></rect>
-                                <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"></path>
-                            </svg>
-                        </span>
-                        Professional Experience
-                    </h5>
-                    <div className="h-0.5 w-10 bg-primary-500/70 rounded mb-4"></div>
-
-                    <ol className="relative border-l border-primary-500 pl-3">
-                        <li className="relative mb-6 ml-3">
-                            <h3 className="mb-1 md:flex print:flex items-center font-bold text-gray-900">
-                                <div className="mr-2">Software Engineer</div>
-                                <div className="text-sm font-medium text-primary-800 inline-flex items-center gap-1 whitespace-nowrap">
-                                    <span>at</span>
-                                    <a
-                                        href="https://mononsoft.org"
-                                        target="_blank"
-                                        rel="noreferrer noopener"
-                                        className="text-primary-700 hover:underline underline-offset-4">
-                                        MononSoft Ltd.
-                                    </a>
-                                    <span>(A Sister Concern of</span>
-                                    <a
-                                        href="https://jmigroup-bd.com"
-                                        target="_blank"
-                                        rel="noreferrer noopener"
-                                        className="text-primary-700 hover:underline underline-offset-4">
-                                        JMI Group
-                                    </a>
-                                    <span>)</span>
-                                </div>
-                            </h3>
-                            <div className="mb-3 space-y-1 md:space-y-0 print:space-y-0 md:flex print:flex items-center justify-between">
-                                <time className="block text-sm font-normal leading-none text-gray-700">
-                                    Feb 2021 - Present
-                                </time>
-                                <address className="text-xs">52 New Eskaton Road, Dhaka-1000.</address>
-                            </div>
-                            <ul className="bullet-list">
-                                <li className="flex items-center">
-                                    <div className="mr-4">
-                                        <div className="bullet"></div>
-                                    </div>
-                                    <p>Developing an ERP system based on Oracle Database and Oracle Apex.</p>
-                                </li>
-                                <li className="flex items-center">
-                                    <div className="mr-4">
-                                        <div className="bullet"></div>
-                                    </div>
-                                    <p>Developing software solutions to meet customer needs.</p>
-                                </li>
-                                <li className="flex items-center">
-                                    <div className="mr-4">
-                                        <div className="bullet"></div>
-                                    </div>
-                                    <p>Complex business logic, Packages, stored procedures, triggers, and functions.</p>
-                                </li>
-                                <li className="flex items-center">
-                                    <div className="mr-4">
-                                        <div className="bullet"></div>
-                                    </div>
-                                    <p>
-                                        Creating function for different purposes like returning JSON for report queries.
-                                    </p>
-                                </li>
-                                <li className="flex items-center">
-                                    <div className="mr-4">
-                                        <div className="bullet"></div>
-                                    </div>
-                                    <p>Evaluating existing applications and performing updates and modifications.</p>
-                                </li>
-                                <li className="flex items-center">
-                                    <div className="mr-4">
-                                        <div className="bullet"></div>
-                                    </div>
-                                    <p>I am committed to staying updated with the latest technologies.</p>
-                                </li>
+                            <p className="resume-kicker resume-kicker-light">Contact</p>
+                            <ul className="resume-contact-list">
+                                {contacts.map((item) => (
+                                    <li key={item.label} className="flex items-start gap-3">
+                                        <span className="mt-0.5 shrink-0 text-sky-300 print:text-white">
+                                            {getContactIcon(item.label)}
+                                        </span>
+                                        <div className="min-w-0 flex-1">
+                                            <span className="resume-contact-label">{item.label}</span>
+                                            {item.href ? (
+                                                <a
+                                                    href={item.href}
+                                                    target={item.href.startsWith('http') ? '_blank' : undefined}
+                                                    rel={item.href.startsWith('http') ? 'noreferrer noopener' : undefined}
+                                                    className="resume-contact-link">
+                                                    {item.value}
+                                                </a>
+                                            ) : (
+                                                <p className="resume-contact-text">{item.value}</p>
+                                            )}
+                                        </div>
+                                    </li>
+                                ))}
                             </ul>
-                        </li>
-                    </ol>
+                        </div>
+                    </div>
 
-                    {/* Additional Skills */}
-                    <h5 className="subtitle text-slate-700 dark:text-slate-200 tracking-wider uppercase text-sm inline-flex items-center gap-2">
-                        <span
-                            className="inline-flex h-5 w-5 items-center justify-center rounded-md bg-primary-50 text-primary-600 ring-1 ring-primary-200 print:ring-0"
-                            aria-hidden>
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-                                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
-                            </svg>
-                        </span>
-                        Additional Skills
-                    </h5>
-                    <div className="h-0.5 w-10 bg-primary-500/70 rounded mb-2"></div>
+                    <div className="resume-side-block">
+                        <p className="resume-kicker resume-kicker-light">Core Expertise</p>
+                        <ul className="resume-side-list">
+                            {expertise.map((item) => (
+                                <li key={item} className="resume-side-list-item">
+                                    {item}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
 
-                    <ul className="bullet-list ml-4">
-                        <li className="flex items-center">
-                            <div className="mr-4">
-                                <div className="bullet"></div>
-                            </div>
-                            <p>Advance Knowledge on Web Services likes REST API/JSON.</p>
-                        </li>
-                        <li className="flex items-center">
-                            <div className="mr-4">
-                                <div className="bullet"></div>
-                            </div>
-                            <p>HTML, CSS, Bootstrap, C, C++, and MySQL.</p>
-                        </li>
-                        <li className="flex items-center">
-                            <div className="mr-4">
-                                <div className="bullet"></div>
-                            </div>
-                            <p>Proficient Understanding of Code Versioning Tools Github Action and SVN.</p>
-                        </li>
-                        <li className="flex items-center">
-                            <div className="mr-4">
-                                <div className="bullet"></div>
-                            </div>
-                            <p>Knowledge of JIRA, Click Up.</p>
-                        </li>
-                        <li className="flex items-center">
-                            <div className="mr-4">
-                                <div className="bullet"></div>
-                            </div>
-                            <p>Ability to work individually and independently with minimal supervision.</p>
-                        </li>
-                        <li className="flex items-center">
-                            <div className="mr-4">
-                                <div className="bullet"></div>
-                            </div>
-                            <p>Problem-solving skills, Self-managed, independent, initiative and proactive.</p>
-                        </li>
-                    </ul>
+                    <div className="resume-side-block">
+                        <p className="resume-kicker resume-kicker-light">Education</p>
+                        <div className="relative border-l border-white/10 dark:border-white/5 pl-4 ml-1.5 space-y-5 print:border-l print:border-white/20">
+                            {education.map((item) => (
+                                <div key={item.degree} className="relative">
+                                    <span className="absolute -left-[21px] top-1.5 h-2 w-2 rounded-full border border-sky-400 dark:border-sky-300 bg-slate-900 print:border-white print:bg-white" />
+                                    <p className="resume-side-heading">{item.degree}</p>
+                                    <p className="resume-side-copy">{item.institute}</p>
+                                    <p className="resume-side-meta">{item.meta}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
 
-                    {/* Projects (under Additional Skills) */}
-                    <h5 className="subtitle text-slate-700 dark:text-slate-200 tracking-wider uppercase text-sm mt-4 inline-flex items-center gap-2">
-                        <span
-                            className="inline-flex h-5 w-5 items-center justify-center rounded-md bg-primary-50 text-primary-600 ring-1 ring-primary-200 print:ring-0"
-                            aria-hidden>
-                            <svg
-                                width="12"
-                                height="12"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round">
-                                <path d="M3 7a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"></path>
-                            </svg>
-                        </span>
-                        Projects
-                    </h5>
-                    <div className="h-0.5 w-10 bg-primary-500/70 rounded mb-3"></div>
-                    <ul className="bullet-list">
-                        <li className="flex items-start">
-                            <div className="mr-4">
-                                <div className="bullet"></div>
+                    <div className="resume-side-block">
+                        <p className="resume-kicker resume-kicker-light">Training</p>
+                        <div className="relative border-l border-white/10 dark:border-white/5 pl-4 ml-1.5 space-y-5 print:border-l print:border-white/20">
+                            {training.map((item) => (
+                                <div key={item.title} className="relative">
+                                    <span className="absolute -left-[21px] top-1.5 h-2 w-2 rounded-full border border-sky-400 dark:border-sky-300 bg-slate-900 print:border-white print:bg-white" />
+                                    {item.href ? (
+                                        <a
+                                            href={item.href}
+                                            target="_blank"
+                                            rel="noreferrer noopener"
+                                            className="resume-side-heading resume-side-link">
+                                            {item.title}
+                                        </a>
+                                    ) : (
+                                        <p className="resume-side-heading">{item.title}</p>
+                                    )}
+                                    <p className="resume-side-copy">{item.provider}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </aside>
+
+                {/* Right Main Body */}
+                <main className="resume-main">
+                    <header className="resume-header">
+                        <div>
+                            <p className="resume-kicker">Software Engineer</p>
+                            <h1 className="resume-name">Dilder Hossain</h1>
+                            <p className="resume-role">Oracle APEX | PL/SQL | ERP Application Developer</p>
+                            <div className="resume-highlight-row">
+                                {highlights.map((item) => (
+                                    <span key={item} className="resume-highlight-pill">
+                                        {item}
+                                    </span>
+                                ))}
                             </div>
-                            <div>
-                                <p className="font-semibold text-slate-800">Micro Credit Management System</p>
-                                <p className="text-xs text-slate-600">
-                                    Oracle APEX modules for onboarding, loans, collections and reporting.
-                                </p>
-                                <p className="mt-1 text-xs">
-                                    Demo:{' '}
-                                    <a
-                                        className="text-blue-600 hover:underline underline-offset-4"
-                                        href={'https://apex.oracle.com/pls/apex/f?p=113484'}
-                                        target="_blank"
-                                        rel="noreferrer noopener">
-                                        apex.oracle.com/pls/apex/f?p=113484
-                                    </a>
-                                </p>
+                        </div>
+                    </header>
+
+                    {/* Professional Summary */}
+                    <section className="resume-section">
+                        <div className="resume-section-heading">
+                            <h2 className="resume-section-title">Professional Summary</h2>
+                            <span className="resume-divider" aria-hidden></span>
+                        </div>
+                        <p className="resume-copy">
+                            Results-driven <strong>Oracle APEX and ERP Developer</strong> with <strong>5+ years</strong>{' '}
+                            of progressive experience designing, developing, and optimizing enterprise-grade
+                            applications using <strong>Oracle APEX</strong>, <strong>Oracle Database</strong>,{' '}
+                            <strong>SQL</strong>, and <strong>PL/SQL</strong>. Proven expertise in architecting
+                            scalable <strong>ERP systems</strong>, building <strong>RESTful API integrations</strong>,
+                            and leading <strong>database performance tuning</strong> initiatives that improve speed,
+                            reliability, and business efficiency. Specialized in delivering tailored solutions for the{' '}
+                            <strong>pharmaceutical and healthcare sectors</strong>, including <strong>Nipro JMI Pharma</strong>,{' '}
+                            <strong>Unido Pharma</strong>, <strong>Bangladesh Eye Hospital</strong>, and several other{' '}
+                            <strong>JMI Group</strong> concerns. Adept at translating complex business requirements into
+                            robust technical solutions, automating mission-critical workflows, and delivering
+                            enterprise applications that support <strong>4000+ concurrent users</strong>. An{' '}
+                            <strong>Oracle APEX Cloud Developer Certified</strong> professional with a strong record of
+                            leading end-to-end software delivery in agile environments.
+                        </p>
+                    </section>
+
+                    {/* Technical Snapshot */}
+                    <section className="resume-section">
+                        <div className="resume-section-heading">
+                            <h2 className="resume-section-title">Technical Snapshot</h2>
+                            <span className="resume-divider" aria-hidden></span>
+                        </div>
+                        <div className="resume-chip-grid">
+                            {tools.map((item) => (
+                                <span key={item} className="resume-chip">
+                                    {item}
+                                </span>
+                            ))}
+                        </div>
+                    </section>
+
+                    {/* Experience */}
+                    <section className="resume-section">
+                        <div className="resume-section-heading">
+                            <h2 className="resume-section-title">Professional Experience</h2>
+                            <span className="resume-divider" aria-hidden></span>
+                        </div>
+
+                        <article className="resume-experience">
+                            <div className="resume-experience-top">
+                                <div>
+                                    <h3 className="resume-item-title">Software Engineer</h3>
+                                    <p className="resume-company">
+                                        MononSoft Ltd. <span className="resume-company-muted">| Sister concern of JMI Group</span>
+                                    </p>
+                                </div>
+                                <div className="resume-meta-block">
+                                    <p className="resume-meta">Feb 2021 - Present</p>
+                                    <p className="resume-meta">Dhaka, Bangladesh</p>
+                                </div>
                             </div>
-                        </li>
-                        <li className="flex items-start">
-                            <div className="mr-4">
-                                <div className="bullet"></div>
+
+                            <p className="resume-copy">
+                                Contributing to a full ERP ecosystem built on Oracle technology, including business
+                                process automation, report development, database programming and ongoing production
+                                support for multiple companies under JMI Group.
+                            </p>
+
+                            <ul className="resume-bullet-list">
+                                {experienceBullets.map((item) => (
+                                    <li key={item} className="resume-bullet-item">
+                                        <span className="resume-bullet" aria-hidden></span>
+                                        <span>{item}</span>
+                                    </li>
+                                ))}
+                            </ul>
+
+                            <div className="resume-domain-row">
+                                <span className="resume-domain-label">ERP Exposure</span>
+                                <div className="resume-chip-grid">
+                                    {domainAreas.map((item) => (
+                                        <span key={item} className="resume-chip resume-chip-soft">
+                                            {item}
+                                        </span>
+                                    ))}
+                                </div>
                             </div>
-                            <div>
-                                <p className="font-semibold text-slate-800">Cash & Carry POS</p>
-                                <p className="text-xs text-slate-600">
-                                    Retail POS with invoicing, stock and daily sales summary.
-                                </p>
-                                <p className="mt-1 text-xs">
-                                    Demo:{' '}
-                                    <a
-                                        className="text-blue-600 hover:underline underline-offset-4"
-                                        href={'https://apex.oracle.com/pls/apex/f?p=207615'}
-                                        target="_blank"
-                                        rel="noreferrer noopener">
-                                        apex.oracle.com/pls/apex/f?p=207615
-                                    </a>{' '}
-                                    <span className="ml-2 text-slate-500">Credentials: 02030 / 123456</span>
-                                </p>
-                            </div>
-                        </li>
-                        <li className="flex items-start">
-                            <div className="mr-4">
-                                <div className="bullet"></div>
-                            </div>
-                            <div>
-                                <p className="font-semibold text-slate-800">QC Alert System</p>
-                                <p className="text-xs text-slate-600">
-                                    QC alerts and approvals with audit logs and dashboards.
-                                </p>
-                                <p className="mt-1 text-xs">
-                                    Demo:{' '}
-                                    <a
-                                        className="text-blue-600 hover:underline underline-offset-4"
-                                        href={'https://apex.oracle.com/pls/apex/f?p=57988'}
-                                        target="_blank"
-                                        rel="noreferrer noopener">
-                                        apex.oracle.com/pls/apex/f?p=57988
-                                    </a>{' '}
-                                    <span className="ml-2 text-slate-500">Credentials: Mithu / 123</span>
-                                </p>
-                            </div>
-                        </li>
-                        <li className="flex items-start">
-                            <div className="mr-4">
-                                <div className="bullet"></div>
-                            </div>
-                            <div>
-                                <p className="font-semibold text-slate-800">Pharmacy Management System (POS)</p>
-                                <p className="text-xs text-slate-600">
-                                    Billing, inventory, expiry tracking, and purchase management.
-                                </p>
-                                <p className="mt-1 text-xs">
-                                    Demo:{' '}
-                                    <a
-                                        className="text-blue-600 hover:underline underline-offset-4"
-                                        href={'https://apex.oracle.com/pls/apex/f?p=157297'}
-                                        target="_blank"
-                                        rel="noreferrer noopener">
-                                        apex.oracle.com/pls/apex/f?p=157297
-                                    </a>{' '}
-                                    <span className="ml-2 text-slate-500">Credentials: 1001 / 1001</span>
-                                </p>
-                            </div>
-                        </li>
-                        <li className="flex items-start">
-                            <div className="mr-4">
-                                <div className="bullet"></div>
-                            </div>
-                            <div>
-                                <p className="font-semibold text-slate-800">Blood Circulation System</p>
-                                <p className="text-xs text-slate-600">
-                                    Donation, routing and inventory tracking with notifications.
-                                </p>
-                                <p className="mt-1 text-xs">
-                                    Demo:{' '}
-                                    <a
-                                        className="text-blue-600 hover:underline underline-offset-4"
-                                        href={'https://apex.oracle.com/pls/apex/f?p=224500'}
-                                        target="_blank"
-                                        rel="noreferrer noopener">
-                                        apex.oracle.com/pls/apex/f?p=224500
-                                    </a>{' '}
-                                    <span className="ml-2 text-slate-500">Credentials: Mithu / 123</span>
-                                </p>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+                        </article>
+                    </section>
+
+                    {/* Projects */}
+                    <section className="resume-section">
+                        <div className="resume-section-heading">
+                            <h2 className="resume-section-title">Selected Projects</h2>
+                            <span className="resume-divider" aria-hidden></span>
+                        </div>
+
+                        <div className="resume-project-list">
+                            {projectHighlights.map((project) => (
+                                <article key={project.name} className="resume-project-card">
+                                    <div className="resume-project-top">
+                                        <h3 className="resume-item-title">{project.name}</h3>
+                                        <a
+                                            href={project.href}
+                                            target="_blank"
+                                            rel="noreferrer noopener"
+                                            className="resume-project-link inline-flex items-center gap-1">
+                                            <span>Live Demo</span>
+                                            <svg className="w-2.5 h-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                            </svg>
+                                        </a>
+                                    </div>
+                                    <p className="resume-copy resume-copy-sm">{project.summary}</p>
+                                    {project.credentials ? (
+                                        <p className="resume-project-meta">{project.credentials}</p>
+                                    ) : null}
+                                </article>
+                            ))}
+                        </div>
+                    </section>
+
+                    {/* Professional Strengths */}
+                    <section className="resume-section resume-section-compact">
+                        <div className="resume-section-heading">
+                            <h2 className="resume-section-title">Professional Strengths</h2>
+                            <span className="resume-divider" aria-hidden></span>
+                        </div>
+                        <div className="resume-strength-list">
+                            <p className="resume-strength-card">Strong ownership of database-centric business applications</p>
+                            <p className="resume-strength-card">Comfortable with independent execution and production support</p>
+                            <p className="resume-strength-card">Focused on clean logic, maintainability and practical outcomes</p>
+                            <p className="resume-strength-card">Adaptable across business domains, stakeholders and workflows</p>
+                        </div>
+                    </section>
+                </main>
             </div>
         </div>
     );
