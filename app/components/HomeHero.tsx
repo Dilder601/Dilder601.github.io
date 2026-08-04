@@ -540,7 +540,7 @@ export default function HomeHero() {
                         )}
 
                         {/* Side tags visible in desktop 2xl only */}
-                        <div className="absolute -left-6 top-16 hidden w-40 rounded-[22px] border border-white/60 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 p-4 shadow-xl backdrop-blur 2xl:block transition-all duration-300">
+                        <div className="absolute top-16 hidden w-40 rounded-[22px] border border-white/60 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 p-4 shadow-xl backdrop-blur 2xl:-left-40 2xl:block transition-all duration-300">
                             <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Core Focus</p>
                             <p className="mt-1.5 text-sm font-bold text-slate-900 dark:text-white">ERP + Database + Delivery</p>
                             <p className="mt-1 text-xs leading-5 text-slate-600 dark:text-slate-400">
@@ -548,7 +548,7 @@ export default function HomeHero() {
                             </p>
                         </div>
 
-                        <div className="absolute -right-5 bottom-20 hidden w-44 rounded-[22px] border border-sky-200/80 dark:border-sky-900/60 bg-sky-50/95 dark:bg-slate-900/95 p-4 shadow-xl 2xl:block transition-all duration-300">
+                        <div className="absolute bottom-20 hidden w-44 rounded-[22px] border border-sky-200/80 dark:border-sky-900/60 bg-sky-50/95 dark:bg-slate-900/95 p-4 shadow-xl 2xl:-right-44 2xl:block transition-all duration-300">
                             <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-sky-700 dark:text-sky-400">Impact</p>
                             <p className="mt-1.5 text-3xl font-bold tracking-tight text-sky-950 dark:text-white">4000+</p>
                             <p className="mt-1 text-xs leading-5 text-slate-600 dark:text-slate-455">Concurrent users supported through enterprise ERP delivery.</p>
