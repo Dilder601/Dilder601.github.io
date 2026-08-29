@@ -1,8 +1,8 @@
 import './globals.css';
 
-const description = `I am writing to express my strong interest in the Oracle Apex and PL/SQL Developer. As a skilled and experienced professional with a passion for creating efficient and robust applications, I believe my technical expertise and dedication to delivering high-quality solutions align perfectly with the requirements of the role. Over the course of my career, I have acquired a deep understanding of Oracle Application Express (Apex) and PL/SQL development, along with a strong foundation in database design and management. I have successfully developed and implemented a wide range of applications, including data-driven web applications, reports, and interactive dashboards.`;
+const description = `Professional portfolio of Dilder Hossain — Oracle APEX Cloud Developer Certified. Expert in PL/SQL, ERP architecture, and enterprise database engineering for pharmaceutical and healthcare operations.`;
 
-const authorName = 'DILDER HOSSAIN';
+const authorName = 'Dilder Hossain';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
@@ -25,7 +25,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                         `
                     }}
                 />
-                <title>{authorName}</title>
+                {/* Google Fonts — Inter */}
+                <link rel="preconnect" href="https://fonts.googleapis.com" />
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+                <link
+                    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+                    rel="stylesheet"
+                />
+                <title>{authorName} — Oracle APEX &amp; PL/SQL Engineer</title>
                 <meta
                     name="viewport"
                     content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
@@ -34,39 +41,28 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <link rel="manifest" href="/manifest.json" />
                 <link rel="icon" href="/favicon.png" />
                 <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
-                <meta name="theme-color" content="#009EF7" />
-                <meta name="apple-mobile-web-app-status-bar" content="#009EF7" />
+                <meta name="theme-color" content="#111827" />
+                <meta name="apple-mobile-web-app-status-bar" content="#111827" />
                 <meta name="apple-mobile-web-app-capable" content="yes" />
                 <meta name="apple-mobile-web-app-title" content={authorName} />
                 <meta name="application-name" content={authorName} />
                 <meta name="description" content={description} />
-                <meta name="keywords" content="software engineer, problem solving" />
+                <meta name="keywords" content="Oracle APEX, PL/SQL, ERP developer, software engineer, database engineer, Oracle Cloud, resume" />
                 <meta name="author" content={authorName} />
-                <meta name="theme-color" content="#009EF7" />
 
                 <meta name="twitter:card" content="summary" />
-                <meta name="twitter:url" content="https://dilder.vercel.app" />
+                <meta name="twitter:url" content="https://dilder601.github.io" />
                 <meta name="twitter:title" content={authorName} />
                 <meta name="twitter:description" content={description} />
-                <meta name="twitter:image" content="/images/icons/android-chrome-192x192.png" />
                 <meta name="twitter:creator" content="@DilderHossain8" />
                 <meta name="title" property="og:title" content={authorName} key="title" />
                 <meta name="description" property="og:description" content={description} key="desc" />
                 <meta property="og:type" content="website" />
                 <meta property="og:site_name" content={authorName} />
-                <meta property="og:url" content="https://dilder.vercel.app" />
-                <meta property="og:image" content="/images/icons/android-chrome-192x192.png" />
+                <meta property="og:url" content="https://dilder601.github.io" />
             </head>
-            <body
-                suppressHydrationWarning={true}
-                style={
-                    {
-                        '--font-inter': '"Segoe UI", "Helvetica Neue", Arial, sans-serif',
-                        '--font-outfit': '"Trebuchet MS", "Arial Narrow", Arial, sans-serif',
-                    } as React.CSSProperties
-                }
-            >
-                <div className="font-sans">{children}</div>
+            <body className="bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-300" suppressHydrationWarning={true}>
+                <div className="font-sans antialiased min-h-screen">{children}</div>
             </body>
         </html>
     );

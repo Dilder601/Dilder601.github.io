@@ -1,591 +1,260 @@
 'use client';
 
 import Image from 'next/image';
-import Link from 'next/link';
-import { useState, useEffect, useRef } from 'react';
-
-const navItems = [
-    { href: '/resume', label: 'Resume' },
-    { href: 'https://github.com/Dilder601', label: 'GitHub', ext: true },
-    { href: 'https://www.linkedin.com/in/dilder-orclapex/', label: 'LinkedIn', ext: true }
-];
-
-const expertise = ['Oracle APEX', 'PL/SQL', 'ERP Architecture', 'REST API', 'Performance Tuning'];
-
-const trustPoints = [
-    'Oracle APEX Cloud Developer Certified',
-    '5+ years in ERP delivery',
-    'Built solutions for pharma and healthcare operations'
-];
 
 const highlights = [
-    {
-        value: '5+',
-        label: 'Years building Oracle ERP workflows'
-    },
-    {
-        value: '4000+',
-        label: 'Concurrent users supported in enterprise applications'
-    },
-    {
-        value: 'JMI',
-        label: 'Hands-on delivery across multiple JMI Group concerns'
-    }
-];
-
-const focusCards = [
-    {
-        title: 'Enterprise Systems',
-        text: 'Production-ready APEX applications designed around real operational workflows.'
-    },
-    {
-        title: 'Database Performance',
-        text: 'PL/SQL, SQL tuning, report optimization, and reliable backend architecture.'
-    },
-    {
-        title: 'Domain Delivery',
-        text: 'Strong delivery experience in pharmaceutical, manufacturing, and healthcare environments.'
-    }
+    { value: '5+', label: 'Years Experience' },
+    { value: '15+', label: 'Enterprise Projects' },
+    { value: '4000+', label: 'Concurrent Users' }
 ];
 
 const socials = [
-    { href: 'https://github.com/Dilder601', icon: '/images/github.png', label: 'GitHub' },
-    { href: 'https://www.linkedin.com/in/dilder-orclapex/', icon: '/images/linkedin.png', label: 'LinkedIn' },
-    { href: 'https://leetcode.com/DilderHossain/', icon: '/images/leetcode.svg', label: 'LeetCode' }
-];
-
-// Mock database commands and outputs
-const terminalCommands = [
     {
-        cmd: 'SELECT * FROM skills;',
-        output: [
-            'SKILL_NAME                | LEVEL       | CERTIFIED',
-            '--------------------------|-------------|----------',
-            'Oracle APEX Development   | Expert      | YES      ',
-            'Oracle SQL & PL/SQL       | Expert      | YES      ',
-            'ERP Architecture Design   | Senior      | YES      ',
-            'Performance Tuning        | Specialist  | YES      ',
-            'REST API & Web Services   | Advanced    | YES      ',
-            '',
-            '5 rows selected (0.02 seconds).'
-        ]
+        href: 'https://github.com/Dilder601',
+        label: 'GitHub',
+        icon: (
+            <svg className="size-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.91 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.565 21.795 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+            </svg>
+        )
     },
     {
-        cmd: 'EXECUTE db_tuner.optimize_query(\'JMI_SALES_REPORT\');',
-        output: [
-            '*** Oracle Tuning Task Initialized ***',
-            '[INFO] Analyzing SQL execution plan...',
-            '[WARN] Detected FULL TABLE SCAN on large partition JMI_SALES_DATA (14.8 seconds).',
-            '[ACTION] Restructuring nested subqueries to inline WITH clause...',
-            '[ACTION] Applying Local Partitioned Index on INVOICE_DATE...',
-            '[SUCCESS] SQL Profile generated successfully.',
-            '[SUCCESS] Query execution time reduced: 14.8s -> 0.11s!',
-            '[STATUS] 99.2% increase in query efficiency.',
-            '',
-            'PL/SQL procedure successfully completed (0.15 seconds).'
-        ]
+        href: 'https://www.linkedin.com/in/dilder-orclapex/',
+        label: 'LinkedIn',
+        icon: (
+            <svg className="size-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+            </svg>
+        )
     },
     {
-        cmd: 'SELECT * FROM experience WHERE company = \'MononSoft\';',
-        output: [
-            'COMPANY    | ROLE              | TENURE            | LOCATION',
-            '-----------|-------------------|-------------------|------------------',
-            'MononSoft  | Software Engineer | Feb 2021 - Pres.  | Dhaka, BD        ',
-            '',
-            'Description:',
-            'Developing enterprise ERP ecosystems on Oracle Database & APEX.',
-            'Maintaining systems supporting 4000+ concurrent pharmaceutical users.',
-            '',
-            '1 row selected (0.01 seconds).'
-        ]
+        href: 'https://leetcode.com/DilderHossain/',
+        label: 'LeetCode',
+        icon: (
+            <svg className="size-5" fill="currentColor" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                <path d="M21.469 23.907l-3.595 3.473c-.624.625-1.484.885-2.432.885s-1.807-.26-2.432-.885l-5.776-5.812c-.62-.625-.937-1.537-.937-2.485 0-.952.317-1.812.937-2.432l5.76-5.844c.62-.619 1.5-.859 2.448-.859s1.808.26 2.432.885l3.595 3.473c.687.688 1.823.663 2.536-.052.708-.713.735-1.848.047-2.536l-3.473-3.511c-.901-.891-2.032-1.505-3.261-1.787l3.287-3.333c.688-.687.667-1.823-.047-2.536s-1.849-.735-2.536-.052l-13.469 13.469c-1.307 1.312-1.989 3.113-1.989 5.113 0 1.996.683 3.86 1.989 5.168l5.797 5.812c1.307 1.307 3.115 1.937 5.115 1.937 1.995 0 3.801-.683 5.109-1.989l3.479-3.521c.688-.683.661-1.817-.052-2.531s-1.849-.74-2.531-.052zM27.749 17.349h-13.531c-.932 0-1.692.801-1.692 1.791 0 .991.76 1.797 1.692 1.797h13.531c.933 0 1.693-.807 1.693-1.797 0-.989-.76-1.791-1.693-1.791z"/>
+            </svg>
+        )
     }
 ];
 
+const techPills = [
+    { name: 'Oracle Database 19c', color: 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border-emerald-200/80 dark:border-emerald-800/60' },
+    { name: 'Oracle APEX Cloud', color: 'bg-teal-500/10 text-teal-700 dark:text-teal-300 border-teal-200/80 dark:border-teal-800/60' },
+    { name: 'PL/SQL Architecture', color: 'bg-rose-500/10 text-rose-700 dark:text-rose-300 border-rose-200/80 dark:border-rose-800/60' },
+    { name: 'ORDS REST APIs', color: 'bg-emerald-500/10 text-emerald-800 dark:text-emerald-300 border-emerald-200/80 dark:border-emerald-800/60' },
+    { name: 'Query Tuning (AWR/ASH)', color: 'bg-amber-500/10 text-amber-800 dark:text-amber-300 border-amber-200/80 dark:border-amber-800/60' },
+];
+
 export default function HomeHero() {
-    const [mobileOpen, setMobileOpen] = useState(false);
-    const [theme, setTheme] = useState<'light' | 'dark'>('light');
-    const [rightPanel, setRightPanel] = useState<'profile' | 'terminal'>('profile');
-    
-    // Terminal state
-    const [terminalLogs, setTerminalLogs] = useState<string[]>([
-        'Oracle Database 19c Enterprise Edition Release 19.0.0.0.0',
-        'Connected to instance: DILDER_CORE_PROD',
-        'Type a command or click one of the quick queries below...',
-        ''
-    ]);
-    const [isTyping, setIsTyping] = useState(false);
-    const terminalEndRef = useRef<HTMLDivElement>(null);
-
-    // Sync theme with document class list
-    useEffect(() => {
-        if (typeof window !== 'undefined') {
-            const isDark = document.documentElement.classList.contains('dark');
-            setTheme(isDark ? 'dark' : 'light');
-        }
-    }, []);
-
-    const toggleTheme = () => {
-        if (theme === 'light') {
-            document.documentElement.classList.add('dark');
-            localStorage.setItem('theme', 'dark');
-            setTheme('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-            localStorage.setItem('theme', 'light');
-            setTheme('light');
-        }
-    };
-
-    // Auto scroll terminal to bottom
-    useEffect(() => {
-        if (terminalEndRef.current) {
-            terminalEndRef.current.scrollIntoView({ behavior: 'smooth' });
-        }
-    }, [terminalLogs]);
-
-    const runTerminalCommand = (cmdText: string) => {
-        if (isTyping) return;
-        setIsTyping(true);
-        
-        // Add typed command
-        setTerminalLogs(prev => [...prev, `SQL> ${cmdText}`]);
-        
-        // Find matching output
-        const cmdObj = terminalCommands.find(c => c.cmd === cmdText);
-        const outputLines = cmdObj ? cmdObj.output : ['[ERROR] ORA-00900: invalid SQL statement.'];
-        
-        // Simulate typing delay
-        setTimeout(() => {
-            setTerminalLogs(prev => [...prev, ...outputLines, '']);
-            setIsTyping(false);
-        }, 800);
-    };
-
-    const clearTerminal = () => {
-        setTerminalLogs([
-            'Oracle Database 19c Enterprise Edition Release 19.0.0.0.0',
-            'Connected to instance: DILDER_CORE_PROD',
-            ''
-        ]);
-    };
-
     return (
-        <main className="relative min-h-screen overflow-hidden bg-[linear-gradient(180deg,#f8fbff_0%,#edf4fb_56%,#ffffff_100%)] dark:bg-[linear-gradient(180deg,#030712_0%,#090d16_56%,#020617_100%)] font-sans text-slate-900 dark:text-slate-100 selection:bg-sky-100 dark:selection:bg-sky-950/60 selection:text-sky-900 transition-colors duration-300">
-            {/* Ambient Background Graphics */}
-            <div className="absolute inset-0 -z-30">
-                <Image src="/mesh-2.png" alt="background texture" fill className="object-cover opacity-25 dark:opacity-10" priority />
+        <section id="hero" className="relative flex min-h-screen flex-col justify-center overflow-hidden px-4 pt-28 pb-16">
+            {/* ── National Dashboard Inspired Emerald & Rose Ambient Mesh ── */}
+            <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden -z-10">
+                {/* Lush Emerald Green Top-Right Aurora */}
+                <div className="animate-pulse-slow absolute top-[-15%] right-[-10%] h-[75vh] w-[75vw] rounded-full bg-emerald-400/20 mix-blend-multiply blur-[130px] dark:bg-emerald-500/20 dark:mix-blend-screen" />
+                {/* Soft Blush Rose / Coral Bottom-Left Aurora */}
+                <div className="animate-pulse-slow absolute bottom-[-15%] left-[-10%] h-[65vh] w-[65vw] rounded-full bg-rose-400/15 mix-blend-multiply blur-[120px] [animation-delay:2s] dark:bg-rose-500/15 dark:mix-blend-screen" />
+                {/* Mint-Teal Center Glow */}
+                <div className="animate-pulse-slow absolute top-[25%] left-[20%] h-[55vh] w-[55vw] rounded-full bg-teal-400/15 mix-blend-multiply blur-[110px] [animation-delay:4s] dark:bg-teal-500/15 dark:mix-blend-screen" />
+                {/* Warm Amber Accent */}
+                <div className="animate-pulse-slow absolute bottom-[20%] right-[20%] h-[45vh] w-[45vw] rounded-full bg-amber-300/10 mix-blend-multiply blur-[100px] [animation-delay:6s] dark:bg-amber-500/10 dark:mix-blend-screen" />
             </div>
-            <div className="absolute inset-0 -z-20 bg-[radial-gradient(circle_at_top_left,rgba(14,165,233,0.15),transparent_28%),radial-gradient(circle_at_80%_20%,rgba(30,64,175,0.14),transparent_26%),radial-gradient(circle_at_bottom,rgba(251,191,36,0.1),transparent_24%)] dark:bg-[radial-gradient(circle_at_top_left,rgba(56,189,248,0.08),transparent_35%),radial-gradient(circle_at_80%_20%,rgba(37,99,235,0.08),transparent_30%)]" />
-            <div className="absolute inset-0 -z-10 opacity-[0.12] dark:opacity-[0.07] bg-dots pan-slow" />
-            
-            {/* Blurs */}
-            <div className="pointer-events-none absolute -left-28 top-16 -z-10 h-80 w-80 rounded-full bg-cyan-300/30 dark:bg-cyan-500/10 blur-[110px] animate-blob md:h-[28rem] md:w-[28rem]" />
-            <div className="pointer-events-none absolute right-[-5rem] top-32 -z-10 h-72 w-72 rounded-full bg-blue-500/20 dark:bg-blue-600/10 blur-[120px] animate-blob animation-delay-2000 md:h-[30rem] md:w-[30rem]" />
-            <div className="pointer-events-none absolute bottom-[-7rem] left-1/3 -z-10 h-72 w-72 rounded-full bg-amber-300/15 dark:bg-emerald-500/5 blur-[120px] animate-blob" />
 
-            <header className="relative z-30 px-5 pt-6 md:px-10">
-                <div className="mx-auto max-w-7xl">
-                    <div className="flex items-center justify-between rounded-full border border-white/50 dark:border-slate-800/40 bg-white/70 dark:bg-slate-900/60 px-4 py-3 shadow-[0_18px_55px_rgba(15,23,42,0.06)] dark:shadow-[0_18px_55px_rgba(0,0,0,0.3)] backdrop-blur-xl md:px-6 transition-all duration-300">
-                        <Link href="/" className="group flex items-center gap-3">
-                            <span className="relative inline-flex h-11 w-11 items-center justify-center rounded-full bg-[linear-gradient(135deg,#0f172a_0%,#1d4ed8_100%)] dark:bg-[linear-gradient(135deg,#1e293b_0%,#0284c7_100%)] text-sm font-bold tracking-[0.22em] text-white shadow-lg">
-                                DH
-                                <span className="absolute inset-0 rounded-full ring-1 ring-white/30" />
+            <div className="container mx-auto max-w-6xl">
+                <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-12">
+                    {/* Left: Text Content */}
+                    <div className="flex flex-col items-start text-left">
+                        {/* Availability badge with emerald glow */}
+                        <p className="animate-fade-in-up border border-emerald-200/80 dark:border-emerald-800/60 bg-emerald-50/80 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 mb-8 inline-flex items-center gap-2.5 rounded-full py-1.5 pr-4 pl-3 text-sm font-semibold backdrop-blur-md shadow-xs">
+                            <span aria-hidden="true" className="relative grid size-2 place-items-center">
+                                <span className="absolute size-2 rounded-full bg-emerald-500 opacity-75 motion-safe:animate-ping" />
+                                <span className="size-2 rounded-full bg-emerald-500" />
                             </span>
-                            <div>
-                                <p className="font-heading text-lg font-bold tracking-tight text-slate-955 dark:text-white">Dilder Hossain</p>
-                                <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-slate-500 dark:text-slate-400">
-                                    Oracle APEX Developer
-                                </p>
-                            </div>
-                        </Link>
-
-                        <nav className="hidden items-center gap-1 md:flex">
-                            {navItems.map((item) =>
-                                item.ext ? (
-                                    <a
-                                        key={item.label}
-                                        href={item.href}
-                                        target="_blank"
-                                        rel="noreferrer noopener"
-                                        className="rounded-full px-4 py-2 text-sm font-semibold text-slate-600 dark:text-slate-300 transition-all hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-950 dark:hover:text-white">
-                                        {item.label}
-                                    </a>
-                                ) : (
-                                    <Link
-                                        key={item.label}
-                                        href={item.href}
-                                        className="rounded-full px-4 py-2 text-sm font-semibold text-slate-600 dark:text-slate-300 transition-all hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-955 dark:hover:text-white">
-                                        {item.label}
-                                    </Link>
-                                )
-                            )}
-                            
-                            {/* Theme Toggle Button */}
-                            <button
-                                onClick={toggleTheme}
-                                className="mx-2 theme-toggle-btn"
-                                aria-label="Toggle theme">
-                                {theme === 'light' ? (
-                                    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                                    </svg>
-                                ) : (
-                                    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 9H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.062.062a5.002 5.002 0 01-7.01 0l-.002-.002z" />
-                                    </svg>
-                                )}
-                            </button>
-
-                            <a
-                                href="mailto:dilder.hossain.feni@gmail.com"
-                                className="ml-2 inline-flex items-center gap-2 rounded-full bg-slate-950 dark:bg-sky-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-slate-900/10 dark:shadow-sky-950/20 transition-all hover:-translate-y-0.5 hover:bg-slate-800 dark:hover:bg-sky-500">
-                                Let&apos;s Talk
-                            </a>
-                        </nav>
-
-                        <div className="flex items-center gap-3 md:hidden">
-                            <button
-                                onClick={toggleTheme}
-                                className="theme-toggle-btn h-9 w-9"
-                                aria-label="Toggle theme">
-                                {theme === 'light' ? (
-                                    <svg className="h-4.5 w-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                                    </svg>
-                                ) : (
-                                    <svg className="h-4.5 w-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 9H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.062.062a5.002 5.002 0 01-7.01 0l-.002-.002z" />
-                                    </svg>
-                                )}
-                            </button>
-                            
-                            <button
-                                aria-label="Toggle menu"
-                                className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300"
-                                onClick={() => setMobileOpen((v) => !v)}>
-                                <svg
-                                    className={`transition-transform duration-300 ${mobileOpen ? 'rotate-90' : ''}`}
-                                    width="20"
-                                    height="20"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    {mobileOpen ? (
-                                        <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                                    ) : (
-                                        <path d="M4 8h16M4 16h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                                    )}
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div
-                        className={`overflow-hidden transition-all duration-500 md:hidden ${mobileOpen ? 'max-h-96 pt-4 opacity-100' : 'max-h-0 opacity-0'}`}>
-                        <div className="rounded-[28px] border border-white/60 dark:border-slate-800/40 bg-white/75 dark:bg-slate-900/80 p-3 shadow-xl backdrop-blur-xl">
-                            <div className="flex flex-col gap-1">
-                                {navItems.map((item) =>
-                                    item.ext ? (
-                                        <a
-                                            key={item.label}
-                                            href={item.href}
-                                            target="_blank"
-                                            rel="noreferrer noopener"
-                                            className="rounded-2xl px-4 py-3 text-sm font-semibold text-slate-700 dark:text-slate-300 transition-colors hover:bg-slate-50 dark:hover:bg-slate-800/60">
-                                            {item.label}
-                                        </a>
-                                    ) : (
-                                        <Link
-                                            key={item.label}
-                                            href={item.href}
-                                            className="rounded-2xl px-4 py-3 text-sm font-semibold text-slate-700 dark:text-slate-300 transition-colors hover:bg-slate-50 dark:hover:bg-slate-800/60">
-                                            {item.label}
-                                        </Link>
-                                    )
-                                )}
-                                <a
-                                    href="mailto:dilder.hossain.feni@gmail.com"
-                                    className="mt-2 inline-flex items-center justify-center rounded-2xl bg-slate-950 dark:bg-sky-600 px-5 py-3 text-sm font-bold text-white">
-                                    Let&apos;s Talk
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </header>
-
-            <section className="relative z-20 mx-auto grid max-w-7xl gap-12 px-5 pb-14 pt-12 md:px-10 md:pb-20 md:pt-16 xl:grid-cols-[minmax(0,1.05fr)_31rem] xl:items-center">
-                <div className="min-w-0 max-w-3xl">
-                    <div className="inline-flex items-center gap-3 rounded-full border border-sky-200/70 dark:border-sky-800/40 bg-white/80 dark:bg-slate-900/60 px-4.5 py-2 shadow-sm backdrop-blur animate-fade-in-up">
-                        <span className="flex h-2.5 w-2.5 rounded-full bg-emerald-500 shadow-[0_0_0_6px_rgba(16,185,129,0.16)] dark:shadow-[0_0_0_6px_rgba(16,185,129,0.22)]" />
-                        <span className="text-[10px] font-bold uppercase tracking-[0.28em] text-sky-800 dark:text-sky-300">
-                            Oracle APEX Cloud Developer Certified
-                        </span>
-                    </div>
-
-                    <div className="mt-7 space-y-6">
-                        <p className="text-[11px] font-bold uppercase tracking-[0.34em] text-slate-400 dark:text-slate-450 animate-fade-in-up delay-100">
-                            Enterprise Applications. Database Logic. ERP Delivery.
+                            Available for exciting opportunities
                         </p>
-                        <h1 className="font-heading text-[2.75rem] md:text-7xl font-bold leading-[1.02] tracking-[-0.04em] text-slate-950 dark:text-white animate-fade-in-up delay-100">
-                            Gorgeous software is nice.
-                            <span className="mt-3 block bg-gradient-to-r from-sky-600 via-blue-700 to-indigo-950 dark:from-sky-400 dark:via-blue-400 dark:to-indigo-300 bg-clip-text text-transparent">
-                                Reliable enterprise systems are better.
+
+                        {/* Headline with dashboard pen-mark highlighted words */}
+                        <h1 className="animate-fade-in-up font-sans text-[2.6rem] leading-[1.08] tracking-tight font-bold text-slate-900 dark:text-white sm:text-5xl lg:text-6xl">
+                            Hi, I&apos;m{' '}
+                            <span className="text-slate-900 dark:text-white">Dilder Hossain</span>
+                            <br className="hidden lg:inline" />
+                            {' '}I Build{' '}
+                            <span className="hero-mark" style={{ '--mark': '#a7f3d0' } as React.CSSProperties}>
+                                Reliable
                             </span>
+                            <br className="hidden lg:inline" />
+                            {' '}Systems That{' '}
+                            <span className="hero-mark" style={{ '--mark': '#fecdd3' } as React.CSSProperties}>
+                                Empower
+                            </span>
+                            <br className="hidden lg:inline" />
+                            {' '}Real Operations
                         </h1>
-                        <p className="max-w-2xl text-[13px] md:text-sm leading-7 md:leading-8 text-slate-600 dark:text-slate-300 animate-fade-in-up delay-200">
-                            I design and ship Oracle APEX and PL/SQL solutions that help real operations move faster,
-                            from ERP workflows and reporting systems to performance-critical database applications in
-                            pharma and healthcare environments.
+
+                        {/* Lede */}
+                        <p className="animate-fade-in-up mt-6 max-w-xl text-base leading-8 text-slate-600 dark:text-slate-400">
+                            Oracle APEX &amp; PL/SQL Engineer at MononSoft (JMI Group). I design ERP
+                            systems for scale with Oracle Database, APEX, and REST APIs — and solve the
+                            performance bottlenecks that show up once real users arrive.
                         </p>
-                    </div>
 
-                    <div className="mt-8 flex flex-wrap items-center gap-4 animate-fade-in-up delay-300">
-                        <Link
-                            href="/resume"
-                            className="inline-flex items-center gap-3 rounded-full bg-slate-950 dark:bg-sky-600 px-7 py-4 text-sm font-semibold text-white shadow-[0_18px_40px_rgba(15,23,42,0.12)] dark:shadow-[0_18px_40px_rgba(3,105,161,0.25)] transition-all hover:-translate-y-1 hover:bg-slate-800 dark:hover:bg-sky-500">
-                            View Resume
-                            <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                            </svg>
-                        </Link>
-                        <a
-                            href="mailto:dilder.hossain.feni@gmail.com"
-                            className="inline-flex items-center gap-3 rounded-full border border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/60 px-7 py-4 text-sm font-semibold text-slate-700 dark:text-slate-300 shadow-sm backdrop-blur transition-all hover:-translate-y-1 hover:bg-white dark:hover:bg-slate-800 hover:text-slate-950 dark:hover:text-white">
-                            Contact Me
-                        </a>
-                    </div>
-
-                    <div className="mt-9 flex flex-wrap gap-2 animate-fade-in-up delay-300">
-                        {expertise.map((item) => (
-                            <span
-                                key={item}
-                                className="rounded-full border border-slate-200/80 dark:border-slate-800/80 bg-white/70 dark:bg-slate-900/50 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.16em] text-slate-700 dark:text-slate-300 backdrop-blur">
-                                {item}
-                            </span>
-                        ))}
-                    </div>
-
-                    <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-                        {highlights.map((item) => (
-                            <div
-                                key={item.label}
-                                className="rounded-[28px] border border-white/60 dark:border-slate-800/60 bg-white/75 dark:bg-slate-900/40 p-5 shadow-[0_18px_45px_rgba(15,23,42,0.04)] dark:shadow-[0_18px_45px_rgba(0,0,0,0.15)] backdrop-blur transition-all duration-300 hover:-translate-y-0.5">
-                                <p className="font-heading text-3xl font-bold tracking-tight text-slate-950 dark:text-white">{item.value}</p>
-                                <p className="mt-2 text-xs leading-6 text-slate-600 dark:text-slate-400">{item.label}</p>
-                            </div>
-                        ))}
-                    </div>
-
-                    <div className="mt-10 flex flex-col gap-6 border-t border-slate-200/70 dark:border-slate-800/70 pt-8 lg:flex-row lg:items-center lg:justify-between">
-                        <div className="flex items-center gap-3">
-                            {socials.map((social) => (
-                                <a
-                                    key={social.label}
-                                    href={social.href}
-                                    target="_blank"
-                                    rel="noreferrer noopener"
-                                    className="group flex h-12 w-12 items-center justify-center rounded-full border border-slate-200 dark:border-slate-800 bg-white/85 dark:bg-slate-900/60 shadow-sm transition-all hover:-translate-y-1 hover:border-sky-200 dark:hover:border-sky-900 hover:shadow-md"
-                                    title={social.label}>
-                                    <Image
-                                        src={social.icon}
-                                        alt={social.label}
-                                        width={20}
-                                        height={20}
-                                        className="opacity-70 dark:opacity-60 transition-opacity group-hover:opacity-100 group-hover:invert-0 dark:invert-[0.85] dark:group-hover:invert-0"
-                                    />
-                                </a>
-                            ))}
+                        {/* CTA Buttons with Emerald Primary Accent */}
+                        <div className="animate-fade-in-up mt-10 flex w-full flex-col items-start gap-4 sm:w-auto sm:flex-row sm:items-center">
+                            <a
+                                href="#contact"
+                                className="group inline-flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-full px-6 text-sm font-semibold transition-all bg-emerald-600 hover:bg-emerald-700 dark:bg-emerald-500 dark:hover:bg-emerald-600 text-white w-full sm:w-auto shadow-lg shadow-emerald-600/25 hover:shadow-emerald-600/35 hover:-translate-y-0.5"
+                            >
+                                Get in touch
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                            </a>
+                            <a
+                                href="/articles"
+                                className="inline-flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-full px-6 text-sm font-semibold transition-all border border-slate-200/80 dark:border-slate-700/60 hover:border-emerald-300 dark:hover:border-emerald-600 hover:bg-emerald-50/50 dark:hover:bg-emerald-950/30 text-slate-700 dark:text-slate-300 w-full sm:w-auto backdrop-blur-sm"
+                            >
+                                Read the writing
+                            </a>
                         </div>
 
-                        <div className="grid gap-2">
-                            {trustPoints.map((item) => (
-                                <div key={item} className="flex items-start gap-3 text-xs text-slate-600 dark:text-slate-400">
-                                    <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-sky-500 dark:bg-sky-400" />
-                                    <span>{item}</span>
-                                </div>
-                            ))}
+                        {/* Stats row */}
+                        <div className="animate-fade-in-up mt-12">
+                            <dl className="flex flex-wrap gap-x-8 gap-y-4">
+                                {highlights.map((h) => (
+                                    <div key={h.label}>
+                                        <dt className="text-[11px] font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500">
+                                            {h.label}
+                                        </dt>
+                                        <dd className="mt-1 text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
+                                            {h.value}
+                                        </dd>
+                                    </div>
+                                ))}
+                            </dl>
+
+                            {/* Divider + Social icons */}
+                            <ul className="mt-5 flex flex-wrap items-center gap-5 border-t border-slate-200/70 dark:border-slate-700/40 pt-5">
+                                {socials.map((s) => (
+                                    <li key={s.label}>
+                                        <a
+                                            href={s.href}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            aria-label={s.label}
+                                            className="block rounded-sm text-slate-400 dark:text-slate-500 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
+                                        >
+                                            {s.icon}
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
                         </div>
                     </div>
-                </div>
 
-                {/* Right Side Panel - Features Toggle tab between Photo Profile and Live PL/SQL Terminal */}
-                <div className="relative mx-auto w-full max-w-[31rem] min-w-0 xl:mx-0">
-                    <div className="absolute inset-x-8 top-8 h-40 rounded-full bg-cyan-300/20 dark:bg-cyan-500/5 blur-[90px]" />
-                    <div className="absolute inset-x-14 bottom-8 h-36 rounded-full bg-blue-600/15 dark:bg-sky-600/5 blur-[90px]" />
+                    {/* Right: Modern Executive Visual Stage with Non-Overlapping Badges */}
+                    <div className="animate-fade-in-up relative mx-auto w-full max-w-[22rem] sm:max-w-md lg:max-w-lg">
+                        {/* Multi-layered Ambient Glow Backdrop */}
+                        <div className="absolute -inset-4 sm:-inset-8 rounded-[48px] bg-gradient-to-tr from-emerald-500/25 via-teal-500/20 to-rose-400/20 blur-3xl opacity-75 dark:opacity-85 pointer-events-none -z-10 animate-pulse-slow" />
+                        
+                        {/* Decorative Rings */}
+                        <div className="absolute inset-0 rounded-[40px] border border-emerald-200/40 dark:border-emerald-500/15 pointer-events-none -z-10 scale-105" />
+                        <div className="absolute inset-0 rounded-[48px] border border-slate-200/30 dark:border-slate-800/40 pointer-events-none -z-10 scale-110" />
 
-                    {/* Toggle Headers */}
-                    <div className="flex justify-center gap-2 mb-4">
-                        <button 
-                            onClick={() => setRightPanel('profile')}
-                            className={`px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-full transition-all duration-300 ${rightPanel === 'profile' ? 'bg-slate-950 text-white dark:bg-sky-600' : 'bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-slate-900 dark:text-slate-400 dark:hover:bg-slate-800'}`}>
-                            Profile Profile
-                        </button>
-                        <button 
-                            onClick={() => setRightPanel('terminal')}
-                            className={`px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-full transition-all duration-300 ${rightPanel === 'terminal' ? 'bg-slate-950 text-white dark:bg-sky-600' : 'bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-slate-900 dark:text-slate-400 dark:hover:bg-slate-800'}`}>
-                            Live PL/SQL Terminal
-                        </button>
-                    </div>
+                        {/* Main Portrait Card Frame */}
+                        <div className="group relative overflow-hidden rounded-[36px] sm:rounded-[40px] border-2 border-white/90 dark:border-slate-700/70 bg-gradient-to-b from-white/90 to-slate-50/90 dark:from-slate-900/90 dark:to-slate-950/90 p-3 sm:p-4 shadow-[0_25px_60px_-15px_rgba(5,150,105,0.15)] dark:shadow-[0_25px_60px_-15px_rgba(0,0,0,0.7)] backdrop-blur-xl transition-all duration-500 hover:shadow-2xl">
+                            {/* Inner Photo Container */}
+                            <div className="relative aspect-[4/4.8] w-full overflow-hidden rounded-[28px] sm:rounded-[32px] bg-slate-100 dark:bg-slate-800">
+                                <Image
+                                    src="/images/resume-profile.jpg"
+                                    alt="Dilder Hossain portrait"
+                                    fill
+                                    className="object-cover object-top scale-100 group-hover:scale-105 transition-transform duration-700 ease-out"
+                                    sizes="(min-width: 1024px) 460px, 320px"
+                                    priority
+                                />
 
-                    {/* Panel Container */}
-                    <div className="relative rounded-[36px] border border-white/70 dark:border-slate-800 bg-[linear-gradient(160deg,rgba(255,255,255,0.92),rgba(232,242,252,0.82))] dark:bg-[linear-gradient(160deg,rgba(15,23,42,0.95),rgba(9,15,28,0.9))] p-4 shadow-[0_30px_80px_rgba(15,23,42,0.12)] dark:shadow-[0_30px_80px_rgba(0,0,0,0.5)] backdrop-blur-xl min-h-[500px] flex flex-col justify-between">
-                        {rightPanel === 'profile' ? (
-                            <div className="rounded-[30px] bg-[linear-gradient(180deg,#0f2749_0%,#173d6b_52%,#205b8f_100%)] dark:bg-[linear-gradient(180deg,#090d16_0%,#111827_52%,#1e293b_100%)] p-5 text-white flex flex-col h-full justify-between">
-                                <div>
-                                    <div className="flex items-start justify-between gap-4">
+                                {/* Subtle Bottom Card Scrim & Identity Badge */}
+                                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950/90 via-slate-950/50 to-transparent p-5 pt-12 text-white">
+                                    <div className="flex items-center justify-between">
                                         <div>
-                                            <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-sky-200/90">
-                                                Featured Profile
+                                            <p className="text-base sm:text-lg font-bold tracking-tight text-white flex items-center gap-2 font-heading">
+                                                Dilder Hossain
+                                                <span className="size-2 rounded-full bg-emerald-400 shadow-[0_0_8px_#34d399]" />
                                             </p>
-                                            <h2 className="mt-3 font-heading text-3xl font-bold tracking-tight">Dilder Hossain</h2>
-                                            <p className="mt-2.5 max-w-xs text-xs leading-6 text-sky-100/85">
-                                                Oracle APEX, PL/SQL, ERP modules, reporting systems, and business process automation.
+                                            <p className="text-xs text-slate-300 font-medium mt-0.5">
+                                                Oracle APEX &amp; PL/SQL Engineer
                                             </p>
                                         </div>
-                                        <div className="rounded-full border border-white/15 bg-white/10 px-3.5 py-1 text-[9px] font-bold uppercase tracking-[0.18em] text-sky-100">
-                                            Dhaka
+                                        <div className="rounded-full bg-emerald-500/20 backdrop-blur-md px-3 py-1 text-[11px] font-semibold border border-emerald-400/30 text-emerald-200">
+                                            MononSoft
                                         </div>
-                                    </div>
-
-                                    <div className="relative mt-6 overflow-hidden rounded-[28px] border border-white/10 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.12),transparent_48%),linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] p-4">
-                                        <div className="absolute left-1/2 top-4 h-56 w-56 -translate-x-1/2 rounded-full border border-white/10" />
-                                        <div className="absolute left-1/2 top-8 h-48 w-48 -translate-x-1/2 rounded-full border border-white/5" />
-                                        <div className="relative mx-auto aspect-[4/5] max-w-[17rem] overflow-hidden rounded-[28px] bg-[linear-gradient(180deg,#e0f2fe_0%,#f8fbff_100%)] shadow-[0_24px_50px_rgba(2,6,23,0.3)]">
-                                            <Image
-                                                src="/images/resume-profile.jpg"
-                                                alt="Dilder Hossain portrait"
-                                                fill
-                                                className="object-cover object-top transition-transform duration-500 hover:scale-105"
-                                                sizes="(max-width: 1024px) 90vw, 30rem"
-                                                priority
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="mt-5 grid gap-3">
-                                    {focusCards.map((item) => (
-                                        <div
-                                            key={item.title}
-                                            className="rounded-[22px] border border-white/10 bg-white/10 p-4 backdrop-blur transition-all duration-300 hover:bg-white/15">
-                                            <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-sky-200">{item.title}</p>
-                                            <p className="mt-1.5 text-xs leading-5 text-sky-50/90">{item.text}</p>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        ) : (
-                            /* Live PL/SQL Terminal Simulator */
-                            <div className="terminal-mock flex flex-col h-full bg-slate-950 text-emerald-450 p-4 min-h-[480px]">
-                                <div className="terminal-header border-b border-slate-900 pb-3 mb-3 flex items-center justify-between">
-                                    <div className="terminal-dots flex gap-1.5">
-                                        <span className="terminal-dot bg-red-500 h-2.5 w-2.5 rounded-full" />
-                                        <span className="terminal-dot bg-yellow-500 h-2.5 w-2.5 rounded-full" />
-                                        <span className="terminal-dot bg-green-500 h-2.5 w-2.5 rounded-full" />
-                                    </div>
-                                    <span className="text-[10px] font-bold uppercase tracking-widest text-slate-500">
-                                        SQLPlus Console
-                                    </span>
-                                    <button 
-                                        onClick={clearTerminal} 
-                                        className="text-[10px] hover:text-white text-slate-500 uppercase tracking-widest border border-slate-800 rounded px-2 py-0.5 transition-colors">
-                                        Clear
-                                    </button>
-                                </div>
-
-                                {/* Outputs */}
-                                <div className="flex-1 overflow-y-auto max-h-[300px] text-[11px] leading-5 pr-2 font-mono scrollbar-thin scrollbar-thumb-slate-800">
-                                    {terminalLogs.map((log, index) => (
-                                        <div key={index} className={log.startsWith('SQL>') ? 'text-white' : log.startsWith('[SUCCESS]') ? 'text-sky-400' : log.startsWith('[ERROR]') ? 'text-rose-500' : log.startsWith('[WARN]') ? 'text-amber-500' : 'text-emerald-400'}>
-                                            {log}
-                                        </div>
-                                    ))}
-                                    {isTyping && (
-                                        <div className="flex items-center gap-1 text-white">
-                                            <span>{'SQL> Running query...'}</span>
-                                            <span className="h-3 w-1.5 bg-white animate-blink" />
-                                        </div>
-                                    )}
-                                    <div ref={terminalEndRef} />
-                                </div>
-
-                                {/* Clickable inputs */}
-                                <div className="mt-4 border-t border-slate-900 pt-3">
-                                    <p className="text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-2">
-                                        Execute Query Shortcut:
-                                    </p>
-                                    <div className="flex flex-col gap-1.5">
-                                        <button 
-                                            disabled={isTyping}
-                                            onClick={() => runTerminalCommand('SELECT * FROM skills;')}
-                                            className="text-left text-[11px] font-mono hover:bg-slate-900 disabled:opacity-50 text-sky-400 hover:text-white px-2 py-1.5 border border-slate-800 rounded transition-all">
-                                            &gt; SELECT * FROM skills;
-                                        </button>
-                                        <button 
-                                            disabled={isTyping}
-                                            onClick={() => runTerminalCommand('EXECUTE db_tuner.optimize_query(\'JMI_SALES_REPORT\');')}
-                                            className="text-left text-[11px] font-mono hover:bg-slate-900 disabled:opacity-50 text-sky-400 hover:text-white px-2 py-1.5 border border-slate-800 rounded transition-all">
-                                            {"> EXECUTE db_tuner.optimize_query('JMI_SALES_REPORT');"}
-                                        </button>
-                                        <button 
-                                            disabled={isTyping}
-                                            onClick={() => runTerminalCommand('SELECT * FROM experience WHERE company = \'MononSoft\';')}
-                                            className="text-left text-[11px] font-mono hover:bg-slate-900 disabled:opacity-50 text-sky-400 hover:text-white px-2 py-1.5 border border-slate-800 rounded transition-all">
-                                            &gt; SELECT * FROM experience...
-                                        </button>
                                     </div>
                                 </div>
                             </div>
-                        )}
-
-                        {/* Side tags visible in desktop 2xl only */}
-                        <div className="absolute top-16 hidden w-40 rounded-[22px] border border-white/60 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 p-4 shadow-xl backdrop-blur 2xl:-left-40 2xl:block transition-all duration-300">
-                            <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Core Focus</p>
-                            <p className="mt-1.5 text-sm font-bold text-slate-900 dark:text-white">ERP + Database + Delivery</p>
-                            <p className="mt-1 text-xs leading-5 text-slate-600 dark:text-slate-400">
-                                Clean architecture for practical business systems.
-                            </p>
                         </div>
 
-                        <div className="absolute bottom-20 hidden w-44 rounded-[22px] border border-sky-200/80 dark:border-sky-900/60 bg-sky-50/95 dark:bg-slate-900/95 p-4 shadow-xl 2xl:-right-44 2xl:block transition-all duration-300">
-                            <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-sky-700 dark:text-sky-400">Impact</p>
-                            <p className="mt-1.5 text-3xl font-bold tracking-tight text-sky-950 dark:text-white">4000+</p>
-                            <p className="mt-1 text-xs leading-5 text-slate-600 dark:text-slate-455">Concurrent users supported through enterprise ERP delivery.</p>
+                        {/* ── Non-Overlapping Floating Badges (Positioned Safely on Card Sides) ── */}
+
+                        {/* Top-Right: Oracle APEX Certified Badge */}
+                        <div className="absolute -top-3 -right-2 sm:-right-6 z-20 rounded-2xl border border-white/90 dark:border-slate-700/80 bg-white/95 dark:bg-slate-900/95 p-3 sm:p-3.5 shadow-xl backdrop-blur-md transition-all duration-300 hover:scale-105 hover:-translate-y-1">
+                            <div className="flex items-center gap-3">
+                                <div className="flex size-10 items-center justify-center rounded-xl bg-red-50 dark:bg-red-950/50 border border-red-200 dark:border-red-800/60 text-red-600 dark:text-red-400">
+                                    <svg viewBox="0 0 80 80" className="size-6" fill="none">
+                                        <circle cx="40" cy="40" r="38" fill="#FF0000" fillOpacity="0.1" stroke="#FF0000" strokeWidth="2" strokeOpacity="0.5" />
+                                        <text x="40" y="38" textAnchor="middle" fontSize="13" fontWeight="bold" fill="#CC0000" className="dark:fill-red-400">ORCL</text>
+                                        <text x="40" y="54" textAnchor="middle" fontSize="9" fontWeight="bold" fill="#CC0000" className="dark:fill-red-400">APEX</text>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <div className="flex items-center gap-1">
+                                        <p className="text-xs font-bold text-slate-900 dark:text-white">Oracle Certified</p>
+                                        <svg className="size-3.5 text-emerald-500" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                                        </svg>
+                                    </div>
+                                    <p className="text-[10px] font-medium text-slate-500 dark:text-slate-400">Cloud Developer (1Z0-771)</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Mid-Left: Enterprise Concurrency Badge (Safe Mid-Height Flank Position) */}
+                        <div className="absolute top-1/3 -translate-y-1/2 -left-3 sm:-left-8 z-20 rounded-2xl border border-white/90 dark:border-slate-700/80 bg-white/95 dark:bg-slate-900/95 p-3 sm:p-3.5 shadow-xl backdrop-blur-md transition-all duration-300 hover:scale-105 hover:-translate-y-1">
+                            <div className="flex items-center gap-3">
+                                <div className="flex size-10 items-center justify-center rounded-xl bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800/60 text-emerald-600 dark:text-emerald-400">
+                                    <svg className="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p className="text-xs font-bold text-slate-900 dark:text-white">4,000+ Active Users</p>
+                                    <p className="text-[10px] font-medium text-slate-500 dark:text-slate-400">MononSoft ERP Systems</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Cleanly Spaced Tech Stack Pills (Zero Overlap with Badges) */}
+                        <div className="mt-8 sm:mt-10 flex flex-wrap justify-center gap-2 px-2">
+                            {techPills.map((pill) => (
+                                <span
+                                    key={pill.name}
+                                    className={`rounded-full border px-3.5 py-1 text-[11px] font-semibold backdrop-blur-md shadow-xs transition-all duration-200 hover:-translate-y-0.5 hover:shadow-sm ${pill.color}`}
+                                >
+                                    {pill.name}
+                                </span>
+                            ))}
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
 
-            <section className="relative z-20 mx-auto max-w-7xl px-5 pb-16 md:px-10 md:pb-24">
-                <div className="rounded-[34px] border border-white/60 dark:border-slate-800 bg-white/72 dark:bg-slate-900/50 p-3 shadow-[0_22px_60px_rgba(15,23,42,0.04)] dark:shadow-[0_22px_60px_rgba(0,0,0,0.2)] backdrop-blur-xl">
-                    <div className="grid gap-4 rounded-[28px] bg-[linear-gradient(135deg,rgba(255,255,255,0.9),rgba(236,246,255,0.92))] dark:bg-[linear-gradient(135deg,rgba(15,23,42,0.85),rgba(17,24,39,0.92))] p-3 lg:grid-cols-3">
-                        <div className="rounded-[24px] bg-slate-950 dark:bg-slate-900 px-6 py-6 text-white border border-slate-900 dark:border-slate-800 shadow">
-                            <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-sky-400">What I Build</p>
-                            <h3 className="mt-3 font-heading text-2xl font-bold">Oracle-backed business platforms</h3>
-                            <p className="mt-3 text-xs leading-6 text-slate-300 dark:text-slate-400">
-                                ERP modules, dashboards, reports, automation pipelines, APIs, and stable database-heavy systems.
-                            </p>
-                        </div>
-
-                        <div className="rounded-[24px] bg-white dark:bg-slate-950/60 px-6 py-6 border border-slate-100 dark:border-slate-800 shadow-sm">
-                            <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-slate-500 dark:text-slate-400">Industries</p>
-                            <h3 className="mt-3 font-heading text-2xl font-bold text-slate-900 dark:text-white">Pharma, healthcare, operations</h3>
-                            <p className="mt-3 text-xs leading-6 text-slate-600 dark:text-slate-400">
-                                Delivery experience for organizations including Nipro JMI Pharma, Unido Pharma, Bangladesh Eye Hospital, and related concerns.
-                            </p>
-                        </div>
-
-                        <div className="rounded-[24px] bg-[linear-gradient(135deg,#e0f2fe_0%,#eff6ff_100%)] dark:bg-[linear-gradient(135deg,rgba(15,23,42,0.45)_0%,rgba(3,105,161,0.2)_100%)] px-6 py-6 border border-sky-100/50 dark:border-sky-900/20 shadow-sm">
-                            <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-sky-700 dark:text-sky-350">Approach</p>
-                            <h3 className="mt-3 font-heading text-2xl font-bold text-slate-950 dark:text-white">Business-first engineering</h3>
-                            <p className="mt-3 text-xs leading-6 text-slate-700 dark:text-slate-300">
-                                I translate complex operational requirements into maintainable applications that teams can trust every day.
-                             </p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </main>
+            {/* Scroll cue */}
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 text-slate-400 dark:text-slate-600 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors pointer-events-none sm:pointer-events-auto">
+                <a href="#about" aria-label="Scroll to About Section" className="flex flex-col items-center">
+                    <span className="text-[9px] font-bold tracking-[0.3em] uppercase mb-1">Scroll</span>
+                    <svg className="w-5 h-5 animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M19 13l-7 7-7-7m14-6l-7 7-7-7" />
+                    </svg>
+                </a>
+            </div>
+        </section>
     );
 }
