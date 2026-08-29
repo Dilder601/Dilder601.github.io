@@ -192,13 +192,11 @@ export default function HomeHero() {
                             </div>
                         </div>
 
-                        {/* ── Non-Overlapping Floating Badges (Positioned Safely on Card Sides) ── */}
-
-                        {/* Top-Right: Oracle APEX Certified Badge */}
-                        <div className="absolute -top-3 -right-2 sm:-right-6 z-20 rounded-2xl border border-white/90 dark:border-slate-700/80 bg-white/95 dark:bg-slate-900/95 p-3 sm:p-3.5 shadow-xl backdrop-blur-md transition-all duration-300 hover:scale-105 hover:-translate-y-1">
-                            <div className="flex items-center gap-3">
-                                <div className="flex size-10 items-center justify-center rounded-xl bg-red-50 dark:bg-red-950/50 border border-red-200 dark:border-red-800/60 text-red-600 dark:text-red-400">
-                                    <svg viewBox="0 0 80 80" className="size-6" fill="none">
+                        {/* ── Verified Credential Badge (Cleanly Positioned Above Top-Right) ── */}
+                        <div className="absolute -top-4 -right-1 sm:-top-5 sm:-right-4 z-20 rounded-2xl border border-white/90 dark:border-slate-700/80 bg-white/95 dark:bg-slate-900/95 p-2.5 sm:p-3.5 shadow-xl backdrop-blur-md transition-all duration-300 hover:scale-105 hover:-translate-y-1">
+                            <div className="flex items-center gap-2.5 sm:gap-3">
+                                <div className="flex size-9 sm:size-10 items-center justify-center rounded-xl bg-red-50 dark:bg-red-950/50 border border-red-200 dark:border-red-800/60 text-red-600 dark:text-red-400 shrink-0">
+                                    <svg viewBox="0 0 80 80" className="size-5 sm:size-6" fill="none">
                                         <circle cx="40" cy="40" r="38" fill="#FF0000" fillOpacity="0.1" stroke="#FF0000" strokeWidth="2" strokeOpacity="0.5" />
                                         <text x="40" y="38" textAnchor="middle" fontSize="13" fontWeight="bold" fill="#CC0000" className="dark:fill-red-400">ORCL</text>
                                         <text x="40" y="54" textAnchor="middle" fontSize="9" fontWeight="bold" fill="#CC0000" className="dark:fill-red-400">APEX</text>
@@ -206,33 +204,18 @@ export default function HomeHero() {
                                 </div>
                                 <div>
                                     <div className="flex items-center gap-1">
-                                        <p className="text-xs font-bold text-slate-900 dark:text-white">Oracle Certified</p>
-                                        <svg className="size-3.5 text-emerald-500" fill="currentColor" viewBox="0 0 20 20">
+                                        <p className="text-xs font-bold text-slate-900 dark:text-white whitespace-nowrap">Oracle Certified</p>
+                                        <svg className="size-3.5 text-emerald-500 shrink-0" fill="currentColor" viewBox="0 0 20 20">
                                             <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                                         </svg>
                                     </div>
-                                    <p className="text-[10px] font-medium text-slate-500 dark:text-slate-400">Cloud Developer (1Z0-771)</p>
+                                    <p className="text-[10px] font-medium text-slate-500 dark:text-slate-400 whitespace-nowrap">Cloud Developer (1Z0-771)</p>
                                 </div>
                             </div>
                         </div>
 
-                        {/* Mid-Left: Enterprise Concurrency Badge (Safe Mid-Height Flank Position) */}
-                        <div className="absolute top-1/3 -translate-y-1/2 -left-3 sm:-left-8 z-20 rounded-2xl border border-white/90 dark:border-slate-700/80 bg-white/95 dark:bg-slate-900/95 p-3 sm:p-3.5 shadow-xl backdrop-blur-md transition-all duration-300 hover:scale-105 hover:-translate-y-1">
-                            <div className="flex items-center gap-3">
-                                <div className="flex size-10 items-center justify-center rounded-xl bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800/60 text-emerald-600 dark:text-emerald-400">
-                                    <svg className="size-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                                    </svg>
-                                </div>
-                                <div>
-                                    <p className="text-xs font-bold text-slate-900 dark:text-white">4,000+ Active Users</p>
-                                    <p className="text-[10px] font-medium text-slate-500 dark:text-slate-400">MononSoft ERP Systems</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Cleanly Spaced Tech Stack Pills (Zero Overlap with Badges) */}
-                        <div className="mt-8 sm:mt-10 flex flex-wrap justify-center gap-2 px-2">
+                        {/* Cleanly Spaced Tech Stack Pills (100% Unobstructed & Visible) */}
+                        <div className="mt-6 sm:mt-7 flex flex-wrap justify-center gap-2 px-1">
                             {techPills.map((pill) => (
                                 <span
                                     key={pill.name}
